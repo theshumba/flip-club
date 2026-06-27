@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Consoles For You — Turn Old Consoles Into Real Money</title>
-<meta name="description" content="The UK's console buying & selling community. Learn to flip consoles for profit, get live deal drops on WhatsApp, and sell your stock straight to us." />
+<title>Consoles For You — Buy, Sell &amp; Repair Consoles For Profit</title>
+<meta name="description" content="The UK's console buying, selling & repair community. Learn to flip consoles for profit, get live deal drops on WhatsApp, sell your stock to us, and get your console fixed." />
 <link rel="icon" href="logo.jpg" />
 
 <!-- ============================================================
      SWAP-ME CHECKLIST (search "SWAP-ME"):
-       • WhatsApp community invite link → replace WHATSAPP_LINK below
+       • WhatsApp community invite link → replace href="#join"
        • Social handle: @consolesforyou
        • Numbers in the stats + ticker (edit to real figures)
        • Subscription price: £39/mo
@@ -22,22 +22,19 @@
 
 <style>
 :root{
-  /* bright theme pulled from the CFY logo: blue + black + white */
-  --bg:#ffffff;
-  --bg-tint:#eef4ff;
-  --surface:#ffffff;
-  --surface-2:#f3f7ff;
-  --line:#dbe5f5;
-  --line-strong:#bcd0ee;
-  --blue:#1763ff;          /* logo blue */
-  --blue-deep:#0a2a73;     /* navy for headings */
-  --blue-dark:#0c1c3a;
-  --blue-soft:#e6eeff;
-  --blue-glow:rgba(23,99,255,.32);
-  --ink:#0b1424;           /* near-black body text */
-  --ink-2:#243049;
-  --muted:#56657f;
-  --muted-2:#8492a8;
+  --bg:#0a0b09;
+  --bg-2:#101310;
+  --surface:#161a12;
+  --surface-2:#1c2117;
+  --line:#2c3322;
+  --line-bright:#434d26;
+  --green:#c5f82a;        /* money green */
+  --green-dim:#9bc41f;
+  --green-glow:rgba(197,248,42,.35);
+  --wa:#25D366;
+  --ink:#f6f6ec;          /* brighter body text */
+  --muted:#b6bda9;        /* brightened for readability */
+  --muted-2:#838a73;
   --display:'Anton',sans-serif;
   --body:'Hanken Grotesk',sans-serif;
   --mono:'Space Mono',monospace;
@@ -51,9 +48,13 @@ body{
   color:var(--ink);
   font-family:var(--body);
   font-size:17.5px;
-  line-height:1.58;
+  line-height:1.62;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -62,190 +63,198 @@ section{position:relative}
 
 /* ---------- type ---------- */
 .eyebrow{
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--blue);font-weight:700;display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--green);display:inline-flex;align-items:center;gap:9px;
 }
-.eyebrow::before{content:"";width:22px;height:2px;background:var(--blue)}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.95;letter-spacing:.012em;text-transform:uppercase;color:var(--blue-deep)}
-.h-xl{font-size:clamp(3.2rem,9vw,7.4rem)}
-.h-lg{font-size:clamp(2.4rem,6vw,4.5rem)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--green)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.96;letter-spacing:.01em;text-transform:uppercase;color:var(--ink)}
+.h-xl{font-size:clamp(3.2rem,9vw,7.2rem)}
+.h-lg{font-size:clamp(2.4rem,6vw,4.4rem)}
 .h-md{font-size:clamp(1.7rem,3.4vw,2.6rem)}
-.lead{font-size:clamp(1.08rem,1.8vw,1.34rem);color:var(--ink-2);max-width:48ch;line-height:1.5}
+.lead{font-size:clamp(1.08rem,1.8vw,1.32rem);color:#cfd5c4;max-width:48ch;line-height:1.55}
 .mono-label{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.pos{color:var(--green)}
 
 /* ---------- buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;
   font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
-  padding:16px 26px;border-radius:4px;transition:transform .15s ease, box-shadow .2s ease, background .2s, color .2s;
+  padding:16px 26px;border-radius:3px;transition:transform .15s ease, box-shadow .2s ease, background .2s, color .2s;
 }
-.btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 22px -10px var(--blue-glow)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px var(--blue-glow);background:#0d56e8}
-.btn-ghost{background:#fff;color:var(--blue-deep);border:2px solid var(--line-strong)}
-.btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
-.btn-wa{background:#25D366;color:#06351b}
-.btn-wa:hover{background:#1ebd5b;transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(37,211,102,.5)}
+.btn-primary{background:var(--green);color:#0a0b09;box-shadow:0 0 0 rgba(197,248,42,0)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px -8px var(--green-glow)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-bright)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
 .btn .arr{transition:transform .2s}
 .btn:hover .arr{transform:translate(3px,-3px)}
 .wa-ic{width:17px;height:17px;flex:none}
 
-/* ---------- TICKER (bigger + brighter) ---------- */
+/* ---------- ticker (bigger + brighter) ---------- */
 .ticker{
-  position:sticky;top:0;z-index:60;background:var(--blue);
-  border-bottom:3px solid var(--blue-deep);overflow:hidden;white-space:nowrap;
+  position:sticky;top:0;z-index:60;background:var(--green);color:#0a0b09;
+  border-bottom:2px solid #0a0b09;overflow:hidden;white-space:nowrap;
 }
-.ticker-track{display:inline-flex;align-items:center;animation:scroll 34s linear infinite;will-change:transform}
+.ticker-track{display:inline-flex;align-items:center;animation:scroll 36s linear infinite;will-change:transform}
 .ticker:hover .ticker-track{animation-play-state:paused}
 .tick{
-  font-family:var(--mono);font-weight:700;font-size:15.5px;letter-spacing:.05em;color:#fff;
-  padding:13px 26px;display:inline-flex;align-items:center;gap:12px;text-transform:uppercase;
+  font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:.05em;
+  padding:12px 24px;display:inline-flex;align-items:center;gap:11px;text-transform:uppercase;
 }
-.tick .sep{opacity:.55}
-.tick b{background:#fff;color:var(--blue);padding:3px 10px;border-radius:4px;font-size:15px;box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.tick .sep{opacity:.5}
+.tick b{background:#0a0b09;color:var(--green);padding:2px 9px;border-radius:3px}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- nav ---------- */
-header.nav{position:sticky;top:49px;z-index:55;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+header.nav{position:sticky;top:47px;z-index:55;background:rgba(10,11,9,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand img{width:44px;height:44px;border-radius:50%}
-.brand .bt{font-family:var(--display);font-size:21px;letter-spacing:.04em;color:var(--blue-deep);line-height:1}
-.brand .bt span{color:var(--blue)}
-.nav-links{display:flex;gap:30px;align-items:center}
-.nav-links a{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
+.brand img{width:42px;height:42px;border-radius:50%}
+.brand .bt{font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--ink);line-height:1}
+.brand .bt span{color:var(--green)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c3c9b6;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
 .nav-cta{padding:12px 18px;font-size:12.5px}
-@media(max-width:860px){.nav-links a:not(.nav-cta){display:none}.brand .bt{font-size:18px}}
+@media(max-width:900px){.nav-links a:not(.nav-cta){display:none}.brand .bt{font-size:17px}}
 
 /* ---------- hero ---------- */
-.hero{padding:clamp(64px,10vw,120px) 0 86px;overflow:hidden;background:
-  radial-gradient(900px 520px at 82% -8%, var(--blue-soft), transparent 60%),var(--bg)}
-.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:54px;align-items:center;position:relative;z-index:1}
+.hero{padding:clamp(66px,10vw,124px) 0 84px;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;top:-8%;right:-14%;width:58vw;height:58vw;max-width:740px;max-height:740px;
+  background:radial-gradient(circle, var(--green-glow), transparent 62%);filter:blur(40px);opacity:.5;pointer-events:none;z-index:0;
+}
+.hero-grid{display:grid;grid-template-columns:1.13fr .87fr;gap:52px;align-items:center;position:relative;z-index:1}
 @media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}}
-.hero h1{margin:22px 0 24px;color:var(--blue-deep)}
-.hero h1 em{font-style:normal;color:var(--blue)}
-.hero h1 .stroke{color:transparent;-webkit-text-stroke:2px var(--blue-deep)}
+.hero h1{margin:22px 0 24px}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.hero h1 em{font-style:normal;color:var(--green)}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
-.hero-stats{display:flex;gap:38px;margin-top:48px;flex-wrap:wrap}
-.stat .n{font-family:var(--display);font-size:clamp(2rem,4vw,2.9rem);line-height:1;color:var(--blue-deep)}
-.stat .n .pos{color:var(--blue)}
-.stat .l{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.hero-stats{display:flex;gap:36px;margin-top:48px;flex-wrap:wrap}
+.stat .n{font-family:var(--display);font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--ink)}
+.stat .n .pos{color:var(--green)}
+.stat .l{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
 /* deal card */
 .deal-card{
-  background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;position:relative;
-  box-shadow:0 30px 60px -28px rgba(10,42,115,.35), 0 2px 0 var(--blue-soft);
+  background:linear-gradient(160deg,var(--surface),var(--bg-2));border:1px solid var(--line-bright);
+  border-radius:8px;padding:24px;position:relative;box-shadow:0 30px 70px -30px rgba(0,0,0,.85);
 }
-.deal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--blue-soft);padding-bottom:15px;margin-bottom:6px}
-.live{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px}
-.live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--blue-soft);animation:pulse 1.6s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.deal-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:15px}
+.deal-card .crt{position:absolute;inset:0;border-radius:8px;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px)}
+.deal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed var(--line-bright);padding-bottom:14px;margin-bottom:6px}
+.live{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.deal-row{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:14.5px}
 .deal-row:last-child{border-bottom:none}
-.deal-row .item{color:var(--ink);font-weight:700;letter-spacing:.01em}
+.deal-row .item{color:var(--ink);font-weight:700;letter-spacing:.02em}
 .deal-row .nums{color:var(--muted)}
-.deal-row .nums b{color:#fff;background:var(--blue);padding:2px 9px;border-radius:4px}
-.deal-foot{margin-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--muted-2);font-weight:700;letter-spacing:.08em;text-align:center;text-transform:uppercase}
+.deal-row .nums b{color:#0a0b09;background:var(--green);padding:2px 8px;border-radius:3px}
+.deal-foot{margin-top:16px;font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--muted-2);letter-spacing:.07em;text-align:center;text-transform:uppercase}
 
 /* ---------- section ---------- */
 .sec{padding:clamp(72px,10vw,118px) 0}
-.sec.tint{background:var(--bg-tint)}
+.sec.alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sec-head{max-width:64ch;margin-bottom:54px}
 .sec-head h2{margin:18px 0 18px}
 
 /* steps */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 @media(max-width:820px){.steps{grid-template-columns:1fr}}
-.step{background:#fff;padding:38px 30px;border:1px solid var(--line);border-radius:12px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.step:hover{transform:translateY(-5px);box-shadow:0 24px 50px -28px rgba(10,42,115,.4);border-color:var(--line-strong)}
-.step .num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.1em}
-.step h3{font-size:1.55rem;margin:20px 0 12px;color:var(--blue-deep)}
+.step{background:var(--bg);padding:38px 30px;transition:background .25s}
+.step:hover{background:var(--surface)}
+.step .num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green);letter-spacing:.1em}
+.step h3{font-size:1.55rem;margin:20px 0 12px}
 .step p{color:var(--muted);font-size:16px}
 
 /* pricing */
-.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
 @media(max-width:980px){.tiers{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.tiers{grid-template-columns:1fr}}
-.tier{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}
-.tier:hover{transform:translateY(-5px);box-shadow:0 24px 50px -28px rgba(10,42,115,.4);border-color:var(--line-strong)}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px 22px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.tier:hover{transform:translateY(-4px);border-color:var(--line-bright)}
 .tier .tname{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.tier .price{font-family:var(--display);font-size:2.7rem;line-height:1;margin:16px 0 4px;color:var(--blue-deep)}
+.tier .price{font-family:var(--display);font-size:2.7rem;line-height:1;margin:16px 0 4px}
 .tier .price small{font-family:var(--mono);font-size:.82rem;color:var(--muted);letter-spacing:.05em}
 .tier .tdesc{color:var(--muted);font-size:14.5px;min-height:44px}
 .tier ul{list-style:none;margin:18px 0 22px;display:flex;flex-direction:column;gap:11px}
-.tier li{font-size:15px;display:flex;gap:10px;align-items:flex-start;color:var(--ink-2);font-weight:500}
-.tier li::before{content:"✓";color:var(--blue);font-weight:800}
+.tier li{font-size:15px;display:flex;gap:10px;align-items:flex-start;color:#e4e8d9}
+.tier li::before{content:"✓";color:var(--green);font-family:var(--mono);font-weight:700}
 .tier .btn{margin-top:auto;justify-content:center}
-.tier.feature{background:linear-gradient(180deg,#0f3fb0,#1763ff);border-color:var(--blue);box-shadow:0 34px 70px -28px var(--blue-glow);position:relative;transform:scale(1.03)}
-.tier.feature:hover{transform:scale(1.03) translateY(-5px)}
-.tier.feature .tname{color:#bcd0ff}
-.tier.feature .price,.tier.feature h2{color:#fff}
-.tier.feature .tdesc{color:#d7e3ff}
-.tier.feature li{color:#fff}
-.tier.feature li::before{color:#aef0c6}
-.tier.feature .btn-ghost{background:#fff;color:var(--blue-deep);border-color:#fff}
-.flag{position:absolute;top:-13px;left:24px;background:#fff;color:var(--blue);font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:4px;box-shadow:0 6px 16px -6px rgba(0,0,0,.3)}
+.tier.feature{background:linear-gradient(180deg,#20290f,#13180e);border-color:var(--green);box-shadow:0 30px 80px -34px var(--green-glow);position:relative;transform:scale(1.03)}
+.tier.feature:hover{transform:scale(1.03) translateY(-4px)}
+.tier.feature .price{color:var(--green)}
+.flag{position:absolute;top:-12px;left:22px;background:var(--green);color:#0a0b09;font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px;border-radius:3px}
 
 /* inside */
-.inside{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.inside{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:820px){.inside{grid-template-columns:1fr}}
-.feat{border:1px solid var(--line);border-radius:12px;padding:28px;background:#fff;transition:transform .2s,box-shadow .2s,border-color .2s}
-.feat:hover{transform:translateY(-4px);box-shadow:0 22px 46px -28px rgba(10,42,115,.4);border-color:var(--line-strong)}
-.feat .ic{font-family:var(--mono);font-weight:700;color:var(--blue);font-size:13px;letter-spacing:.1em}
-.feat h3{font-size:1.3rem;margin:16px 0 10px;color:var(--blue-deep)}
+.feat{border:1px solid var(--line);border-radius:8px;padding:28px;background:var(--surface);transition:border-color .2s,transform .2s}
+.feat:hover{border-color:var(--line-bright);transform:translateY(-3px)}
+.feat .ic{font-family:var(--mono);font-weight:700;color:var(--green);font-size:13px;letter-spacing:.1em}
+.feat h3{font-size:1.3rem;margin:16px 0 10px}
 .feat p{color:var(--muted);font-size:15.5px}
 
-/* loop (blue feature band) */
-.loop{background:linear-gradient(150deg,#1763ff,#0a2a73);color:#fff}
-.loop h2{color:#fff;margin:18px 0 22px}
-.loop .eyebrow{color:#bcd0ff}
-.loop .eyebrow::before{background:#bcd0ff}
-.loop .lead{color:#d8e3ff;max-width:52ch}
+/* repairs */
+.repair-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:820px){.repair-grid{grid-template-columns:1fr}}
+.rcard{border:1px solid var(--line-bright);border-radius:10px;padding:32px;background:linear-gradient(165deg,var(--surface),var(--bg-2));position:relative}
+.rcard .rtag{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.rcard h3{font-size:1.7rem;margin:14px 0 14px}
+.rcard p{color:var(--muted);font-size:15.5px;margin-bottom:20px}
+.rlist{list-style:none;display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}
+.rlist li{font-family:var(--mono);font-size:12.5px;color:#dfe4d4;border:1px solid var(--line-bright);border-radius:40px;padding:7px 14px;background:rgba(197,248,42,.05)}
+.rcard .btn{justify-content:center}
+
+/* loop (green band) */
+.loop{background:var(--green);color:#0a0b09}
+.loop h2{color:#0a0b09;margin:18px 0 22px}
+.loop .eyebrow{color:#0a0b09}
+.loop .eyebrow::before{background:#0a0b09}
+.loop .lead{color:#1c2a07;max-width:52ch}
 .loop-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
 @media(max-width:820px){.loop-grid{grid-template-columns:1fr}}
-.loop-steps{display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:14.5px}
-.loop-steps div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:17px 18px;border-radius:8px;display:flex;gap:14px;align-items:center;backdrop-filter:blur(4px)}
-.loop-steps b{background:#fff;color:var(--blue);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font-weight:700}
-
-/* founder */
-.founder{display:flex;gap:18px;align-items:center;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2)}
-.founder .av{width:54px;height:54px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none;overflow:hidden}
+.loop-steps{display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:14.5px}
+.loop-steps div{background:rgba(10,11,9,.08);border:1px solid rgba(10,11,9,.16);padding:16px 18px;border-radius:6px;display:flex;gap:14px;align-items:center}
+.loop-steps b{background:#0a0b09;color:var(--green);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none}
+.founder{display:flex;gap:16px;align-items:center;margin-top:30px;padding-top:24px;border-top:1px solid rgba(10,11,9,.2)}
+.founder .av{width:54px;height:54px;border-radius:50%;overflow:hidden;flex:none;background:#0a0b09}
 .founder .av img{width:54px;height:54px;object-fit:cover}
-.founder .ft{font-family:var(--mono);font-size:13px;color:#d8e3ff;letter-spacing:.03em}
-.founder .ft b{display:block;font-family:var(--body);font-size:17px;color:#fff;font-weight:800;letter-spacing:0;margin-bottom:2px}
+.founder .ft{font-family:var(--mono);font-size:13px;color:#21310a;letter-spacing:.02em}
+.founder .ft b{display:block;font-family:var(--body);font-size:17px;color:#0a0b09;font-weight:800;letter-spacing:0;margin-bottom:2px}
 
 /* wins */
-.wins{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.wins{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:820px){.wins{grid-template-columns:1fr}}
-.win{border:1px solid var(--line);border-radius:12px;padding:26px;background:#fff;box-shadow:0 14px 34px -28px rgba(10,42,115,.4)}
-.win .q{font-size:16px;color:var(--ink);line-height:1.5}
+.win{border:1px solid var(--line);border-radius:8px;padding:26px;background:var(--surface)}
+.win .q{font-size:16px;color:#eef1e6;line-height:1.5}
 .win .who{margin-top:18px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.04em}
-.win .av{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700;font-family:var(--display);flex:none}
-.win .tag{margin-left:auto;color:#fff;background:var(--blue);padding:3px 10px;border-radius:4px}
+.win .av{width:36px;height:36px;border-radius:50%;background:var(--green);color:#0a0b09;display:grid;place-items:center;font-weight:700;font-family:var(--display);flex:none}
+.win .tag{margin-left:auto;color:#0a0b09;background:var(--green);padding:3px 9px;border-radius:3px}
 
 /* faq */
 .faq-item{border-bottom:1px solid var(--line)}
-.faq-q{width:100%;background:none;border:none;color:var(--blue-deep);text-align:left;cursor:pointer;
+.faq-q{width:100%;background:none;border:none;color:var(--ink);text-align:left;cursor:pointer;
   padding:24px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;
   font-family:var(--body);font-weight:800;font-size:1.18rem}
-.faq-q .pm{font-family:var(--mono);color:var(--blue);font-size:1.5rem;flex:none;transition:transform .25s}
+.faq-q .pm{font-family:var(--mono);color:var(--green);font-size:1.5rem;flex:none;transition:transform .25s}
 .faq-q[aria-expanded="true"] .pm{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .faq-a p{color:var(--muted);padding:0 0 24px;max-width:72ch;font-size:16px}
 
 /* final */
-.final{text-align:center;padding:clamp(84px,12vw,150px) 0;position:relative;overflow:hidden;background:
-  radial-gradient(700px 440px at 50% 120%, var(--blue-soft), transparent 60%),var(--bg)}
-.final img.fl{width:78px;height:78px;border-radius:50%;margin:0 auto 26px;box-shadow:0 16px 40px -16px var(--blue-glow)}
-.final h2{margin-bottom:22px}
+.final{text-align:center;padding:clamp(84px,12vw,150px) 0;position:relative;overflow:hidden}
+.final::after{content:"";position:absolute;left:50%;bottom:-40%;transform:translateX(-50%);width:80vw;height:60vw;max-width:900px;max-height:600px;background:radial-gradient(circle,var(--green-glow),transparent 60%);filter:blur(50px);opacity:.45;pointer-events:none}
+.final img.fl{width:78px;height:78px;border-radius:50%;margin:0 auto 26px;position:relative;z-index:1}
+.final h2{position:relative;z-index:1;margin-bottom:22px}
 .final .lead{margin:0 auto 34px;text-align:center}
-.final .hero-cta{justify-content:center}
+.final .hero-cta{justify-content:center;position:relative;z-index:1}
 
 /* footer */
-footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--surface-2)}
+footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-2)}
 .foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 .foot-links{display:flex;gap:24px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.foot-links a:hover{color:var(--blue)}
+.foot-links a:hover{color:var(--green)}
 .disclaimer{color:var(--muted-2);font-size:12.5px;max-width:62ch;margin-top:24px;line-height:1.55}
 
 /* reveal */
@@ -271,6 +280,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
     <nav class="nav-links">
       <a href="#how">How it works</a>
       <a href="#club">Membership</a>
+      <a href="#repairs">Repairs</a>
       <a href="#buyer">We buy your stock</a>
       <a href="#faq">FAQ</a>
       <a href="#join" class="btn btn-primary nav-cta">Join free</a>
@@ -282,12 +292,12 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow reveal in">The UK's console buying &amp; selling community</span>
+      <span class="eyebrow reveal in">Buy · Sell · Repair · UK console community</span>
       <h1 class="h-xl reveal in d1">Turn old<br><span class="stroke">consoles</span> into<br><em>real money.</em></h1>
-      <p class="lead reveal in d2">We buy and sell consoles for profit — and we teach you to do the same. Live deal drops in our WhatsApp community, a crew that's actually winning, and a team that'll buy your stock off you when you're done. Start with under a grand.</p>
+      <p class="lead reveal in d2">We buy, sell and repair consoles for profit — and we teach you to do the same. Live deal drops in our WhatsApp community, a crew that's actually winning, and a team that'll buy your stock or fix your console when you need it. Start with under a grand.</p>
       <div class="hero-cta reveal in d3">
-        <!-- SWAP-ME: WHATSAPP_LINK -->
-        <a href="#join" class="btn btn-wa">
+        <!-- SWAP-ME: WhatsApp invite link -->
+        <a href="#join" class="btn btn-primary">
           <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
           Join the WhatsApp community
         </a>
@@ -301,14 +311,15 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
     </div>
 
     <div class="deal-card reveal in d2">
+      <div class="crt"></div>
       <div class="deal-head">
         <span class="live">Live deals</span>
         <span class="mono-label">today</span>
       </div>
       <div class="deal-row"><span class="item">PS5 Slim</span><span class="nums">£260 → £400 <b>+£140</b></span></div>
       <div class="deal-row"><span class="item">Switch OLED</span><span class="nums">£150 → £225 <b>+£75</b></span></div>
+      <div class="deal-row"><span class="item">Faulty PS5 (fixed)</span><span class="nums">£200 → £380 <b>+£180</b></span></div>
       <div class="deal-row"><span class="item">GameCube CIB</span><span class="nums">£55 → £160 <b>+£105</b></span></div>
-      <div class="deal-row"><span class="item">PS4 Pro + games</span><span class="nums">£90 → £165 <b>+£75</b></span></div>
       <div class="deal-row"><span class="item">N64 bundle</span><span class="nums">£70 → £190 <b>+£120</b></span></div>
       <div class="deal-foot">— spreads dropped in the WhatsApp community every morning —</div>
     </div>
@@ -316,7 +327,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
 </section>
 
 <!-- ===== HOW IT WORKS ===== -->
-<section class="sec tint" id="how">
+<section class="sec alt" id="how">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">How it works</span>
@@ -327,7 +338,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
       <div class="step reveal">
         <span class="num">01 / SOURCE</span>
         <h3>Find the deal</h3>
-        <p>We show you exactly where the underpriced consoles are — Marketplace, eBay, car boots, bundles — and how to spot a winner in seconds.</p>
+        <p>We show you exactly where the underpriced consoles are — Marketplace, eBay, car boots, bundles, faulty units — and how to spot a winner in seconds.</p>
       </div>
       <div class="step reveal d1">
         <span class="num">02 / FLIP</span>
@@ -388,7 +399,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
           <li>We'll buy your consoles off you</li>
           <li>Members-only chat + wins</li>
         </ul>
-        <a href="#join" class="btn btn-ghost">Join the membership</a>
+        <a href="#join" class="btn btn-primary">Join the membership</a>
       </div>
 
       <div class="tier reveal d3">
@@ -407,7 +418,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
 </section>
 
 <!-- ===== INSIDE ===== -->
-<section class="sec tint" id="inside">
+<section class="sec alt" id="inside">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Inside the membership</span>
@@ -419,8 +430,48 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
       <div class="feat reveal d1"><span class="ic">// 02</span><h3>The sourcing vault</h3><p>Every place we find stock and exactly how to work it — built up and updated by the whole community.</p></div>
       <div class="feat reveal d2"><span class="ic">// 03</span><h3>Live price guides</h3><p>What every console, bundle and retro lot is really worth this month. Stop guessing, start pricing.</p></div>
       <div class="feat reveal"><span class="ic">// 04</span><h3>Weekly live calls</h3><p>Watch the team flip live, ask anything, get on the hot seat. Real-time coaching, every week.</p></div>
-      <div class="feat reveal d1"><span class="ic">// 05</span><h3>Member wins channel</h3><p>Real spreads from real members, daily. Proof it works — and the push to go get yours.</p></div>
+      <div class="feat reveal d1"><span class="ic">// 05</span><h3>Repair know-how</h3><p>Learn the faulty-flip game — buy broken consoles cheap, fix them, and double your money on the resale.</p></div>
       <div class="feat reveal d2"><span class="ic">// 06</span><h3>Scripts + templates</h3><p>Listing copy, DM openers, negotiation lines. Copy, paste, close. No more staring at a blank message.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REPAIRS ===== -->
+<section class="sec" id="repairs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Repairs</span>
+      <h2 class="h-lg">We don't just flip.<br>We fix.</h2>
+      <p class="lead">Consoles break — and a broken console is the best deal there is. We repair them in-house, and we teach members how to turn faulty units into the fattest margins in the game.</p>
+    </div>
+    <div class="repair-grid">
+      <div class="rcard reveal">
+        <span class="rtag">// Need a console fixed?</span>
+        <h3>Bring it back to life</h3>
+        <p>Send it in or drop it to us. Fast, fair, no-nonsense repairs on every console — and you'll know the price before any work starts.</p>
+        <ul class="rlist">
+          <li>HDMI port replacement</li>
+          <li>Disc drive fixes</li>
+          <li>Joy-Con / controller drift</li>
+          <li>Overheating &amp; fan cleans</li>
+          <li>No-power / board repairs</li>
+          <li>Full refurb</li>
+        </ul>
+        <a href="#join" class="btn btn-primary">Book a repair</a>
+      </div>
+      <div class="rcard reveal d1">
+        <span class="rtag">// Want to learn repairs?</span>
+        <h3>The faulty-flip game</h3>
+        <p>Faulty consoles sell for peanuts — then sell for double once they're fixed. Members learn exactly which faults are worth buying, how to fix them, and how to price the resale.</p>
+        <ul class="rlist">
+          <li>Which faults to buy</li>
+          <li>Step-by-step fixes</li>
+          <li>Tools &amp; parts list</li>
+          <li>Resale pricing</li>
+          <li>Member repair support</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Learn with the crew</a>
+      </div>
     </div>
   </div>
 </section>
@@ -459,8 +510,8 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
         <div class="who"><span class="av">J</span> Jay, Manchester <span class="tag">+£60</span></div>
       </div>
       <div class="win reveal d1">
-        <p class="q">"The retro bundles are mad. Bought a job lot for £80, broke it up and the games alone went for £210. Wouldn't have touched it without the price guide."</p>
-        <div class="who"><span class="av">D</span> Deniz, London <span class="tag">+£130</span></div>
+        <p class="q">"Bought a 'broken' PS4 for £40, turned out to be a knackered HDMI port. Fixed it with the repair guide, sold it for £140. Maddest flip I've done."</p>
+        <div class="who"><span class="av">D</span> Deniz, London <span class="tag">+£100</span></div>
       </div>
       <div class="win reveal d2">
         <p class="q">"Didn't want the faff of posting it so I sold the PS5 straight to Abe and the team. Quick, clean, still made £90. That's the bit that sold me."</p>
@@ -471,7 +522,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="sec tint" id="faq">
+<section class="sec alt" id="faq">
   <div class="wrap" style="max-width:860px">
     <div class="sec-head reveal">
       <span class="eyebrow">Straight answers</span>
@@ -487,16 +538,16 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
         <div class="faq-a"><p>Especially for you. Most of the crew started at zero. You get the starter guide, the daily deals done for you, weekly live calls, and a buyer for your stock — it's the most hand-held way to start there is.</p></div>
       </div>
       <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you actually repair consoles too? <span class="pm">+</span></button>
+        <div class="faq-a"><p>Yes. We fix consoles in-house — HDMI ports, disc drives, controller drift, overheating, no-power board repairs, full refurbs. You can book a repair, and members also learn how to fix faulty consoles themselves to flip for bigger margins.</p></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How fast can I make my membership back? <span class="pm">+</span></button>
         <div class="faq-a"><p>One decent flip usually covers months of membership. We can't promise numbers — your effort decides that — but the average spread our members log is around £85 a flip. Do one, you're already up.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What if I can't sell a console? <span class="pm">+</span></button>
         <div class="faq-a"><p>Then we buy it off you. Members get a guaranteed exit — find the deal, and if you don't want to sell it yourself, sell it to us same week at a fair price. You never get stuck holding stock.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Is this just another guru course? <span class="pm">+</span></button>
-        <div class="faq-a"><p>No. There's no fake Lambo here. We actually trade consoles every single day, we show the real numbers, and we're the only ones who'll literally buy your stock off you. It's a working community, not a PDF.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Can I cancel anytime? <span class="pm">+</span></button>
@@ -514,12 +565,12 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
     <h2 class="h-xl reveal d1">Stop scrolling.<br>Start flipping.</h2>
     <p class="lead reveal d2">Jump in the free WhatsApp community, watch how it's done, and join the crew turning old consoles into real money — every single week.</p>
     <div class="hero-cta reveal d3">
-      <!-- SWAP-ME: WHATSAPP_LINK -->
-      <a href="#join" class="btn btn-wa">
+      <!-- SWAP-ME: WhatsApp invite link -->
+      <a href="#join" class="btn btn-primary">
         <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
         Join the WhatsApp community
       </a>
-      <a href="#how" class="btn btn-ghost">See how it works</a>
+      <a href="#repairs" class="btn btn-ghost">Book a repair</a>
     </div>
   </div>
 </section>
@@ -535,12 +586,13 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
       <div class="foot-links">
         <a href="#how">How it works</a>
         <a href="#club">Membership</a>
+        <a href="#repairs">Repairs</a>
         <a href="#faq">FAQ</a>
         <!-- SWAP-ME: real social handle -->
         <a href="#">@consolesforyou</a>
       </div>
     </div>
-    <p class="disclaimer">Consoles For You is an education and community membership founded by Abe Ahmed. We share what works for us and our members — we don't guarantee earnings, and results depend on your own effort, market conditions and time invested. Treat trading income responsibly and keep records for HMRC. © 2026 Consoles For You.</p>
+    <p class="disclaimer">Consoles For You is a console buying, selling, repair and education community founded by Abe Ahmed. We share what works for us and our members — we don't guarantee earnings, and results depend on your own effort, market conditions and time invested. Treat trading income responsibly and keep records for HMRC. © 2026 Consoles For You.</p>
   </div>
 </footer>
 
@@ -548,12 +600,13 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--sur
 const deals = [
   ['PS5 Slim','£260 → £400','+£140'],
   ['Switch OLED','£150 → £225','+£75'],
+  ['Faulty PS5 fixed','£200 → £380','+£180'],
   ['PS4 Pro','£90 → £165','+£75'],
   ['GameCube CIB','£55 → £160','+£105'],
   ['Xbox Series S','£130 → £200','+£70'],
   ['N64 bundle','£70 → £190','+£120'],
+  ['HDMI repair','same day','+£90'],
   ['Retro game lot','£40 → £140','+£100'],
-  ['Dreamcast','£60 → £150','+£90'],
 ];
 const tickEl = document.getElementById('tick');
 const makeRun = () => deals.map(d =>
