@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FLIP CLUB — Turn Old Consoles Into Real Money</title>
+<meta name="description" content="The UK's console flipping community. Learn to buy and sell consoles for profit, get live deal drops, and sell your stock straight to us." />
+
+<!-- ============================================================
+     SWAP-ME CHECKLIST (search "SWAP-ME"):
+       • Brand name: FLIP CLUB
+       • Social handle: @flipclub
+       • Join link / Whop / Skool URL: #join  (replace href="#join")
+       • Numbers in the stats + ticker (edit to real figures)
+       • Subscription price: £39/mo
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0b09;
+  --bg-2:#101310;
+  --surface:#141811;
+  --surface-2:#1a1f16;
+  --line:#252b1e;
+  --line-bright:#39411f;
+  --green:#c5f82a;        /* money green */
+  --green-dim:#9bc41f;
+  --green-glow:rgba(197,248,42,.35);
+  --ink:#f3f2e8;
+  --muted:#8b9080;
+  --muted-2:#5f6557;
+  --red:#ff5c46;
+  --display:'Anton',sans-serif;
+  --body:'Hanken Grotesk',sans-serif;
+  --mono:'Space Mono',monospace;
+  --maxw:1200px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* grain overlay */
+body::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{position:relative}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--green);display:inline-flex;align-items:center;gap:9px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--green)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.96;letter-spacing:.01em;text-transform:uppercase}
+.h-xl{font-size:clamp(3.2rem,9vw,7.2rem)}
+.h-lg{font-size:clamp(2.4rem,6vw,4.4rem)}
+.h-md{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+.lead{font-size:clamp(1.05rem,1.8vw,1.32rem);color:var(--muted);max-width:46ch;line-height:1.5}
+.mono-label{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.pos{color:var(--green)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;
+  font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+  padding:16px 26px;border-radius:2px;transition:transform .15s ease, box-shadow .2s ease, background .2s;
+}
+.btn-primary{background:var(--green);color:#0a0b09;box-shadow:0 0 0 rgba(197,248,42,0)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 34px -8px var(--green-glow)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-bright)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translate(3px,-3px)}
+
+/* ---------- ticker ---------- */
+.ticker{
+  position:sticky;top:0;z-index:60;background:var(--green);color:#0a0b09;
+  border-bottom:1px solid #0a0b09;overflow:hidden;white-space:nowrap;
+}
+.ticker-track{display:inline-flex;align-items:center;gap:0;animation:scroll 38s linear infinite;will-change:transform}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.tick{
+  font-family:var(--mono);font-weight:700;font-size:12.5px;letter-spacing:.06em;
+  padding:8px 22px;display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;
+}
+.tick .sep{opacity:.45}
+.tick b{background:#0a0b09;color:var(--green);padding:1px 7px;border-radius:2px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:33px;z-index:55;background:rgba(10,11,9,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:var(--display);font-size:24px;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+.brand .dot{width:11px;height:11px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green-glow);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{padding:11px 18px;font-size:12.5px}
+@media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(70px,11vw,130px) 0 80px;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;top:-10%;right:-15%;width:60vw;height:60vw;max-width:760px;max-height:760px;
+  background:radial-gradient(circle, var(--green-glow), transparent 62%);filter:blur(40px);opacity:.5;pointer-events:none;z-index:0;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;position:relative;z-index:1}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:42px}}
+.hero h1{margin:22px 0 24px}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.hero h1 em{font-style:normal;color:var(--green);position:relative}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.hero-stats{display:flex;gap:34px;margin-top:46px;flex-wrap:wrap}
+.stat .n{font-family:var(--display);font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--ink)}
+.stat .n .pos{color:var(--green)}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+
+/* deal card */
+.deal-card{
+  background:linear-gradient(160deg,var(--surface),var(--bg-2));border:1px solid var(--line-bright);
+  border-radius:6px;padding:24px;position:relative;box-shadow:0 30px 70px -30px rgba(0,0,0,.8);
+}
+.deal-card .crt{position:absolute;inset:0;border-radius:6px;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px)}
+.deal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed var(--line-bright);padding-bottom:14px;margin-bottom:6px}
+.live{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+.deal-row{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:14px}
+.deal-row:last-child{border-bottom:none}
+.deal-row .item{color:var(--ink);letter-spacing:.02em}
+.deal-row .nums{color:var(--muted)}
+.deal-row .nums b{color:var(--green)}
+.deal-foot{margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.08em;text-align:center;text-transform:uppercase}
+
+/* ---------- section heading ---------- */
+.sec{padding:clamp(70px,10vw,120px) 0}
+.sec-head{max-width:62ch;margin-bottom:54px}
+.sec-head h2{margin:18px 0 18px}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--bg);padding:38px 30px;transition:background .25s}
+.step:hover{background:var(--surface)}
+.step .num{font-family:var(--mono);font-size:13px;color:var(--green);letter-spacing:.1em}
+.step h3{font-size:1.5rem;margin:20px 0 12px}
+.step p{color:var(--muted);font-size:15.5px}
+
+/* ---------- club / pricing ---------- */
+.club{background:
+  radial-gradient(900px 400px at 80% -10%, rgba(197,248,42,.07), transparent 60%),
+  var(--bg-2);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+@media(max-width:980px){.tiers{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tiers{grid-template-columns:1fr}}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:26px 22px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.tier:hover{transform:translateY(-4px);border-color:var(--line-bright)}
+.tier .tname{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.tier .price{font-family:var(--display);font-size:2.6rem;line-height:1;margin:16px 0 4px}
+.tier .price small{font-family:var(--mono);font-size:.85rem;color:var(--muted);letter-spacing:.05em}
+.tier .tdesc{color:var(--muted);font-size:14px;min-height:42px}
+.tier ul{list-style:none;margin:18px 0 22px;display:flex;flex-direction:column;gap:10px}
+.tier li{font-size:14.5px;display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
+.tier li::before{content:"+";color:var(--green);font-family:var(--mono);font-weight:700}
+.tier .btn{margin-top:auto;justify-content:center}
+.tier.feature{background:linear-gradient(180deg,#1c2313,#12160f);border-color:var(--green);box-shadow:0 30px 80px -34px var(--green-glow);position:relative;transform:scale(1.02)}
+.tier.feature:hover{transform:scale(1.02) translateY(-4px)}
+.tier.feature .price{color:var(--green)}
+.flag{position:absolute;top:-12px;left:22px;background:var(--green);color:#0a0b09;font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:2px}
+
+/* ---------- inside grid ---------- */
+.inside{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.inside{grid-template-columns:1fr}}
+.feat{border:1px solid var(--line);border-radius:6px;padding:26px;background:var(--surface);transition:border-color .2s,transform .2s}
+.feat:hover{border-color:var(--line-bright);transform:translateY(-3px)}
+.feat .ic{font-family:var(--mono);color:var(--green);font-size:13px;letter-spacing:.1em}
+.feat h3{font-size:1.25rem;margin:16px 0 10px}
+.feat p{color:var(--muted);font-size:14.5px}
+
+/* ---------- loop highlight ---------- */
+.loop{background:var(--green);color:#0a0b09}
+.loop .eyebrow{color:#0a0b09}
+.loop .eyebrow::before{background:#0a0b09}
+.loop h2{margin:18px 0 22px}
+.loop .lead{color:#1c2a07;max-width:52ch}
+.loop-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:46px;align-items:center}
+@media(max-width:820px){.loop-grid{grid-template-columns:1fr}}
+.loop-steps{display:flex;flex-direction:column;gap:2px;font-family:var(--mono);font-size:14px}
+.loop-steps div{background:rgba(10,11,9,.07);border:1px solid rgba(10,11,9,.14);padding:16px 18px;border-radius:4px;display:flex;gap:14px;align-items:center}
+.loop-steps b{background:#0a0b09;color:var(--green);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none}
+
+/* ---------- wins ---------- */
+.wins{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.wins{grid-template-columns:1fr}}
+.win{border:1px solid var(--line);border-radius:6px;padding:24px;background:var(--surface)}
+.win .q{font-size:15.5px;color:var(--ink);line-height:1.5}
+.win .who{margin-top:18px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em}
+.win .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dim));color:#0a0b09;display:grid;place-items:center;font-weight:700;font-family:var(--display);flex:none}
+.win .tag{margin-left:auto;color:var(--green)}
+
+/* ---------- faq ---------- */
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;background:none;border:none;color:var(--ink);text-align:left;cursor:pointer;
+  padding:24px 0;display:flex;justify-content:space-between;gap:20px;align-items:center;
+  font-family:var(--body);font-weight:700;font-size:1.15rem}
+.faq-q .pm{font-family:var(--mono);color:var(--green);font-size:1.4rem;flex:none;transition:transform .25s}
+.faq-q[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{color:var(--muted);padding:0 0 24px;max-width:70ch;font-size:15.5px}
+
+/* ---------- final cta ---------- */
+.final{text-align:center;padding:clamp(80px,12vw,150px) 0;position:relative;overflow:hidden}
+.final::after{content:"";position:absolute;left:50%;bottom:-40%;transform:translateX(-50%);width:80vw;height:60vw;max-width:900px;max-height:600px;background:radial-gradient(circle,var(--green-glow),transparent 60%);filter:blur(50px);opacity:.45;pointer-events:none}
+.final h2{position:relative;z-index:1;margin-bottom:24px}
+.final .lead{margin:0 auto 36px;text-align:center}
+.final .hero-cta{justify-content:center}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:50px 0 40px;background:var(--bg-2)}
+.foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:24px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.foot-links a:hover{color:var(--green)}
+.disclaimer{color:var(--muted-2);font-size:12px;max-width:60ch;margin-top:24px;line-height:1.5}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+</style>
+</head>
+<body>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tick">
+    <!-- duplicated in JS for seamless loop -->
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="dot"></span>FLIP CLUB</a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#club">The Club</a>
+      <a href="#buyer">We buy your stock</a>
+      <a href="#faq">FAQ</a>
+      <a href="#join" class="btn btn-primary nav-cta">Join the club</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow reveal in">The UK's console flipping community</span>
+      <h1 class="h-xl reveal in d1">Turn old<br><span class="stroke">consoles</span> into<br><em>real money.</em></h1>
+      <p class="lead reveal in d2">We buy and sell consoles for profit — and we teach you to do the same. Live deal drops, a community that's actually winning, and a guy who'll buy your stock off you when you're done. Start with under a grand.</p>
+      <div class="hero-cta reveal in d3">
+        <a href="#join" class="btn btn-primary">Join the club <span class="arr">↗</span></a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-stats reveal in d3">
+        <div class="stat"><div class="n">320<span class="pos">+</span></div><div class="l">Members flipping</div></div>
+        <div class="stat"><div class="n">1,200<span class="pos">+</span></div><div class="l">Deals tracked</div></div>
+        <div class="stat"><div class="n"><span class="pos">£</span>85</div><div class="l">Avg spread / flip</div></div>
+      </div>
+    </div>
+
+    <div class="deal-card reveal in d2">
+      <div class="crt"></div>
+      <div class="deal-head">
+        <span class="live">Live deals</span>
+        <span class="mono-label">today</span>
+      </div>
+      <div class="deal-row"><span class="item">PS5 Slim</span><span class="nums">£260 → £400 <b>+£140</b></span></div>
+      <div class="deal-row"><span class="item">Switch OLED</span><span class="nums">£150 → £225 <b>+£75</b></span></div>
+      <div class="deal-row"><span class="item">GameCube CIB</span><span class="nums">£55 → £160 <b>+£105</b></span></div>
+      <div class="deal-row"><span class="item">PS4 Pro + games</span><span class="nums">£90 → £165 <b>+£75</b></span></div>
+      <div class="deal-row"><span class="item">N64 bundle</span><span class="nums">£70 → £190 <b>+£120</b></span></div>
+      <div class="deal-foot">— spreads posted in the club every morning —</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h-lg">Buy low. Sell high.<br>Get paid. Repeat.</h2>
+      <p class="lead">No warehouse, no big bankroll, no fluff. You learn a simple, repeatable system — and you're never alone doing it.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01 / SOURCE</span>
+        <h3>Find the deal</h3>
+        <p>We show you exactly where the underpriced consoles are — Marketplace, eBay, car boots, bundles — and how to know a winner in seconds.</p>
+      </div>
+      <div class="step reveal d1">
+        <span class="num">02 / FLIP</span>
+        <h3>Lock the spread</h3>
+        <p>Line the buyer up first, then buy. Your money recycles in days, not months. We hand you the price guides and the scripts that close it.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="num">03 / CASH OUT</span>
+        <h3>Bank the profit</h3>
+        <p>Sell it on — or sell it straight to us. Either way you walk with the spread, then do it again. That's the whole game.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE CLUB / PRICING ===== -->
+<section class="sec club" id="club">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The come up</span>
+      <h2 class="h-lg">Pick your level.</h2>
+      <p class="lead">Most people start free, grab the playbook, then go all-in on the club once the first flips land. No pressure — move at your pace.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal">
+        <span class="tname">Free</span>
+        <div class="price">£0</div>
+        <p class="tdesc">Get in the room. See the wins. Decide for yourself.</p>
+        <ul>
+          <li>Free community access</li>
+          <li>Weekly deal of the week</li>
+          <li>Beginner starter guide</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Join free</a>
+      </div>
+
+      <div class="tier reveal d1">
+        <span class="tname">The Playbook</span>
+        <div class="price">£25 <small>once</small></div>
+        <p class="tdesc">The exact system, start to finish, to land your first flip.</p>
+        <ul>
+          <li>Full sourcing walkthrough</li>
+          <li>Pricing + negotiation scripts</li>
+          <li>First-flip checklist</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Get the playbook</a>
+      </div>
+
+      <div class="tier feature reveal d2">
+        <span class="flag">★ Most popular</span>
+        <span class="tname">Flip Club</span>
+        <div class="price">£39 <small>/ month</small></div>
+        <p class="tdesc">The engine room. Live deals, live calls, and a buyer for your stock.</p>
+        <ul>
+          <li>Daily live deal drops</li>
+          <li>The sourcing vault + price guides</li>
+          <li>Weekly live flip-along call</li>
+          <li>We'll buy your consoles off you</li>
+          <li>Member wins + private chat</li>
+        </ul>
+        <a href="#join" class="btn btn-primary">Join the club ↗</a>
+      </div>
+
+      <div class="tier reveal d3">
+        <span class="tname">1-to-1 Scale Up</span>
+        <div class="price">£300<small>+</small></div>
+        <p class="tdesc">Me and you, building your operation to real monthly income.</p>
+        <ul>
+          <li>Private coaching block</li>
+          <li>Personalised scaling plan</li>
+          <li>Priority buyer access</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Apply</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT'S INSIDE ===== -->
+<section class="sec" id="inside">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Inside the club</span>
+      <h2 class="h-lg">A monthly membership<br>that actually pays for itself.</h2>
+      <p class="lead">One good flip covers months of membership. The rest is profit — and a crew that's got your back.</p>
+    </div>
+    <div class="inside">
+      <div class="feat reveal"><span class="ic">// 01</span><h3>Daily deal drops</h3><p>Specific consoles worth buying right now, with the numbers done for you. This alone is worth the fee.</p></div>
+      <div class="feat reveal d1"><span class="ic">// 02</span><h3>The sourcing vault</h3><p>Every place we find stock and exactly how to work it — built up and updated by the whole community.</p></div>
+      <div class="feat reveal d2"><span class="ic">// 03</span><h3>Live price guides</h3><p>What every console, bundle and retro lot is really worth this month. Stop guessing, start pricing.</p></div>
+      <div class="feat reveal"><span class="ic">// 04</span><h3>Weekly live calls</h3><p>Watch me flip live, ask anything, get on the hot seat. Real-time coaching, every week.</p></div>
+      <div class="feat reveal d1"><span class="ic">// 05</span><h3>The member wins channel</h3><p>Real spreads from real members, daily. Proof it works — and the push to go get yours.</p></div>
+      <div class="feat reveal d2"><span class="ic">// 06</span><h3>Scripts + templates</h3><p>Listing copy, DM openers, negotiation lines. Copy, paste, close. No more staring at a blank message.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE BUYER LOOP ===== -->
+<section class="sec loop" id="buyer">
+  <div class="wrap loop-grid">
+    <div class="reveal">
+      <span class="eyebrow">The unfair advantage</span>
+      <h2 class="h-lg">Scared you<br>can't sell it?<br>We'll buy it.</h2>
+      <p class="lead">The #1 fear of every beginner: "what if I get stuck with it?" Forget it. Find the deal, and if you don't fancy the hassle of selling — sell it straight to us, same week, fair price. You still profit. Nobody gets stuck. That's something no course on earth can offer you.</p>
+    </div>
+    <div class="loop-steps reveal d1">
+      <div><b>1</b><span>We teach you to find a console deal.</span></div>
+      <div><b>2</b><span>You grab it — knowing you've got a guaranteed exit.</span></div>
+      <div><b>3</b><span>Don't want to sell it? We buy it off you, fast.</span></div>
+      <div><b>4</b><span>You bank the profit. We handle the rest. Repeat.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WINS ===== -->
+<section class="sec" id="wins">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Member wins</span>
+      <h2 class="h-lg">The crew is eating.</h2>
+    </div>
+    <div class="wins">
+      <div class="win reveal">
+        <p class="q">"Came in not knowing anything. First week I flipped a Switch for £60 profit off a Marketplace deal the club spotted. Membership paid for itself day three."</p>
+        <div class="who"><span class="av">J</span> Jay, Manchester <span class="tag">+£60</span></div>
+      </div>
+      <div class="win reveal d1">
+        <p class="q">"The retro bundles are mad. Bought a job lot for £80, broke it up and the games alone went for £210. Wouldn't have touched it without the price guide."</p>
+        <div class="who"><span class="av">D</span> Deniz, London <span class="tag">+£130</span></div>
+      </div>
+      <div class="win reveal d2">
+        <p class="q">"Didn't want the faff of posting it so I just sold the PS5 straight to the club. Quick, clean, still made £90. That's the bit that sold me."</p>
+        <div class="who"><span class="av">R</span> Reece, Leeds <span class="tag">+£90</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="sec" id="faq">
+  <div class="wrap" style="max-width:840px">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Straight answers</span>
+      <h2 class="h-lg">Questions, sorted.</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do I need loads of money to start? <span class="pm">+</span></button>
+        <div class="faq-a"><p>No. The whole model is built for under £1,000 — and honestly you can start with a few hundred. We teach you to line up the buyer first, so your money recycles in days instead of sitting in stock. Small bankroll, fast turns.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">I've never flipped anything before. Is this for me? <span class="pm">+</span></button>
+        <div class="faq-a"><p>Especially for you. Most of the crew started at zero. You get the starter guide, the daily deals done for you, weekly live calls, and a buyer for your stock — it's the most hand-held way to start there is.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How fast can I make my membership back? <span class="pm">+</span></button>
+        <div class="faq-a"><p>One decent flip usually covers months of membership. We can't promise numbers — your effort decides that — but the average spread our members log is around £85 a flip. Do one, you're already up.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if I can't sell a console? <span class="pm">+</span></button>
+        <div class="faq-a"><p>Then we buy it off you. Members get a guaranteed exit — find the deal, and if you don't want to sell it yourself, sell it to us same week at a fair price. You never get stuck holding stock.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is this just another guru course? <span class="pm">+</span></button>
+        <div class="faq-a"><p>No. There's no fake Lambo here. We actually trade consoles every single day, we show the real numbers, and we're the only ones who'll literally buy your stock off you. It's a working community, not a PDF.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I cancel anytime? <span class="pm">+</span></button>
+        <div class="faq-a"><p>Anytime, no drama. It's a rolling monthly membership — stay because it's making you money, not because you're locked in.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final" id="join">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Doors are open</span>
+    <h2 class="h-xl reveal d1">Stop scrolling.<br>Start flipping.</h2>
+    <p class="lead reveal d2">Get in the room free, watch how it's done, and join the crew turning old consoles into real money — every single week.</p>
+    <div class="hero-cta reveal d3">
+      <!-- SWAP-ME: point href to your Whop/Skool/Telegram join link -->
+      <a href="#join" class="btn btn-primary">Join the club ↗</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="#top"><span class="dot"></span>FLIP CLUB</a>
+      <div class="foot-links">
+        <a href="#how">How it works</a>
+        <a href="#club">The Club</a>
+        <a href="#faq">FAQ</a>
+        <!-- SWAP-ME: real social handle -->
+        <a href="#">@flipclub</a>
+      </div>
+    </div>
+    <p class="disclaimer">FLIP CLUB is an education and community membership. We share what works for us and our members — we don't guarantee earnings, and results depend on your own effort, market conditions and time invested. Treat trading income responsibly and keep records for HMRC. © 2026 FLIP CLUB.</p>
+  </div>
+</footer>
+
+<script>
+// ---- live ticker (duplicated for seamless scroll) ----
+const deals = [
+  ['PS5 Slim','£260 → £400','+£140'],
+  ['Switch OLED','£150 → £225','+£75'],
+  ['PS4 Pro','£90 → £165','+£75'],
+  ['GameCube CIB','£55 → £160','+£105'],
+  ['Xbox Series S','£130 → £200','+£70'],
+  ['N64 bundle','£70 → £190','+£120'],
+  ['Retro game lot','£40 → £140','+£100'],
+  ['Dreamcast','£60 → £150','+£90'],
+];
+const tickEl = document.getElementById('tick');
+const makeRun = () => deals.map(d =>
+  `<span class="tick">${d[0]} <span class="sep">${d[1]}</span> <b>${d[2]}</b><span class="sep">•</span></span>`
+).join('');
+tickEl.innerHTML = makeRun() + makeRun(); // two copies → -50% loop is seamless
+
+// ---- scroll reveal ----
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.14, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+// ---- FAQ accordion ----
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const open = btn.getAttribute('aria-expanded')==='true';
+    const ans = btn.nextElementSibling;
+    btn.setAttribute('aria-expanded', String(!open));
+    ans.style.maxHeight = open ? null : ans.scrollHeight + 'px';
+  });
+});
+</script>
+</body>
+</html>
