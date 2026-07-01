@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#0a0b09" />
 
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
 <!-- Social share (Open Graph + Twitter) -->
@@ -131,13 +132,11 @@ h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.96;letter-spaci
 /* ---------- nav ---------- */
 header.nav{position:sticky;top:47px;z-index:55;background:rgba(10,11,9,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.brand{display:flex;align-items:center;gap:11px}
-.cfy-mark{flex:none;display:block}
-.brand .cfy-mark{width:44px;height:44px}
+.brand{display:flex;align-items:center}
 .brand .wm{display:flex;flex-direction:column;line-height:1}
-.brand .wm-1{font-family:var(--display);font-size:21px;letter-spacing:.03em;color:var(--ink)}
+.brand .wm-1{font-family:var(--display);font-size:25px;letter-spacing:.04em;color:var(--ink)}
 .brand .wm-1 i{font-style:normal;color:var(--green)}
-.brand .wm-2{font-family:var(--mono);font-weight:700;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.brand .wm-2{font-family:var(--mono);font-weight:700;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:5px}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c3c9b6;transition:color .2s}
 .nav-links a:hover{color:var(--green)}
@@ -287,13 +286,11 @@ header.nav{position:sticky;top:47px;z-index:55;background:rgba(10,11,9,.78);back
 /* final */
 .final{text-align:center;padding:clamp(84px,12vw,150px) 0;position:relative;overflow:hidden}
 .final::after{content:"";position:absolute;left:50%;bottom:-40%;transform:translateX(-50%);width:80vw;height:60vw;max-width:900px;max-height:600px;background:radial-gradient(circle,var(--green-glow),transparent 60%);filter:blur(50px);opacity:.45;pointer-events:none}
-.final-lock{display:inline-flex;align-items:center;gap:18px;margin:0 auto 26px;position:relative;z-index:1}
-.final-lock .cfy-mark{width:74px;height:74px}
-.final-lock .wm-1{font-family:var(--display);font-size:clamp(2.6rem,6vw,3.6rem);letter-spacing:.03em;color:var(--ink);line-height:1}
+.final-lock{display:inline-block;margin:0 auto 26px;position:relative;z-index:1}
+.final-lock .wm{text-align:center;line-height:1}
+.final-lock .wm-1{font-family:var(--display);font-size:clamp(3.4rem,8vw,5rem);letter-spacing:.04em;color:var(--ink);line-height:1}
 .final-lock .wm-1 i{font-style:normal;color:var(--green)}
-.final-lock .wm-2{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:7px}
-.final-lock .wm{text-align:left}
-@media(max-width:520px){.final-lock{flex-direction:column;gap:12px}.final-lock .wm{text-align:center}}
+.final-lock .wm-2{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:12px}
 .final h2{position:relative;z-index:1;margin-bottom:22px}
 .final .lead{margin:0 auto 34px;text-align:center}
 .final .hero-cta{justify-content:center;position:relative;z-index:1}
@@ -324,7 +321,6 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 <header class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top" aria-label="Consoles For You — home">
-      <svg class="cfy-mark" viewBox="0 0 120 120" aria-hidden="true"><rect x="4" y="4" width="112" height="112" rx="26" fill="#c5f82a"/><g fill="#0a0b09"><rect x="50" y="36" width="20" height="48" rx="4"/><rect x="36" y="50" width="48" height="20" rx="4"/></g></svg>
       <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navmenu">
@@ -614,7 +610,6 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 <section class="final" id="join">
   <div class="wrap">
     <span class="final-lock reveal">
-      <svg class="cfy-mark" viewBox="0 0 120 120" role="img" aria-label="Consoles For You"><rect x="4" y="4" width="112" height="112" rx="26" fill="#c5f82a"/><g fill="#0a0b09"><rect x="50" y="36" width="20" height="48" rx="4"/><rect x="36" y="50" width="48" height="20" rx="4"/></g></svg>
       <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
     </span>
     <span class="eyebrow reveal d1" style="justify-content:center">Doors are open</span>
@@ -636,7 +631,6 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
   <div class="wrap">
     <div class="foot-in">
       <a class="brand" href="#top" aria-label="Consoles For You — home">
-        <svg class="cfy-mark" viewBox="0 0 120 120" aria-hidden="true"><rect x="4" y="4" width="112" height="112" rx="26" fill="#c5f82a"/><g fill="#0a0b09"><rect x="50" y="36" width="20" height="48" rx="4"/><rect x="36" y="50" width="48" height="20" rx="4"/></g></svg>
         <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
       </a>
       <div class="foot-links">
