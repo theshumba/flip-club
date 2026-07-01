@@ -5,7 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Consoles For You — Buy, Sell &amp; Repair Consoles For Profit</title>
 <meta name="description" content="The UK's console buying, selling & repair community. Learn to flip consoles for profit, get live deal drops on WhatsApp, sell your stock to us, and get your console fixed." />
-<link rel="icon" href="cfy-logo.jpg" />
+<meta name="theme-color" content="#0a0b09" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+<!-- Social share (Open Graph + Twitter) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consoles For You" />
+<meta property="og:url" content="https://consolesforyou.com/" />
+<meta property="og:title" content="Consoles For You — Flip Consoles For Profit" />
+<meta property="og:description" content="Buy, sell & repair consoles for profit. Live deal drops in our free WhatsApp community, a crew that's winning, and a team that'll buy your stock or fix your console." />
+<meta property="og:image" content="https://consolesforyou.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Consoles For You — Flip Consoles For Profit" />
+<meta name="twitter:description" content="Buy, sell & repair consoles for profit. Live deal drops in our free WhatsApp community." />
+<meta name="twitter:image" content="https://consolesforyou.com/og-image.png" />
 
 <!-- ============================================================
      SWAP-ME CHECKLIST (search "SWAP-ME"):
@@ -58,6 +76,12 @@ body::before{
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:0;z-index:200;background:var(--green);color:#0a0b09;
+  font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  padding:12px 18px;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 section{position:relative}
 
@@ -107,15 +131,34 @@ h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.96;letter-spaci
 /* ---------- nav ---------- */
 header.nav{position:sticky;top:47px;z-index:55;background:rgba(10,11,9,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{height:46px;width:auto;display:block}
-.brand .bt{font-family:var(--display);font-size:20px;letter-spacing:.04em;color:var(--ink);line-height:1}
-.brand .bt span{color:var(--green)}
+.brand{display:flex;align-items:center;gap:11px}
+.cfy-mark{flex:none;display:block}
+.brand .cfy-mark{width:44px;height:44px}
+.brand .wm{display:flex;flex-direction:column;line-height:1}
+.brand .wm-1{font-family:var(--display);font-size:21px;letter-spacing:.03em;color:var(--ink)}
+.brand .wm-1 i{font-style:normal;color:var(--green)}
+.brand .wm-2{font-family:var(--mono);font-weight:700;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c3c9b6;transition:color .2s}
 .nav-links a:hover{color:var(--green)}
 .nav-cta{padding:12px 18px;font-size:12.5px}
-@media(max-width:900px){.nav-links a:not(.nav-cta){display:none}.brand .bt{font-size:17px}}
+.nav-toggle{display:none;background:none;border:1.5px solid var(--line-bright);border-radius:7px;width:46px;height:42px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;transition:border-color .2s}
+.nav-toggle:hover{border-color:var(--green)}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:900px){
+  .nav-toggle{display:flex}
+  .brand .wm-2{display:none}
+  .brand .wm-1{font-size:18px}
+  .nav-links{position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:#0c0d0a;border-bottom:1px solid var(--line);box-shadow:0 24px 40px -20px rgba(0,0,0,.9);
+    max-height:0;overflow:hidden;transition:max-height .32s ease}
+  .nav-links.open{max-height:440px}
+  .nav-links a{padding:16px 24px;border-top:1px solid var(--line);font-size:13.5px}
+  .nav-links a.nav-cta{margin:14px 24px 18px;justify-content:center;border-top:none}
+}
 
 /* ---------- hero ---------- */
 .hero{padding:clamp(66px,10vw,124px) 0 84px;overflow:hidden}
@@ -244,7 +287,13 @@ header.nav{position:sticky;top:47px;z-index:55;background:rgba(10,11,9,.78);back
 /* final */
 .final{text-align:center;padding:clamp(84px,12vw,150px) 0;position:relative;overflow:hidden}
 .final::after{content:"";position:absolute;left:50%;bottom:-40%;transform:translateX(-50%);width:80vw;height:60vw;max-width:900px;max-height:600px;background:radial-gradient(circle,var(--green-glow),transparent 60%);filter:blur(50px);opacity:.45;pointer-events:none}
-.final img.fl{height:108px;width:auto;max-width:88%;margin:0 auto 24px;position:relative;z-index:1}
+.final-lock{display:inline-flex;align-items:center;gap:18px;margin:0 auto 26px;position:relative;z-index:1}
+.final-lock .cfy-mark{width:74px;height:74px}
+.final-lock .wm-1{font-family:var(--display);font-size:clamp(2.6rem,6vw,3.6rem);letter-spacing:.03em;color:var(--ink);line-height:1}
+.final-lock .wm-1 i{font-style:normal;color:var(--green)}
+.final-lock .wm-2{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+.final-lock .wm{text-align:left}
+@media(max-width:520px){.final-lock{flex-direction:column;gap:12px}.final-lock .wm{text-align:center}}
 .final h2{position:relative;z-index:1;margin-bottom:22px}
 .final .lead{margin:0 auto 34px;text-align:center}
 .final .hero-cta{justify-content:center;position:relative;z-index:1}
@@ -269,13 +318,19 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
   <div class="ticker-track" id="tick"></div>
 </div>
 
+<a class="skip" href="#top">Skip to content</a>
+
 <!-- ===== NAV ===== -->
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top">
-      <img src="cfy-logo.jpg" alt="Consoles For You logo" />
+    <a class="brand" href="#top" aria-label="Consoles For You — home">
+      <svg class="cfy-mark" viewBox="0 0 120 120" aria-hidden="true"><rect x="4" y="4" width="112" height="112" rx="26" fill="#c5f82a"/><g fill="#0a0b09"><rect x="50" y="36" width="20" height="48" rx="4"/><rect x="36" y="50" width="48" height="20" rx="4"/></g></svg>
+      <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
     </a>
-    <nav class="nav-links">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navmenu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navmenu">
       <a href="#how">How it works</a>
       <a href="#club">Membership</a>
       <a href="#repairs">Repairs</a>
@@ -558,7 +613,10 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 <!-- ===== FINAL CTA ===== -->
 <section class="final" id="join">
   <div class="wrap">
-    <img class="fl reveal" src="cfy-logo.jpg" alt="Consoles For You" />
+    <span class="final-lock reveal">
+      <svg class="cfy-mark" viewBox="0 0 120 120" role="img" aria-label="Consoles For You"><rect x="4" y="4" width="112" height="112" rx="26" fill="#c5f82a"/><g fill="#0a0b09"><rect x="50" y="36" width="20" height="48" rx="4"/><rect x="36" y="50" width="48" height="20" rx="4"/></g></svg>
+      <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
+    </span>
     <span class="eyebrow reveal d1" style="justify-content:center">Doors are open</span>
     <h2 class="h-xl reveal d1">Stop scrolling.<br>Start flipping.</h2>
     <p class="lead reveal d2">Jump in the free WhatsApp community, watch how it's done, and join the crew turning old consoles into real money — every single week.</p>
@@ -577,9 +635,9 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 <footer>
   <div class="wrap">
     <div class="foot-in">
-      <a class="brand" href="#top">
-        <img src="logo.jpg" alt="Consoles For You logo" />
-        <span class="bt">CONSOLES<span> FOR YOU</span></span>
+      <a class="brand" href="#top" aria-label="Consoles For You — home">
+        <svg class="cfy-mark" viewBox="0 0 120 120" aria-hidden="true"><rect x="4" y="4" width="112" height="112" rx="26" fill="#c5f82a"/><g fill="#0a0b09"><rect x="50" y="36" width="20" height="48" rx="4"/><rect x="36" y="50" width="48" height="20" rx="4"/></g></svg>
+        <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
       </a>
       <div class="foot-links">
         <a href="#how">How it works</a>
@@ -625,6 +683,14 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     ans.style.maxHeight = open ? null : ans.scrollHeight + 'px';
   });
 });
+
+/* mobile nav */
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.getElementById('navmenu');
+const setMenu = (open)=>{ navToggle.setAttribute('aria-expanded', String(open)); navMenu.classList.toggle('open', open); };
+navToggle.addEventListener('click', ()=> setMenu(navToggle.getAttribute('aria-expanded')!=='true'));
+navMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> setMenu(false)));
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') setMenu(false); });
 </script>
 </body>
 </html>
