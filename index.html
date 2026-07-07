@@ -29,7 +29,7 @@
 <!-- ============================================================
      SWAP-ME CHECKLIST (search "SWAP-ME"):
        • WhatsApp number → set the WHATSAPP const in the script block (used by quote + shop)
-       • Quote prices → priceTable in the script block (set a touch above CeX cash; review weekly)
+       • Quote prices → priceTable in the script block (= "Suggested CFY cash" from the CeX sheet; last synced 2026-07-07; review weekly)
        • Shop stock + real photos → stock[] in the script block (add Stripe Payment Link as s.buy to take card)
        • PO Box / drop-off address → give to sellers in WhatsApp after they accept
        • Social handle: @consolesforyou · Subscription price: £39/mo
@@ -434,7 +434,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
       </div>
       <div class="q-result">
         <div class="qlabel">Our cash offer</div>
-        <div class="q-price" id="q-price">£290</div>
+        <div class="q-price" id="q-price">£195</div>
         <div class="q-guar">Guaranteed to beat your CeX cash price</div>
       </div>
       <!-- SWAP-ME: WhatsApp number is the WHATSAPP const in the script block -->
@@ -505,9 +505,9 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
         </div>
         <div class="px-summary">
           <div class="px-row"><span>Item price</span><span class="val" id="px-price">£340</span></div>
-          <div class="px-row"><span>Trade-in credit</span><span class="val credit" id="px-credit">−£104</span></div>
-          <div class="px-boost" id="px-boost">£14 more than our cash offer</div>
-          <div class="px-row px-total"><span>You pay</span><span id="px-pay">£236</span></div>
+          <div class="px-row"><span>Trade-in credit</span><span class="val credit" id="px-credit">−£74</span></div>
+          <div class="px-boost" id="px-boost">£10 more than our cash offer</div>
+          <div class="px-row px-total"><span>You pay</span><span id="px-pay">£266</span></div>
           <a class="btn btn-primary" id="px-claim" href="#" target="_blank" rel="noopener">
             <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
             Start part-exchange
@@ -817,35 +817,35 @@ const WHATSAPP = '447786607434'; // Consoles For You WhatsApp (07786 607434) —
 const waLink = (msg) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 /* ===== valuation widget ===== */
-// EDIT THESE — our cash offer per console, set a touch above CeX cash. Review weekly.
+// EDIT THESE — our cash offer per console = CeX cash x ~1.08 ("Suggested CFY cash": beats their cash, sits under their voucher). Boxed/Good from CeX 2026-07-07 sheet; Xbox Series X/S from CeX web lookup 2026-07-08 (2TB Galaxy = estimate, unverified). Faulty ~= 40% of Good (CeX won't buy faulty). Review weekly.
 // model : [ boxed/like-new , good/working , faulty/for-repair ]
 const priceTable = {
-  'PlayStation 5 (Disc)':         [290, 260, 115],
-  'PlayStation 5 (Digital)':      [240, 215, 95],
-  'PlayStation 5 Slim (Disc)':    [320, 290, 130],
-  'PlayStation 5 Slim (Digital)': [270, 245, 110],
-  'PlayStation 5 Pro':            [480, 440, 200],
-  'PlayStation 4':                [80, 65, 30],
-  'PlayStation 4 Slim':           [100, 85, 40],
-  'PlayStation 4 Pro':            [150, 130, 60],
-  'PlayStation 3':                [45, 35, 15],
-  'PlayStation 2':                [30, 22, 8],
-  'Xbox Series X (Disc)':         [270, 240, 110],
-  'Xbox Series X (Digital)':      [250, 220, 100],
-  'Xbox Series X 2TB Galaxy':     [330, 300, 140],
-  'Xbox Series S 512GB':          [130, 110, 45],
-  'Xbox Series S 1TB':            [160, 140, 60],
-  'Xbox One X':                   [110, 90, 40],
-  'Xbox One S':                   [80, 65, 28],
-  'Xbox One':                     [55, 45, 20],
-  'Nintendo Switch 2':            [330, 300, 150],
-  'Nintendo Switch OLED':         [200, 175, 80],
-  'Nintendo Switch':              [150, 130, 55],
-  'Nintendo Switch Lite':         [95, 80, 35],
-  'Game Boy Advance SP':          [85, 60, 22],
-  'Game Boy Advance':             [75, 50, 18],
-  'Game Boy Color':               [70, 45, 16],
-  'Game Boy (Original)':          [60, 40, 15],
+  'PlayStation 5 (Disc)':         [195, 165, 65],
+  'PlayStation 5 (Digital)':      [178, 170, 70],
+  'PlayStation 5 Slim (Disc)':    [213, 204, 80],
+  'PlayStation 5 Slim (Digital)': [184, 178, 70],
+  'PlayStation 5 Pro':            [443, 425, 170],
+  'PlayStation 4':                [64, 52, 20],
+  'PlayStation 4 Slim':           [59, 54, 20],
+  'PlayStation 4 Pro':            [86, 75, 30],
+  'PlayStation 3':                [85, 50, 20],
+  'PlayStation 2':                [102, 54, 20],
+  'Xbox Series X (Disc)':         [211, 188, 75],
+  'Xbox Series X (Digital)':      [214, 191, 75],
+  'Xbox Series X 2TB Galaxy':     [270, 243, 95],
+  'Xbox Series S 512GB':          [119, 113, 45],
+  'Xbox Series S 1TB':            [157, 139, 55],
+  'Xbox One X':                   [76, 66, 25],
+  'Xbox One S':                   [71, 56, 20],
+  'Xbox One':                     [42, 32, 15],
+  'Nintendo Switch 2':            [268, 260, 105],
+  'Nintendo Switch OLED':         [102, 94, 40],
+  'Nintendo Switch':              [90, 71, 30],
+  'Nintendo Switch Lite':         [62, 54, 20],
+  'Game Boy Advance SP':          [104, 50, 20],
+  'Game Boy Advance':             [59, 45, 20],
+  'Game Boy Color':               [67, 44, 20],
+  'Game Boy (Original)':          [123, 59, 25],
 };
 const conditions = ['Boxed – like new','Good – fully working','Faulty – for repair'];
 const modelSel = document.getElementById('q-model');
@@ -867,9 +867,9 @@ updateQuote();
 // EDIT THESE — live stock. Add a Stripe Payment Link as `buy` to take card payment; otherwise buyers reserve on WhatsApp.
 const stock = [
   {name:'PlayStation 5 · Disc', year:2022, model:'CFI-1216A', cond:'Good',  price:340},
-  {name:'Nintendo Switch OLED', year:2021, model:'HEG-001',   cond:'Boxed', price:210},
+  {name:'Nintendo Switch OLED', year:2021, model:'HEG-001',   cond:'Boxed', price:185},
   {name:'Xbox Series X',        year:2020, model:'1882',      cond:'Good',  price:300},
-  {name:'PlayStation 4 Pro',    year:2018, model:'CUH-7216B', cond:'Good',  price:150},
+  {name:'PlayStation 4 Pro',    year:2018, model:'CUH-7216B', cond:'Good',  price:135},
   {name:'Game Boy Advance SP',  year:2005, model:'AGS-101',   cond:'Boxed', price:110},
   {name:'Xbox Series S',        year:2020, model:'1883',      cond:'Good',  price:170, sold:true},
 ];
