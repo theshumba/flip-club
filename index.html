@@ -29,7 +29,7 @@
 <!-- ============================================================
      SWAP-ME CHECKLIST (search "SWAP-ME"):
        • WhatsApp number → set the WHATSAPP const in the script block (used by quote + shop)
-       • Quote prices → priceTable in the script block (= CeX voucher −15-25%, floored to beat CeX cash; last synced 2026-07-08; review weekly)
+       • Quote prices → priceTable in the script block — PS5 models ONLY show on-screen prices (= CeX voucher −15-25%, floored to beat CeX cash; last synced 2026-07-08; review weekly). Every other console = WhatsApp photo valuation (inquiryModels list — no price shown on site)
        • Shop prices → stock[] price = CeX We-Sell −15-25%
        • Shop stock + real photos → stock[] in the script block (add Stripe Payment Link as s.buy to take card)
        • PO Box / drop-off address → give to sellers in WhatsApp after they accept
@@ -320,6 +320,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 .q-result{background:var(--bg);border:1px solid var(--line-bright);border-radius:8px;padding:20px;text-align:center;margin:20px 0 18px}
 .q-result .qlabel{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .q-price{font-family:var(--display);font-size:3.6rem;line-height:1;color:var(--green);margin:8px 0 6px}
+.q-price.txt{font-size:1.9rem;text-transform:uppercase;letter-spacing:.04em}
 .q-guar{font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.02em}
 .quote .btn{width:100%;justify-content:center}
 .q-note{font-family:var(--mono);font-size:11.5px;color:var(--muted-2);text-align:center;margin-top:14px;letter-spacing:.03em;line-height:1.5}
@@ -406,9 +407,9 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
     <div>
       <span class="eyebrow reveal in">Sell · Shop · Repair · UK console community</span>
       <h1 class="h-xl reveal in d1">Sell your <span class="stroke">console</span><br>for a <em>fair<br>cash price.</em></h1>
-      <p class="lead reveal in d2">Get an instant quote in seconds. Free postage, tested the day it lands, paid by bank transfer. Show us a higher genuine CeX <em>cash</em> quote for the same console and we'll beat it. Plus a shop of tested consoles, in-house repairs, and Flip Club — our UK community learning how console reselling works.</p>
+      <p class="lead reveal in d2">Selling a PS5? Get an instant price in seconds. Any other console — send us a few photos on WhatsApp and we'll reply with a fair cash valuation. Free postage, tested the day it lands, paid by bank transfer. Plus a shop of tested consoles, in-house repairs, and Flip Club — our UK community learning how console reselling works.</p>
       <div class="hero-cta reveal in d3">
-        <a href="#quote" class="btn btn-primary">Get your instant quote</a>
+        <a href="#quote" class="btn btn-primary">Get your quote</a>
         <a href="#shop" class="btn btn-ghost">Shop consoles</a>
       </div>
       <div class="hero-stats reveal in d3">
@@ -422,7 +423,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
     <div class="quote reveal in d2" id="quote">
       <div class="crt"></div>
       <div class="quote-head">
-        <span class="qt">Instant quote</span>
+        <span class="qt">Get a quote</span>
         <span class="guarantee">Beats CeX cash</span>
       </div>
       <div class="q-field">
@@ -441,7 +442,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
       <!-- SWAP-ME: WhatsApp number is the WHATSAPP const in the script block -->
       <a class="btn btn-primary" id="q-claim" href="#" target="_blank" rel="noopener">
         <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
-        Lock this price
+        <span id="q-btn-label">Lock this price</span>
       </a>
       <p class="q-note">Free postage · tested same day · same-day bank transfer</p>
     </div>
@@ -454,10 +455,10 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
     <div class="sec-head reveal">
       <span class="eyebrow">Sell to us</span>
       <h2 class="h-lg">Fair cash price.<br>Paid the same day.</h2>
-      <p class="lead">Get an instant quote on your console. Show us a higher genuine CeX <em>cash</em> quote for the same console and condition, and we'll beat it. Post it to us free, we test it the day it lands, and you're paid by same-day bank transfer. No haggling, no queue, no lowballing.</p>
+      <p class="lead">Sell your PS5 with an instant on-screen price — or send a few photos of any other console on WhatsApp for a fast, fair valuation. Show us a higher genuine CeX <em>cash</em> quote for the same console and condition, and we'll beat it. Post it to us free, we test it the day it lands, and you're paid by same-day bank transfer. No haggling, no queue, no lowballing.</p>
     </div>
     <div class="steps four">
-      <div class="step reveal"><span class="num">01 / QUOTE</span><h3>Get your quote</h3><p>Pick your console and its condition for an instant cash offer. Found a higher CeX cash quote? Show us and we'll beat it.</p></div>
+      <div class="step reveal"><span class="num">01 / QUOTE</span><h3>Get your quote</h3><p>PS5s get an instant on-screen price. Any other console — message us a few photos on WhatsApp and we'll reply with a fair cash valuation.</p></div>
       <div class="step reveal d1"><span class="num">02 / POST</span><h3>Free label</h3><p>Happy with it? We email a free prepaid label. Box it up and drop it at any post office — postage is on us.</p></div>
       <div class="step reveal d2"><span class="num">03 / TEST</span><h3>We test it</h3><p>Real people test and grade your console the day it lands. Honest grade, every time — no surprise deductions.</p></div>
       <div class="step reveal d3"><span class="num">04 / PAID</span><h3>Same-day cash</h3><p>All good — money hits your bank the same day. Not quite right? We tell you straight, and post it back free if you say no.</p></div>
@@ -469,7 +470,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
       <span class="promise-chip"><b>✓</b> Same-day bank transfer</span>
     </div>
     <div class="hero-cta reveal" style="margin-top:34px">
-      <a href="#quote" class="btn btn-primary">Get your instant quote</a>
+      <a href="#quote" class="btn btn-primary">Get your quote</a>
       <a href="#shop" class="btn btn-ghost">Browse the shop</a>
     </div>
   </div>
@@ -725,7 +726,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
     <div class="reveal">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How does selling my console to you work? <span class="pm">+</span></button>
-        <div class="faq-a"><p>Get an instant quote, and if you're happy we email you a free prepaid postage label. You drop it at the post office, we test it the day it lands, and once it passes you're paid by same-day bank transfer. No queue, no haggling.</p></div>
+        <div class="faq-a"><p>Selling a PS5? You get an instant price on screen. Any other console — tap through to WhatsApp, send us a few photos, and we'll reply with a fair cash valuation. Happy with the number either way? We email you a free prepaid postage label, you drop it at the post office, we test it the day it lands, and once it passes you're paid by same-day bank transfer. No queue, no haggling.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How can you pay more than CeX? <span class="pm">+</span></button>
@@ -805,6 +806,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
         <a href="#club">Membership</a>
         <a href="#repairs">Repairs</a>
         <a href="#faq">FAQ</a>
+        <a href="terms.html">Terms</a>
         <!-- SWAP-ME: real social handle -->
         <a href="#">@consolesforyou</a>
       </div>
@@ -813,7 +815,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
       <strong style="color:var(--ink)">Consoles For You</strong> is a UK console buying, selling and repair business founded by Ayyub Ahmed, and home of the Flip Club community.<br>
       Contact: <a href="mailto:hello@consolesforyou.com" style="color:var(--green)">hello@consolesforyou.com</a> · WhatsApp 07786&nbsp;607434 · <span style="opacity:.7">[SWAP-ME: registered business address &amp; company number]</span><br><br>
       We only buy consoles you own — we record serial numbers, may refuse locked, blocked or stolen units, and cooperate with reports of stolen property. Shop consoles are tested and graded, and sold under the Consumer Rights Act 2015 with a 14-day right to return. Our "beat CeX" price-match applies to genuine, current CeX <em>cash</em> (not voucher) quotes for the same console and condition — show us and we'll beat it.<br><br>
-      <strong style="color:var(--ink)">Flip Club is educational — it is not a job, an investment or a guaranteed income.</strong> We don't promise you'll earn anything; results depend on what you buy, market conditions and the effort you put in, and margins are often small after costs and fees. Any figures or examples are illustrative, not typical. Keep records and pay any tax due to HMRC. © 2026 Consoles For You.
+      <strong style="color:var(--ink)">Flip Club is educational — it is not a job, an investment or a guaranteed income.</strong> We don't promise you'll earn anything; results depend on what you buy, market conditions and the effort you put in, and margins are often small after costs and fees. Any figures or examples are illustrative, not typical. Keep records and pay any tax due to HMRC. Read our full <a href="terms.html" style="color:var(--green)">Terms &amp; Conditions</a>. © 2026 Consoles For You.
     </p>
   </div>
 </footer>
@@ -824,7 +826,7 @@ const WHATSAPP = '447786607434'; // Consoles For You WhatsApp (07786 607434) —
 const waLink = (msg) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 /* ===== valuation widget ===== */
-// EDIT THESE — our cash offer per console = CeX VOUCHER minus 15-25% (smaller cut on newer consoles, bigger on retro), floored so it always still beats CeX cash. Faulty ~= 40% of Good. Xbox from CeX web lookup 2026-07-08 (2TB Galaxy estimated). Review weekly.
+// EDIT THESE — on-screen prices are PS5-ONLY: CeX VOUCHER minus 15-25%, floored so it always still beats CeX cash. Faulty ~= 40% of Good. Last synced 2026-07-08. Review weekly.
 // model : [ boxed/like-new , good/working , faulty/for-repair ]
 const priceTable = {
   'PlayStation 5 (Disc)':         [226, 205, 80],
@@ -832,39 +834,44 @@ const priceTable = {
   'PlayStation 5 Slim (Disc)':    [247, 237, 95],
   'PlayStation 5 Slim (Digital)': [213, 207, 85],
   'PlayStation 5 Pro':            [422, 405, 160],
-  'PlayStation 4':                [67, 54, 20],
-  'PlayStation 4 Slim':           [62, 57, 25],
-  'PlayStation 4 Pro':            [90, 78, 30],
-  'PlayStation 3':                [81, 49, 20],
-  'PlayStation 2':                [97, 53, 20],
-  'Xbox Series X (Disc)':         [235, 210, 85],
-  'Xbox Series X (Digital)':      [230, 205, 80],
-  'Xbox Series X 2TB Galaxy':     [285, 260, 105],
-  'Xbox Series S 512GB':          [121, 116, 45],
-  'Xbox Series S 1TB':            [160, 143, 55],
-  'Xbox One X':                   [73, 63, 25],
-  'Xbox One S':                   [68, 54, 20],
-  'Xbox One':                     [41, 31, 10],
-  'Nintendo Switch 2':            [255, 248, 100],
-  'Nintendo Switch OLED':         [106, 98, 40],
-  'Nintendo Switch':              [86, 68, 25],
-  'Nintendo Switch Lite':         [59, 52, 20],
-  'Game Boy Advance SP':          [99, 49, 20],
-  'Game Boy Advance':             [57, 43, 15],
-  'Game Boy Color':               [65, 44, 20],
-  'Game Boy (Original)':          [117, 59, 25],
 };
+// Every other console we buy — no price on site; the customer sends photos on WhatsApp and we reply with a valuation.
+const inquiryModels = [
+  'PlayStation 4','PlayStation 4 Slim','PlayStation 4 Pro','PlayStation 3','PlayStation 2',
+  'Xbox Series X (Disc)','Xbox Series X (Digital)','Xbox Series X 2TB Galaxy',
+  'Xbox Series S 512GB','Xbox Series S 1TB','Xbox One X','Xbox One S','Xbox One',
+  'Nintendo Switch 2','Nintendo Switch OLED','Nintendo Switch','Nintendo Switch Lite',
+  'Game Boy Advance SP','Game Boy Advance','Game Boy Color','Game Boy (Original)',
+];
+const allModels = [...Object.keys(priceTable), ...inquiryModels];
 const conditions = ['Boxed – like new','Good – fully working','Faulty – for repair'];
 const modelSel = document.getElementById('q-model');
 const condSel  = document.getElementById('q-cond');
 const priceEl  = document.getElementById('q-price');
 const claimEl  = document.getElementById('q-claim');
-Object.keys(priceTable).forEach(m => modelSel.add(new Option(m, m)));
+const qLabelEl = document.querySelector('#quote .qlabel');
+const qGuarEl  = document.querySelector('#quote .q-guar');
+const qBtnEl   = document.getElementById('q-btn-label');
+allModels.forEach(m => modelSel.add(new Option(m, m)));
 conditions.forEach((c,i) => condSel.add(new Option(c, i)));
 function updateQuote(){
-  const price = priceTable[modelSel.value][+condSel.value];
-  priceEl.textContent = '£' + price;
-  claimEl.href = waLink(`Hi Consoles For You — I'd like to sell my ${modelSel.value} (${conditions[+condSel.value]}). Your quote was £${price}. Please send me a free postage label.`);
+  const m = modelSel.value, cond = conditions[+condSel.value];
+  if (priceTable[m]) {
+    const price = priceTable[m][+condSel.value];
+    qLabelEl.textContent = 'Our cash offer';
+    priceEl.textContent = '£' + price;
+    priceEl.classList.remove('txt');
+    qGuarEl.textContent = "Found a higher CeX cash quote? Show us and we'll beat it.";
+    qBtnEl.textContent = 'Lock this price';
+    claimEl.href = waLink(`Hi Consoles For You — I'd like to sell my ${m} (${cond}). Your quote was £${price}. Please send me a free postage label.`);
+  } else {
+    qLabelEl.textContent = 'Valuation over WhatsApp';
+    priceEl.textContent = 'Send us photos';
+    priceEl.classList.add('txt');
+    qGuarEl.textContent = "Message us a few photos of your console and we'll reply with a fair cash valuation.";
+    qBtnEl.textContent = 'Get my valuation';
+    claimEl.href = waLink(`Hi Consoles For You — I'd like a cash valuation for my ${m} (${cond}). I'll send a few photos of the console now.`);
+  }
 }
 modelSel.addEventListener('change', updateQuote);
 condSel.addEventListener('change', updateQuote);
@@ -901,22 +908,28 @@ grid.innerHTML = stock.map(s => {
 const PARTEX_BOOST = 1.15; // trade-in credit is 15% above our cash offer when spent in the shop (edit to taste)
 const pxItem=document.getElementById('px-item'), pxModel=document.getElementById('px-model'), pxCond=document.getElementById('px-cond');
 stock.forEach((s,i)=>{ if(!s.sold) pxItem.add(new Option(`${s.name} — £${s.price}`, i)); });
-Object.keys(priceTable).forEach(m => pxModel.add(new Option(m, m)));
+allModels.forEach(m => pxModel.add(new Option(m, m)));
 conditions.forEach((c,i) => pxCond.add(new Option(c, i)));
-pxModel.value = 'PlayStation 4';
 function updatePartex(){
   const item = stock[+pxItem.value];
-  const cash = priceTable[pxModel.value][+pxCond.value];
-  const credit = Math.round(cash * PARTEX_BOOST);
-  const pay = Math.max(0, item.price - credit);
-  const excess = credit - item.price;
-  document.getElementById('px-price').textContent  = '£' + item.price;
-  document.getElementById('px-credit').textContent = '−£' + credit;
-  document.getElementById('px-pay').textContent    = '£' + pay;
-  document.getElementById('px-boost').textContent  = excess > 0
-    ? `+ £${excess} cash back to you`
-    : `£${credit - cash} more than our cash offer`;
-  document.getElementById('px-claim').href = waLink(`Hi Consoles For You — I'd like to part-exchange my ${pxModel.value} (${conditions[+pxCond.value]}) toward the ${item.name} (model ${item.model}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
+  document.getElementById('px-price').textContent = '£' + item.price;
+  if (priceTable[pxModel.value]) {
+    const cash = priceTable[pxModel.value][+pxCond.value];
+    const credit = Math.round(cash * PARTEX_BOOST);
+    const pay = Math.max(0, item.price - credit);
+    const excess = credit - item.price;
+    document.getElementById('px-credit').textContent = '−£' + credit;
+    document.getElementById('px-pay').textContent    = '£' + pay;
+    document.getElementById('px-boost').textContent  = excess > 0
+      ? `+ £${excess} cash back to you`
+      : `£${credit - cash} more than our cash offer`;
+    document.getElementById('px-claim').href = waLink(`Hi Consoles For You — I'd like to part-exchange my ${pxModel.value} (${conditions[+pxCond.value]}) toward the ${item.name} (model ${item.model}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
+  } else {
+    document.getElementById('px-credit').textContent = 'Photo valuation';
+    document.getElementById('px-pay').textContent    = 'TBC';
+    document.getElementById('px-boost').textContent  = 'Send us photos on WhatsApp — part-ex credit is 15% above our cash offer';
+    document.getElementById('px-claim').href = waLink(`Hi Consoles For You — I'd like to part-exchange my ${pxModel.value} (${conditions[+pxCond.value]}) toward the ${item.name} (model ${item.model}, £${item.price}). I'll send a few photos of my console for a trade-in valuation.`);
+  }
 }
 [pxItem,pxModel,pxCond].forEach(el => el.addEventListener('change', updatePartex));
 updatePartex();
