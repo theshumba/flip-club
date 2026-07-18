@@ -300,7 +300,7 @@ header.nav{position:sticky;top:0;z-index:55;background:rgba(10,11,9,.78);backdro
 /* footer */
 footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-2)}
 .foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-.foot-links{display:flex;gap:24px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.foot-links{display:flex;flex-wrap:wrap;gap:14px 24px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .foot-links a:hover{color:var(--green)}
 .disclaimer{color:var(--muted-2);font-size:12.5px;max-width:62ch;margin-top:24px;line-height:1.55}
 
@@ -341,6 +341,9 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 .card .ph .pm{font-family:var(--display);font-size:1.4rem;color:var(--muted-2);text-align:center;padding:0 18px;line-height:1.05;letter-spacing:.02em}
 .card .ph .tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0a0b09;background:var(--green);padding:4px 9px;border-radius:3px}
 .card .ph .tag.faulty{background:#f8b32a}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .ph .tag.sample{left:auto;right:12px;background:#171a12;color:var(--muted);border:1px solid var(--line-bright)}
+.card .skl{height:15px;border-radius:4px;background:var(--surface-2);margin-bottom:10px}
 .card.sold .ph::after{content:"SOLD";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:2.2rem;letter-spacing:.12em;color:var(--ink);background:rgba(10,11,9,.74)}
 .card-body{padding:20px;display:flex;flex-direction:column;flex:1}
 .card-body h3{font-family:var(--display);font-size:1.35rem;line-height:1;margin-bottom:10px}
@@ -391,7 +394,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
     </button>
     <nav class="nav-links" id="navmenu">
       <a href="#sell">Sell to us</a>
-      <a href="#shop">Shop</a>
+      <a href="shop.html">Shop</a>
       <a href="#partex">Part-ex</a>
       <a href="#club">Membership</a>
       <a href="#repairs">Repairs</a>
@@ -484,8 +487,11 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
       <h2 class="h-lg">Tested consoles,<br>ready to play.</h2>
       <p class="lead">Every console we buy gets tested, cleaned and graded — then listed here with real photos, condition, year and model number. One of each. When it's gone, it's gone.</p>
     </div>
-    <div class="shop-grid" id="shop-grid"></div>
-    <p class="shop-note">Sample listings — live stock &amp; real unit photos land here as we test them. Every sale is covered by a 14-day return under UK consumer law.<br><a href="#partex">Trade in to pay less →</a> &nbsp;·&nbsp; <a href="#quote">Sell for cash instead →</a></p>
+    <div class="shop-grid" id="shop-teaser"></div>
+    <div class="hero-cta reveal" style="margin-top:38px;justify-content:center">
+      <a href="shop.html" class="btn btn-primary">Browse the shop <span class="arr">→</span></a>
+    </div>
+    <p class="shop-note">The three latest units off the test bench — the full shelf lives in the shop, with real photos and honest grades. Every sale is covered by a 14-day return under UK consumer law.<br><a href="#partex">Trade in to pay less →</a> &nbsp;·&nbsp; <a href="#quote">Sell for cash instead →</a></p>
   </div>
 </section>
 
@@ -801,7 +807,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
       </a>
       <div class="foot-links">
         <a href="#sell">Sell to us</a>
-        <a href="#shop">Shop</a>
+        <a href="shop.html">Shop</a>
         <a href="#partex">Part-ex</a>
         <a href="#club">Membership</a>
         <a href="#repairs">Repairs</a>
@@ -878,7 +884,9 @@ condSel.addEventListener('change', updateQuote);
 updateQuote();
 
 /* ===== shop ===== */
-// EDIT THESE — live stock. Add a Stripe Payment Link as `buy` to take card payment; otherwise buyers reserve on WhatsApp.
+// Live stock now lives in Firestore and renders on shop.html — the #shop section above is a
+// 3-latest teaser (see the module script at the bottom of this file). This stock[] array is
+// KEPT because the part-exchange widget below uses it for its "What you want" list.
 const stock = [
   {name:'PlayStation 5 · Disc', year:2022, model:'CFI-1216A', cond:'Good',  price:349},
   {name:'Nintendo Switch OLED', year:2021, model:'HEG-001',   cond:'Boxed', price:165},
@@ -887,23 +895,6 @@ const stock = [
   {name:'Game Boy Advance SP',  year:2005, model:'AGS-101',   cond:'Boxed', price:129},
   {name:'Xbox Series S',        year:2020, model:'1883',      cond:'Good',  price:170, sold:true},
 ];
-const grid = document.getElementById('shop-grid');
-grid.innerHTML = stock.map(s => {
-  const faulty = String(s.cond).toLowerCase().includes('fault');
-  const reserve = waLink(`Hi Consoles For You — is the ${s.name} (model ${s.model}) still available? I'd like to buy it for £${s.price}.`);
-  const btn = s.sold
-    ? `<a class="btn btn-primary" aria-disabled="true">Sold</a>`
-    : `<a class="btn btn-primary" href="${s.buy || reserve}" target="_blank" rel="noopener">${s.buy ? 'Buy now' : 'Reserve'}</a>`;
-  return `<article class="card reveal ${s.sold?'sold':''}">
-      <div class="ph"><span class="tag ${faulty?'faulty':''}">${s.cond}</span><span class="pm">${s.name}</span></div>
-      <div class="card-body">
-        <h3>${s.name}</h3>
-        <div class="card-meta">Year <span>${s.year}</span> &nbsp;·&nbsp; Model <span>${s.model}</span></div>
-        <div class="card-foot"><span class="card-price">£${s.price}</span>${btn}</div>
-      </div>
-    </article>`;
-}).join('');
-
 /* ===== part-exchange (trade toward a shop purchase) ===== */
 const PARTEX_BOOST = 1.15; // trade-in credit is 15% above our cash offer when spent in the shop (edit to taste)
 const pxItem=document.getElementById('px-item'), pxModel=document.getElementById('px-model'), pxCond=document.getElementById('px-cond');
@@ -955,6 +946,79 @@ const setMenu = (open)=>{ navToggle.setAttribute('aria-expanded', String(open));
 navToggle.addEventListener('click', ()=> setMenu(navToggle.getAttribute('aria-expanded')!=='true'));
 navMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> setMenu(false)));
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') setMenu(false); });
+</script>
+
+<script type="module">
+/* ===== shop teaser — 3 latest units from Firestore (shares the cfy_stock_v1 cache with shop.html) ===== */
+(async () => {
+  const grid = document.getElementById('shop-teaser');
+  if (!grid) return;
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const gbp = pence => {
+    const p = pence || 0;
+    return p % 100 === 0 ? '£' + (p/100).toLocaleString('en-GB')
+      : '£' + (p/100).toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2});
+  };
+  const safeImg = b64 => (typeof b64 === 'string' && /^data:image\/(webp|jpeg|png|jpg);base64,/.test(b64)) ? b64 : null;
+
+  // skeletons while we load
+  grid.innerHTML = Array.from({length:3}, () => `<article class="card" aria-hidden="true">
+      <div class="ph"></div>
+      <div class="card-body"><div class="skl" style="width:70%"></div><div class="skl" style="width:45%"></div></div>
+    </article>`).join('');
+
+  const CACHE_KEY = 'cfy_stock_v1', CACHE_TTL = 5 * 60 * 1000; // same cache shop.html uses
+  let items = null;
+  try {
+    const c = JSON.parse(localStorage.getItem(CACHE_KEY));
+    if (c && Array.isArray(c.items) && typeof c.ts === 'number' && Date.now() - c.ts < CACHE_TTL) items = c.items;
+  } catch {}
+  if (!items) {
+    try {
+      const [{ initializeApp }, F] = await Promise.all([
+        import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
+        import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js'),
+      ]);
+      const db = F.getFirestore(initializeApp({
+        apiKey: "AIzaSyBrfCxE1BZjQGyDkY-8bqLYkzpyXdzsa3I",
+        authDomain: "cfy-shop.firebaseapp.com",
+        projectId: "cfy-shop",
+        appId: "1:391845334721:web:01b81ef180e1b972868e40"
+      }));
+      const snap = await F.getDocs(F.query(F.collection(db, 'stock'), F.orderBy('created_at', 'desc')));
+      items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), items })); } catch {}
+    } catch { items = null; }
+  }
+
+  if (!items) {
+    grid.innerHTML = `<p class="shop-note" style="grid-column:1/-1;text-align:left;margin:0">Live stock wouldn't load just now — <a href="shop.html">open the shop</a> to see everything on the bench.</p>`;
+    return;
+  }
+  const latest = items.filter(u => u && u.status !== 'sold').slice(0, 3);
+  if (!latest.length) {
+    grid.innerHTML = `<p class="shop-note" style="grid-column:1/-1;text-align:left;margin:0">Nothing on the bench right now — new stock lands weekly. <a href="shop.html">See the shop</a> or <a href="#quote">sell us yours</a>.</p>`;
+    return;
+  }
+  grid.innerHTML = latest.map(u => {
+    const cond = String(u.condition || 'good');
+    const condLabel = cond === 'boxed' ? 'Boxed' : cond === 'faulty' ? 'Faulty' : 'Good';
+    const img = safeImg(u.thumb_b64);
+    const isSample = u.status === 'sample';
+    const sampleTag = isSample ? '<span class="tag sample">Example listing</span>' : '';
+    const meta = isSample ? 'Example listing — real stock lands here'
+      : (u.cex_price && u.cex_price > u.price)
+        ? `CeX ${gbp(u.cex_price)} — <span style="color:var(--green)">save ${gbp(u.cex_price - u.price)}</span>`
+        : 'Tested · honestly graded';
+    return `<a class="card" href="shop.html?item=${encodeURIComponent(u.id)}" aria-label="${esc(u.name)} — ${gbp(u.price)}">
+      <div class="ph">${img ? `<img src="${img}" alt="${esc(u.name)}" loading="lazy" decoding="async">` : `<span class="pm">${esc(u.name)}</span>`}<span class="tag ${cond === 'faulty' ? 'faulty' : ''}">${condLabel}</span>${sampleTag}</div>
+      <div class="card-body">
+        <h3>${esc(u.name)}</h3>
+        <div class="card-meta">${meta}</div>
+        <div class="card-foot"><span class="card-price">${gbp(u.price)}</span><span class="btn btn-ghost">View <span class="arr">→</span></span></div>
+      </div></a>`;
+  }).join('');
+})();
 </script>
 </body>
 </html>

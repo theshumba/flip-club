@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shop Tested Consoles — Consoles For You | UK</title>
+<meta name="description" content="Shop tested pre-owned consoles from Consoles For You. Every unit tested on camera, honestly graded, with real photos. Free tracked UK delivery, free local collection, 14-day return." />
+<meta name="theme-color" content="#0a0b09" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+<!-- Social share -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consoles For You" />
+<meta property="og:url" content="https://consolesforyou.com/shop.html" />
+<meta property="og:title" content="Shop Tested Consoles — Consoles For You" />
+<meta property="og:description" content="Tested pre-owned consoles with honest grades and real photos. Free tracked UK delivery and a 14-day return on every unit." />
+<meta property="og:image" content="https://consolesforyou.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://consolesforyou.com/shop.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0b09;
+  --bg-2:#101310;
+  --surface:#161a12;
+  --surface-2:#1c2117;
+  --line:#2c3322;
+  --line-bright:#434d26;
+  --green:#c5f82a;        /* money green */
+  --green-dim:#9bc41f;
+  --green-glow:rgba(197,248,42,.35);
+  --amber:#f8b32a;
+  --wa:#25D366;
+  --ink:#f6f6ec;
+  --muted:#b6bda9;
+  --muted-2:#838a73;
+  --display:'Anton',sans-serif;
+  --body:'Hanken Grotesk',sans-serif;
+  --mono:'Space Mono',monospace;
+  --maxw:1200px;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:0;z-index:200;background:var(--green);color:#0a0b09;
+  font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  padding:12px 18px;border-radius:0 0 6px 0}
+.skip:focus{left:0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{position:relative}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--green);display:inline-flex;align-items:center;gap:9px;
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--green)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.96;letter-spacing:.01em;text-transform:uppercase;color:var(--ink)}
+.h-lg{font-size:clamp(2.4rem,6vw,4.4rem)}
+.h-md{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+.lead{font-size:clamp(1.08rem,1.8vw,1.32rem);color:#cfd5c4;max-width:48ch;line-height:1.55}
+.mono-label{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.pos{color:var(--green)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;border:none;
+  font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+  padding:16px 26px;border-radius:3px;transition:transform .15s var(--ease-out), box-shadow .2s var(--ease-out), background .2s, color .2s, border-color .2s;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--green);color:#0a0b09}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-bright)}
+@media(hover:hover) and (pointer:fine){
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px -8px var(--green-glow)}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+}
+.btn .arr{transition:transform .2s var(--ease-out)}
+.btn:hover .arr{transform:translate(3px,-3px)}
+.wa-ic{width:17px;height:17px;flex:none}
+
+/* ---------- nav (mirrors index.html) ---------- */
+header.nav{position:sticky;top:0;z-index:55;background:rgba(10,11,9,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center}
+.brand .wm{display:flex;flex-direction:column;line-height:1}
+.brand .wm-1{font-family:var(--display);font-size:25px;letter-spacing:.04em;color:var(--ink)}
+.brand .wm-1 i{font-style:normal;color:var(--green)}
+.brand .wm-2{font-family:var(--mono);font-weight:700;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c3c9b6;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{padding:12px 18px;font-size:12.5px}
+.nav-links a.nav-cta{color:#0a0b09}
+.nav-links a.nav-cta:hover{color:#0a0b09}
+.nav-toggle{display:none;background:none;border:1.5px solid var(--line-bright);border-radius:7px;width:46px;height:42px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;transition:border-color .2s}
+.nav-toggle:hover{border-color:var(--green)}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s var(--ease-out),opacity .2s ease}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:900px){
+  .nav-toggle{display:flex}
+  .brand .wm-2{display:none}
+  .brand .wm-1{font-size:18px}
+  .nav-links{position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:#0c0d0a;border-bottom:1px solid var(--line);box-shadow:0 24px 40px -20px rgba(0,0,0,.9);
+    max-height:0;overflow:hidden;transition:max-height .32s var(--ease-out)}
+  .nav-links.open{max-height:440px}
+  .nav-links a{padding:16px 24px;border-top:1px solid var(--line);font-size:13.5px}
+  .nav-links a.nav-cta{margin:14px 24px 18px;justify-content:center;border-top:none}
+}
+
+/* ---------- shop hero strip ---------- */
+.shop-hero{padding:clamp(48px,7vw,84px) 0 clamp(28px,4vw,44px);overflow:hidden}
+.shop-hero::after{
+  content:"";position:absolute;top:-40%;right:-18%;width:52vw;height:52vw;max-width:640px;max-height:640px;
+  background:radial-gradient(circle, var(--green-glow), transparent 62%);filter:blur(40px);opacity:.4;pointer-events:none;z-index:0;
+}
+.shop-hero .wrap{position:relative;z-index:1}
+.shop-hero h1{margin:20px 0 0;max-width:16ch}
+.shop-hero h1 em{font-style:normal;color:var(--green)}
+.readout{
+  display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;margin-top:28px;
+  border-top:1px dashed var(--line-bright);border-bottom:1px dashed var(--line-bright);
+  padding:14px 0;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+}
+.readout .live-dot{display:inline-flex;align-items:center;gap:8px;color:var(--green)}
+.readout .live-dot::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.readout .sep{color:var(--muted-2);opacity:.6}
+
+/* ---------- filter tabs ---------- */
+.filters{position:sticky;top:72px;z-index:45;background:rgba(10,11,9,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.filters-in{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:14px 24px;max-width:var(--maxw);margin:0 auto}
+.filters-in::-webkit-scrollbar{display:none}
+.ftab{
+  flex:none;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1.5px solid var(--line);
+  background:transparent;color:var(--muted);font-family:var(--mono);font-weight:700;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;padding:9px 15px;border-radius:40px;
+  transition:color .18s, border-color .18s, background .18s, transform .12s var(--ease-out);
+}
+.ftab:active{transform:scale(.96)}
+@media(hover:hover) and (pointer:fine){.ftab:hover{border-color:var(--line-bright);color:var(--ink)}}
+.ftab .ct{font-size:10.5px;color:var(--muted-2);background:var(--surface);border-radius:20px;padding:1px 7px;transition:background .18s,color .18s}
+.ftab[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#0a0b09}
+.ftab[aria-pressed="true"] .ct{background:rgba(10,11,9,.16);color:#0a0b09}
+
+/* ---------- stock grid ---------- */
+.stock-sec{padding:clamp(36px,5vw,56px) 0 clamp(56px,8vw,84px)}
+.stock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.stock-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.stock-grid{grid-template-columns:1fr}}
+
+.ucard{
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  display:flex;flex-direction:column;position:relative;
+  transition:transform .2s var(--ease-out),border-color .2s;
+  animation:cardIn .5s var(--ease-out) backwards;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}}
+@media(hover:hover) and (pointer:fine){
+  .ucard:hover{transform:translateY(-4px);border-color:var(--line-bright)}
+  .ucard:hover .ucard-go{color:var(--green)}
+  .ucard:hover .ucard-ph img{transform:scale(1.03)}
+}
+.ucard:active{transform:scale(.985)}
+.ucard-ph{aspect-ratio:4/3;background:linear-gradient(150deg,var(--surface-2),var(--bg));position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+.ucard-ph img{width:100%;height:100%;object-fit:cover;transition:transform .35s var(--ease-out)}
+.ucard-ph .noimg{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.35rem;color:var(--muted-2);text-align:center;padding:0 18px;line-height:1.05;text-transform:uppercase}
+
+.chip{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:3px;display:inline-flex;align-items:center;gap:6px}
+.chip-boxed{background:var(--green);color:#0a0b09}
+.chip-good{background:rgba(10,11,9,.8);color:var(--ink);border:1px solid var(--line-bright)}
+.chip-faulty{background:var(--amber);color:#0a0b09}
+.ucard-ph .chip{position:absolute;top:12px;left:12px}
+.badge-video{
+  position:absolute;bottom:12px;left:12px;font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--green);background:rgba(10,11,9,.86);
+  border:1px solid var(--line-bright);padding:4px 9px;border-radius:3px;
+}
+.badge-sample{
+  position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:rgba(10,11,9,.86);
+  border:1px dashed var(--muted-2);padding:4px 9px;border-radius:3px;
+}
+.ucard-body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1;gap:10px}
+.ucard-name{font-family:var(--display);font-size:1.35rem;line-height:1.02;letter-spacing:.01em;text-transform:uppercase}
+.ucard-meta{font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em;text-transform:uppercase}
+.ucard-foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.ucard-price{font-family:var(--display);font-size:1.95rem;color:var(--green);line-height:1;display:block}
+.ucard-cex{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.02em;display:block;margin-top:6px}
+.ucard-cex b{color:var(--ink);font-weight:700}
+.ucard-go{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);transition:color .18s;white-space:nowrap}
+
+/* sold cards */
+.ucard.is-sold .ucard-ph img{filter:grayscale(1) brightness(.65)}
+.ucard.is-sold .ucard-ph::after{
+  content:"SOLD";position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--display);font-size:2rem;letter-spacing:.14em;color:var(--ink);
+  background:rgba(10,11,9,.5);text-transform:uppercase;
+}
+.ucard.is-sold .ucard-price{color:var(--muted)}
+
+/* ---------- skeletons ---------- */
+.sk-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sk-ph{aspect-ratio:4/3;border-bottom:1px solid var(--line)}
+.sk-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.sk-line{height:14px;border-radius:4px}
+.sk-line.w60{width:60%}.sk-line.w40{width:40%}.sk-line.big{height:30px;width:34%;margin-top:8px}
+.shimmer{background:linear-gradient(100deg,var(--surface-2) 40%,#232a1c 50%,var(--surface-2) 60%);background-size:200% 100%;animation:shim 1.4s linear infinite}
+@keyframes shim{from{background-position:180% 0}to{background-position:-20% 0}}
+
+/* ---------- empty + error states ---------- */
+.state{border:1px dashed var(--line-bright);border-radius:12px;padding:clamp(44px,7vw,80px) 24px;text-align:center;background:linear-gradient(165deg,var(--surface),var(--bg-2))}
+.state .eyebrow{justify-content:center}
+.state h2{margin:18px 0 14px}
+.state p{color:var(--muted);max-width:52ch;margin:0 auto 26px;font-size:16px}
+.state .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- sold archive ---------- */
+.sold-sec{background:var(--bg-2);border-top:1px solid var(--line);padding:clamp(52px,7vw,80px) 0}
+.sold-sec .sec-head{max-width:64ch;margin-bottom:34px}
+.sold-sec .sec-head h2{margin-top:16px;color:var(--muted)}
+.sold-sec .eyebrow{color:var(--muted-2)}
+.sold-sec .eyebrow::before{background:var(--muted-2)}
+.sold-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.sold-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sold-grid{grid-template-columns:1fr}}
+.sold-grid .ucard-name{font-size:1.1rem}
+.sold-grid .ucard-price{font-size:1.4rem}
+.sold-note{font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:.04em;margin-top:22px}
+
+/* ---------- trust strip ---------- */
+.trust-strip{border-top:1px solid var(--line);background:var(--bg-2)}
+.trust-in{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+@media(max-width:820px){.trust-in{grid-template-columns:1fr}}
+.trust{background:var(--bg-2);padding:26px 24px}
+.trust .tt{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.trust p{color:var(--muted);font-size:14.5px;line-height:1.5}
+.trust a{color:var(--green)}
+
+/* ---------- detail view ---------- */
+.detail-sec{padding:clamp(28px,4vw,48px) 0 clamp(64px,9vw,100px)}
+.view-enter{animation:viewIn .28s var(--ease-out)}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.back-btn{
+  display:inline-flex;align-items:center;gap:9px;background:none;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:8px 0;margin-bottom:22px;transition:color .18s;
+}
+.back-btn:hover{color:var(--green)}
+.back-btn .barr{transition:transform .2s var(--ease-out)}
+.back-btn:hover .barr{transform:translateX(-3px)}
+.detail-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,48px);align-items:start}
+@media(max-width:860px){.detail-grid{grid-template-columns:1fr}}
+
+/* media block */
+.d-media{min-width:0}
+@media(min-width:861px){.d-media{position:sticky;top:96px}}
+.media-main{position:relative;border:1px solid var(--line-bright);border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
+.vid-facade{position:relative;display:block;width:100%;aspect-ratio:16/10;cursor:pointer;border:none;background:var(--surface-2);padding:0}
+.vid-facade img{width:100%;height:100%;object-fit:cover;opacity:.82}
+.vid-facade .play{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:linear-gradient(180deg,rgba(10,11,9,.1),rgba(10,11,9,.55));transition:background .2s;
+}
+.vid-facade .play-btn{
+  width:74px;height:74px;border-radius:50%;background:var(--green);display:grid;place-items:center;
+  box-shadow:0 0 0 8px rgba(197,248,42,.18), 0 18px 44px -10px var(--green-glow);
+  transition:transform .18s var(--ease-out);
+}
+.vid-facade .play-btn::after{content:"";width:0;height:0;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #0a0b09;margin-left:5px}
+@media(hover:hover) and (pointer:fine){.vid-facade:hover .play-btn{transform:scale(1.07)}}
+.vid-facade:active .play-btn{transform:scale(.95)}
+.vid-facade .play-label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);background:rgba(10,11,9,.7);padding:6px 12px;border-radius:3px}
+.media-main iframe,.media-main video{display:block;width:100%;aspect-ratio:16/10;border:none;background:#000}
+
+/* gallery */
+.gal{margin-top:14px;position:relative;min-width:0}
+#gal-mount:first-child .gal{margin-top:0}
+#gal-mount:first-child .gal-shot{border-color:var(--line-bright);box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
+.gal-track{
+  display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;border-radius:8px;
+}
+.gal-track::-webkit-scrollbar{display:none}
+.gal-shot{
+  flex:0 0 100%;scroll-snap-align:start;aspect-ratio:4/3;border:1px solid var(--line);border-radius:8px;
+  overflow:hidden;background:var(--surface-2);cursor:zoom-in;padding:0;
+}
+.gal-shot img{width:100%;height:100%;object-fit:cover}
+.gal.multi .gal-shot{flex:0 0 min(78%, 420px)}
+.gal-dots{display:flex;gap:7px;justify-content:center;margin-top:12px}
+.gal-dot{width:7px;height:7px;border-radius:50%;background:var(--line-bright);border:none;padding:0;cursor:pointer;transition:background .18s,transform .18s var(--ease-out)}
+.gal-dot[aria-current="true"]{background:var(--green);transform:scale(1.25)}
+.gal-hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);text-align:center;margin-top:10px}
+.gal-skel{display:flex;gap:10px}
+.gal-skel div{flex:0 0 min(78%,420px);aspect-ratio:4/3;border-radius:8px}
+
+/* info column */
+.d-info{min-width:0}
+.d-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.d-chips .chip{position:static}
+.chip-sample{background:transparent;color:var(--muted);border:1px dashed var(--muted-2)}
+.chip-video{background:rgba(197,248,42,.08);color:var(--green);border:1px solid var(--line-bright)}
+.chip-sold{background:var(--surface-2);color:var(--muted);border:1px solid var(--line-bright)}
+.d-name{font-size:clamp(2rem,4.6vw,3.1rem);margin-bottom:12px}
+.d-sub{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);display:flex;flex-wrap:wrap;gap:6px 16px}
+.d-grade{
+  margin-top:16px;padding:14px 16px;border-left:2px solid var(--green);background:var(--surface);
+  border-radius:0 6px 6px 0;color:#dfe4d4;font-size:15.5px;
+}
+.d-grade b{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+
+.d-block{margin-top:26px}
+.d-block > .bt{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.d-block > .bt::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.inbox-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+@media(max-width:480px){.inbox-list{grid-template-columns:1fr}}
+.inbox-list li{font-size:15px;display:flex;gap:10px;align-items:flex-start;color:#e4e8d9}
+.inbox-list li::before{content:"✓";color:var(--green);font-family:var(--mono);font-weight:700;flex:none}
+
+.d-price-card{
+  margin-top:26px;background:linear-gradient(160deg,var(--surface),var(--bg-2));
+  border:1px solid var(--line-bright);border-radius:10px;padding:22px;position:relative;
+}
+.d-price-card .crt{position:absolute;inset:0;border-radius:10px;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px)}
+.d-price-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.d-price{font-family:var(--display);font-size:clamp(2.6rem,6vw,3.4rem);line-height:1;color:var(--green)}
+.d-price.muted{color:var(--muted)}
+.d-price-label{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.d-cex{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.02em;text-align:right;line-height:1.7}
+.d-cex b{color:var(--ink);background:var(--surface-2);border:1px solid var(--line-bright);padding:2px 8px;border-radius:3px;white-space:nowrap}
+.d-cex .save{color:var(--green);font-weight:700;display:block}
+
+/* part-ex */
+.px-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.px-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.px-fields{grid-template-columns:1fr}}
+.q-field label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.q-select{width:100%;appearance:none;-webkit-appearance:none;background-color:var(--bg);color:var(--ink);border:1.5px solid var(--line-bright);border-radius:6px;padding:13px 40px 13px 14px;font-family:var(--mono);font-size:13.5px;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c5f82a' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.q-select:focus{outline:none;border-color:var(--green)}
+.q-select option{background:var(--bg-2);color:var(--ink)}
+.px-out{margin-top:16px;background:var(--bg);border:1px solid var(--line-bright);border-radius:8px;padding:16px 18px}
+.px-line{font-size:16.5px;color:#e4e8d9;line-height:1.5}
+.px-line b{color:var(--ink)}
+.px-line .px-pay{font-family:var(--display);font-size:1.6rem;color:var(--green);letter-spacing:.01em;padding:0 2px}
+.px-line .was{color:var(--muted);text-decoration:none}
+.px-note{font-family:var(--mono);font-size:11px;color:var(--green-dim);letter-spacing:.03em;margin-top:8px;line-height:1.6}
+.px-card .btn{width:100%;margin-top:14px}
+
+/* CTAs */
+.d-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.d-ctas .btn{flex:1;min-width:200px;padding:18px 26px}
+.btn-wa{background:transparent;color:var(--ink);border:1.5px solid var(--line-bright)}
+@media(hover:hover) and (pointer:fine){.btn-wa:hover{border-color:var(--wa);color:var(--wa);transform:translateY(-2px)}}
+.sample-note{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:.03em;line-height:1.7;border:1px dashed var(--line-bright);border-radius:6px;padding:12px 14px}
+
+/* delivery + rights */
+.d-delivery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.d-delivery{grid-template-columns:1fr}}
+.dl{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:15px 16px}
+.dl .dt{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
+.dl p{color:var(--muted);font-size:13.5px;line-height:1.5}
+.d-rights{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.03em;line-height:1.7}
+.d-rights a{color:var(--green)}
+
+/* not found */
+.nf-wrap{max-width:640px;margin:0 auto}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:120;background:rgba(6,7,5,.96);display:none;flex-direction:column}
+.lb.open{display:flex;animation:lbIn .2s var(--ease-out)}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lb-bar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;flex:none}
+.lb-count{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.lb-close{background:none;border:1.5px solid var(--line-bright);border-radius:7px;color:var(--ink);width:44px;height:44px;cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center;transition:border-color .18s,color .18s}
+.lb-close:hover{border-color:var(--green);color:var(--green)}
+.lb-track{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:center}
+.lb-track::-webkit-scrollbar{display:none}
+.lb-slide{flex:0 0 100%;scroll-snap-align:center;height:100%;display:grid;place-items:center;padding:0 16px 24px}
+.lb-slide img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,11,9,.75);border:1.5px solid var(--line-bright);border-radius:50%;width:48px;height:48px;color:var(--ink);cursor:pointer;font-size:19px;display:none;place-items:center;transition:border-color .18s,color .18s;z-index:2}
+.lb-nav:hover{border-color:var(--green);color:var(--green)}
+.lb-prev{left:18px}.lb-next{right:18px}
+@media(hover:hover) and (pointer:fine){.lb-nav{display:grid}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-2)}
+.foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:24px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);flex-wrap:wrap}
+.foot-links a:hover{color:var(--green)}
+.disclaimer{color:var(--muted-2);font-size:12.5px;max-width:62ch;margin-top:24px;line-height:1.55}
+
+/* reveal (matches index) */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#stock">Skip to content</a>
+
+<!-- ===== NAV (mirrors index.html, Shop active) ===== -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html" aria-label="Consoles For You — home">
+      <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navmenu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navmenu">
+      <a href="index.html#sell">Sell to us</a>
+      <a href="shop.html" class="active" aria-current="page">Shop</a>
+      <a href="index.html#partex">Part-ex</a>
+      <a href="index.html#club">Membership</a>
+      <a href="index.html#repairs">Repairs</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#quote" class="btn btn-primary nav-cta">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== GRID VIEW ===== -->
+<main id="view-grid">
+  <section class="shop-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal in">The CFY shop</span>
+      <h1 class="h-lg reveal in d1">Tested consoles.<br><em>Honest grades.</em><br>Fair prices.</h1>
+      <div class="readout reveal in d2" id="readout" aria-live="polite">
+        <span class="live-dot" id="readout-count">Loading stock…</span>
+        <span class="sep">·</span>
+        <span>Every unit tested by a real person</span>
+        <span class="sep">·</span>
+        <span>One of each — when it's gone, it's gone</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="filters" id="filters" hidden>
+    <div class="filters-in" role="group" aria-label="Filter by platform" id="filters-in"></div>
+  </div>
+
+  <section class="stock-sec" id="stock">
+    <div class="wrap">
+      <div class="stock-grid" id="stock-grid" aria-live="polite"></div>
+      <div id="grid-state"></div>
+    </div>
+  </section>
+
+  <section class="sold-sec" id="sold-sec" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Recently sold</span>
+        <h2 class="h-md">Gone to good homes.</h2>
+      </div>
+      <div class="sold-grid" id="sold-grid"></div>
+      <p class="sold-note">Every price shown is what the unit actually sold for. Want first refusal on the next one? <a href="#" id="sold-wa" target="_blank" rel="noopener" style="color:var(--green)">Message us on WhatsApp</a>.</p>
+    </div>
+  </section>
+
+  <section class="trust-strip">
+    <div class="wrap">
+      <div class="trust-in">
+        <div class="trust"><div class="tt">// Delivery</div><p>Free tracked delivery, 2–3 working days — or free local collection, arranged on WhatsApp after purchase.</p></div>
+        <div class="trust"><div class="tt">// Tested &amp; graded</div><p>Every unit is tested by a real person before it's listed. The grade you read is the unit you get.</p></div>
+        <div class="trust"><div class="tt">// Your rights</div><p>14-day change of mind · faulty = free return. Sold under the Consumer Rights Act 2015 — <a href="terms.html">full terms</a>.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== DETAIL VIEW ===== -->
+<main id="view-detail" hidden>
+  <section class="detail-sec">
+    <div class="wrap">
+      <button class="back-btn" id="back-btn" type="button"><span class="barr">←</span> Back to the shop</button>
+      <div id="detail-root"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lb-bar">
+    <span class="lb-count" id="lb-count">1 / 1</span>
+    <button class="lb-close" id="lb-close" aria-label="Close photo viewer">✕</button>
+  </div>
+  <div class="lb-track" id="lb-track"></div>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">←</button>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">→</button>
+</div>
+
+<!-- ===== FOOTER (mirrors index.html) ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="index.html" aria-label="Consoles For You — home">
+        <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
+      </a>
+      <div class="foot-links">
+        <a href="index.html#sell">Sell to us</a>
+        <a href="shop.html">Shop</a>
+        <a href="index.html#partex">Part-ex</a>
+        <a href="index.html#club">Membership</a>
+        <a href="index.html#repairs">Repairs</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="terms.html">Terms</a>
+        <a href="#">@consolesforyou</a>
+      </div>
+    </div>
+    <p class="disclaimer">
+      <strong style="color:var(--ink)">Consoles For You</strong> is a UK console buying, selling and repair business founded by Ayyub Ahmed, and home of the Flip Club community.<br>
+      Contact: <a href="mailto:hello@consolesforyou.com" style="color:var(--green)">hello@consolesforyou.com</a> · WhatsApp 07786&nbsp;607434<br><br>
+      Shop consoles are tested and graded, and sold under the Consumer Rights Act 2015 with a 14-day right to return. CeX prices shown are their current advertised sell price for the same model and condition at the time of listing — checkable on their site. Free local collection is arranged on WhatsApp after purchase. Read our full <a href="terms.html" style="color:var(--green)">Terms &amp; Conditions</a>. © 2026 Consoles For You.
+    </p>
+  </div>
+</footer>
+
+<script type="module">
+/* ================= config ================= */
+const WHATSAPP = '447786607434';
+const waLink = (msg) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+const CACHE_KEY = 'cfy_stock_v1';
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const firebaseConfig = {
+  apiKey: "AIzaSyBrfCxE1BZjQGyDkY-8bqLYkzpyXdzsa3I",
+  authDomain: "cfy-shop.firebaseapp.com",
+  projectId: "cfy-shop",
+  appId: "1:391845334721:web:01b81ef180e1b972868e40"
+};
+
+/* ===== part-exchange data (copied from index.html — keep in sync) ===== */
+// model : [ boxed/like-new , good/working , faulty/for-repair ]
+const priceTable = {
+  'PlayStation 5 (Disc)':         [226, 205, 80],
+  'PlayStation 5 (Digital)':      [207, 197, 80],
+  'PlayStation 5 Slim (Disc)':    [247, 237, 95],
+  'PlayStation 5 Slim (Digital)': [213, 207, 85],
+  'PlayStation 5 Pro':            [422, 405, 160],
+};
+const inquiryModels = [
+  'PlayStation 4','PlayStation 4 Slim','PlayStation 4 Pro','PlayStation 3','PlayStation 2',
+  'Xbox Series X (Disc)','Xbox Series X (Digital)','Xbox Series X 2TB Galaxy',
+  'Xbox Series S 512GB','Xbox Series S 1TB','Xbox One X','Xbox One S','Xbox One',
+  'Nintendo Switch 2','Nintendo Switch OLED','Nintendo Switch','Nintendo Switch Lite',
+  'Game Boy Advance SP','Game Boy Advance','Game Boy Color','Game Boy (Original)',
+];
+const allModels = [...Object.keys(priceTable), ...inquiryModels];
+const conditions = ['Boxed – like new','Good – fully working','Faulty – for repair'];
+const PARTEX_BOOST = 1.15; // trade-in credit is 15% above our cash offer when spent in the shop
+
+/* ================= state ================= */
+let stock = [];           // [{id, ...data}]
+let filter = 'all';
+let gridScrollY = 0;
+const mediaCache = new Map();
+
+const PLATFORMS = [
+  {key:'all',        label:'All'},
+  {key:'playstation',label:'PlayStation'},
+  {key:'xbox',       label:'Xbox'},
+  {key:'nintendo',   label:'Nintendo'},
+  {key:'retro',      label:'Retro'},
+  {key:'accessory',  label:'Accessories'},
+];
+const PLATFORM_NAME = {playstation:'PlayStation', xbox:'Xbox', nintendo:'Nintendo', retro:'retro', accessory:'accessory'};
+
+/* ================= helpers ================= */
+const $  = (s, el=document) => el.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pounds = (pence) => Math.round((pence || 0) / 100);
+const gbp = (pence) => {
+  const p = pence || 0;
+  return p % 100 === 0 ? '£' + (p/100).toLocaleString('en-GB')
+    : '£' + (p/100).toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2});
+};
+const fmtDate = (iso) => {
+  if (!iso) return null;
+  const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
+  if (isNaN(d)) return null;
+  return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+};
+const condChip = (u) => {
+  const c = String(u.condition || 'good').toLowerCase();
+  if (c === 'boxed')  return '<span class="chip chip-boxed">Boxed</span>';
+  if (c === 'faulty') return '<span class="chip chip-faulty">Faulty — for repair</span>';
+  return '<span class="chip chip-good">Good — tested working</span>';
+};
+const isSample = (u) => u.status === 'sample';
+const isSold   = (u) => u.status === 'sold';
+const safeImg  = (b64) => (typeof b64 === 'string' && /^data:image\/(webp|jpeg|png|jpg);base64,/.test(b64)) ? b64 : null;
+const ytId = (url) => {
+  const m = String(url || '').match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);
+  return m ? m[1] : null;
+};
+
+/* ================= firebase (lazy) ================= */
+let fbPromise = null;
+function fb(){
+  fbPromise ??= (async () => {
+    const [{ initializeApp }, F] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js'),
+    ]);
+    const app = initializeApp(firebaseConfig);
+    return { db: F.getFirestore(app), F };
+  })();
+  return fbPromise;
+}
+
+/* ================= data ================= */
+function readCache(){
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const c = JSON.parse(raw);
+    if (!c || !Array.isArray(c.items) || typeof c.ts !== 'number') return null;
+    return c;
+  } catch { return null; }
+}
+function writeCache(items){
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ts: Date.now(), items})); } catch {}
+}
+
+async function loadStock(){
+  const cached = readCache();
+  if (cached && Date.now() - cached.ts < CACHE_TTL) {
+    stock = cached.items;
+    return true;
+  }
+  try {
+    const { db, F } = await fb();
+    const snap = await F.getDocs(F.query(F.collection(db, 'stock'), F.orderBy('created_at', 'desc')));
+    stock = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    writeCache(stock);
+    return true;
+  } catch (err) {
+    if (cached) { stock = cached.items; return true; } // stale beats nothing
+    return false;
+  }
+}
+
+async function loadMedia(id){
+  if (mediaCache.has(id)) return mediaCache.get(id);
+  try {
+    const { db, F } = await fb();
+    const snap = await F.getDocs(F.query(F.collection(db, 'stock', id, 'media'), F.orderBy('order')));
+    const arr = snap.docs.map(d => d.data()).filter(m => safeImg(m.b64));
+    mediaCache.set(id, arr);
+    return arr;
+  } catch { return []; }
+}
+
+/* ================= grid view ================= */
+function visibleStock(){ return stock.filter(u => !isSold(u)); }
+function soldStock(){ return stock.filter(isSold); }
+
+function renderReadout(){
+  const n = visibleStock().length;
+  $('#readout-count').textContent = n === 0 ? 'Restocking' : `${n} unit${n===1?'':'s'} live now`;
+}
+
+function renderFilters(){
+  const vis = visibleStock();
+  const bar = $('#filters-in');
+  bar.innerHTML = PLATFORMS.map(p => {
+    const n = p.key === 'all' ? vis.length : vis.filter(u => u.platform === p.key).length;
+    return `<button class="ftab" type="button" data-key="${p.key}" aria-pressed="${filter === p.key}">
+      ${p.label} <span class="ct">${n}</span></button>`;
+  }).join('');
+  bar.querySelectorAll('.ftab').forEach(b => b.addEventListener('click', () => {
+    if (filter === b.dataset.key) return;
+    filter = b.dataset.key;
+    bar.querySelectorAll('.ftab').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    renderGrid();
+  }));
+  $('#filters').hidden = stock.length === 0;
+}
+
+function cardHTML(u, i){
+  const img = safeImg(u.thumb_b64);
+  const media = img
+    ? `<img src="${img}" alt="${esc(u.name)}" loading="lazy" decoding="async">`
+    : `<span class="noimg">${esc(u.name)}</span>`;
+  const video = (u.video_url && !isSample(u) && !isSold(u)) ? '<span class="badge-video">▶ Tested on video</span>' : '';
+  const sample = isSample(u) ? '<span class="badge-sample">Example listing</span>' : '';
+  const tested = fmtDate(u.tested_date);
+  const meta = [tested ? `Tested ${tested}` : null, u.serial_last4 ? `Serial ···${esc(u.serial_last4)}` : null]
+    .filter(Boolean).join(' &nbsp;·&nbsp; ');
+  const save = (u.cex_price && u.cex_price > u.price)
+    ? `<span class="ucard-cex">CeX ${gbp(u.cex_price)} — <b>save ${gbp(u.cex_price - u.price)}</b></span>` : '';
+  const soldCls = isSold(u) ? ' is-sold' : '';
+  const price = isSold(u)
+    ? `<span class="ucard-cex" style="margin:0 0 4px">Sold for</span><span class="ucard-price">${gbp(u.price)}</span>`
+    : `<span class="ucard-price">${gbp(u.price)}</span>${save}`;
+  return `<a class="ucard${soldCls}" href="?item=${encodeURIComponent(u.id)}" data-id="${esc(u.id)}" style="animation-delay:${Math.min(i*45, 360)}ms" aria-label="${esc(u.name)} — ${isSold(u) ? 'sold for ' : ''}${gbp(u.price)}">
+    <div class="ucard-ph">${media}${!isSold(u) ? condChip(u) : ''}${video}${sample}</div>
+    <div class="ucard-body">
+      <h3 class="ucard-name">${esc(u.name)}</h3>
+      ${meta ? `<div class="ucard-meta">${meta}</div>` : ''}
+      <div class="ucard-foot"><div>${price}</div><span class="ucard-go">View →</span></div>
+    </div></a>`;
+}
+
+function emptyStateHTML(){
+  if (filter === 'all') {
+    return `<div class="state">
+      <span class="eyebrow">Stock room</span>
+      <h2 class="h-md">Nothing on the bench<br>right now.</h2>
+      <p>Every console we buy gets tested, photographed and listed here — one of each, honestly graded. New stock lands weekly. Tell us what you're after and you'll hear about it first.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="${waLink("Hi CFY — what consoles do you have coming into the shop? I'm looking for:")}" target="_blank" rel="noopener">Ask what's coming in</a>
+        <a class="btn btn-ghost" href="index.html#quote">Sell us your console</a>
+      </div></div>`;
+  }
+  const p = PLATFORMS.find(x => x.key === filter);
+  const nm = p ? p.label : 'that';
+  return `<div class="state">
+    <span class="eyebrow">Restocking</span>
+    <h2 class="h-md">No ${esc(nm)} units in<br>right now.</h2>
+    <p>Stock moves fast — one of each, and when it's gone, it's gone. Message us and we'll tell you what's on the test bench this week.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="${waLink(`Hi CFY — do you have any ${nm} stock coming in? I'd like first refusal.`)}" target="_blank" rel="noopener">Ask about ${esc(nm)}</a>
+      <a class="btn btn-ghost" href="#" data-show-all>See everything live</a>
+    </div></div>`;
+}
+
+function renderGrid(){
+  const grid = $('#stock-grid');
+  const state = $('#grid-state');
+  const items = visibleStock().filter(u => filter === 'all' || u.platform === filter);
+  if (items.length === 0) {
+    grid.innerHTML = '';
+    state.innerHTML = emptyStateHTML();
+    const all = state.querySelector('[data-show-all]');
+    if (all) all.addEventListener('click', (e) => {
+      e.preventDefault(); filter = 'all'; renderFilters(); renderGrid();
+    });
+  } else {
+    state.innerHTML = '';
+    grid.innerHTML = items.map(cardHTML).join('');
+  }
+  // sold archive
+  const sold = soldStock();
+  $('#sold-sec').hidden = sold.length === 0;
+  if (sold.length) {
+    $('#sold-grid').innerHTML = sold.map(cardHTML).join('');
+    $('#sold-wa').href = waLink('Hi CFY — I saw the recently sold units on the shop. Can you tell me when similar stock lands?');
+  }
+  bindCardClicks();
+}
+
+function bindCardClicks(){
+  document.querySelectorAll('.ucard[data-id]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let new-tab clicks through
+      e.preventDefault();
+      openDetail(a.dataset.id, true);
+    });
+  });
+}
+
+function renderSkeletons(){
+  $('#stock-grid').innerHTML = Array.from({length:6}, () => `
+    <div class="sk-card" aria-hidden="true">
+      <div class="sk-ph shimmer"></div>
+      <div class="sk-body">
+        <div class="sk-line shimmer w60"></div>
+        <div class="sk-line shimmer w40"></div>
+        <div class="sk-line shimmer big"></div>
+      </div>
+    </div>`).join('');
+}
+
+function renderError(){
+  $('#stock-grid').innerHTML = '';
+  $('#grid-state').innerHTML = `<div class="state">
+    <span class="eyebrow" style="color:var(--amber)">Connection hiccup</span>
+    <h2 class="h-md">The stock list<br>didn't load.</h2>
+    <p>That's on our end, not yours. Try again in a second — or message us and we'll send you what's live right now.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" type="button" data-retry>Try again</button>
+      <a class="btn btn-ghost" href="${waLink("Hi CFY — the shop page wouldn't load for me. What's in stock right now?")}" target="_blank" rel="noopener">WhatsApp us instead</a>
+    </div></div>`;
+  $('#readout-count').textContent = 'Stock offline';
+  $('#grid-state').querySelector('[data-retry]').addEventListener('click', boot);
+}
+
+/* ================= detail view ================= */
+function unitById(id){ return stock.find(u => u.id === id) || null; }
+
+function hasVideo(u){ return !!(u.video_url && !isSample(u)); }
+
+function mediaBlockHTML(u){
+  if (!hasVideo(u)) return ''; // no video → the photo gallery is the main media block
+  const cover = safeImg(u.thumb_b64);
+  const coverImg = cover ? `<img src="${cover}" alt="${esc(u.name)}">` : `<span class="noimg" style="position:static;display:grid;place-items:center;height:100%">${esc(u.name)}</span>`;
+  return `<div class="media-main" id="media-main">
+    <button class="vid-facade" id="vid-facade" type="button" aria-label="Play the test video for ${esc(u.name)}">
+      ${coverImg}
+      <span class="play"><span class="play-btn"></span><span class="play-label">Watch the test</span></span>
+    </button></div>`;
+}
+
+function wireVideo(u){
+  const btn = $('#vid-facade');
+  if (!btn || btn.tagName !== 'BUTTON') return;
+  btn.addEventListener('click', () => {
+    const main = $('#media-main');
+    const url = String(u.video_url || '');
+    const id = ytId(url);
+    if (id) {
+      main.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
+        title="Test video — ${esc(u.name)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    } else if (/\.mp4($|\?)/i.test(url)) {
+      main.innerHTML = `<video src="${esc(url)}" controls autoplay playsinline></video>`;
+    } else {
+      window.open(url, '_blank', 'noopener');
+    }
+  }, { once:false });
+}
+
+function galleryHTML(shots){
+  if (!shots.length) return '';
+  const multi = shots.length > 1;
+  return `<div class="gal${multi ? ' multi' : ''}" id="gal">
+    <div class="gal-track" id="gal-track">
+      ${shots.map((s, i) => `<button class="gal-shot" type="button" data-i="${i}" aria-label="Open photo ${i+1} of ${shots.length} full screen">
+        <img src="${s}" alt="Photo ${i+1}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async"></button>`).join('')}
+    </div>
+    ${multi ? `<div class="gal-dots" id="gal-dots" role="tablist" aria-label="Photos">${shots.map((_, i) =>
+      `<button class="gal-dot" data-i="${i}" aria-current="${i===0}" aria-label="Photo ${i+1}"></button>`).join('')}</div>
+    <div class="gal-hint">Swipe photos — tap to zoom</div>` : `<div class="gal-hint">Tap the photo to zoom</div>`}
+  </div>`;
+}
+
+function wireGallery(shots){
+  const track = $('#gal-track');
+  if (!track) return;
+  track.querySelectorAll('.gal-shot').forEach(b =>
+    b.addEventListener('click', () => openLightbox(shots, +b.dataset.i)));
+  const dots = $('#gal-dots');
+  if (dots) {
+    dots.querySelectorAll('.gal-dot').forEach(d => d.addEventListener('click', () => {
+      const shot = track.querySelectorAll('.gal-shot')[+d.dataset.i];
+      track.scrollTo({left: shot.offsetLeft - track.offsetLeft, behavior:'smooth'});
+    }));
+    let raf = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const shotsEls = [...track.querySelectorAll('.gal-shot')];
+        const mid = track.scrollLeft + track.clientWidth / 2;
+        let best = 0, bd = Infinity;
+        shotsEls.forEach((s, i) => {
+          const c = s.offsetLeft - track.offsetLeft + s.offsetWidth / 2;
+          const d = Math.abs(c - mid);
+          if (d < bd) { bd = d; best = i; }
+        });
+        dots.querySelectorAll('.gal-dot').forEach((d, i) => d.setAttribute('aria-current', String(i === best)));
+      });
+    }, { passive:true });
+  }
+}
+
+function partexHTML(u){
+  return `<div class="d-block">
+    <div class="bt">Part-exchange — pay less</div>
+    <div class="px-card">
+      <div class="px-fields">
+        <div class="q-field" style="margin:0"><label for="pxd-model">Trade in — your console</label>
+          <select class="q-select" id="pxd-model">${allModels.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('')}</select></div>
+        <div class="q-field" style="margin:0"><label for="pxd-cond">Condition</label>
+          <select class="q-select" id="pxd-cond">${conditions.map((c, i) => `<option value="${i}">${esc(c)}</option>`).join('')}</select></div>
+      </div>
+      <div class="px-out" id="pxd-out" aria-live="polite"></div>
+      <a class="btn btn-primary" id="pxd-cta" href="#" target="_blank" rel="noopener">
+        <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
+        Start part-exchange</a>
+    </div></div>`;
+}
+
+function wirePartex(u){
+  const modelSel = $('#pxd-model'), condSel = $('#pxd-cond');
+  if (!modelSel) return;
+  const out = $('#pxd-out'), cta = $('#pxd-cta');
+  const itemPounds = pounds(u.price);
+  const update = () => {
+    const model = modelSel.value, ci = +condSel.value, cond = conditions[ci];
+    if (priceTable[model]) {
+      const cash = priceTable[model][ci];
+      const credit = Math.round(cash * PARTEX_BOOST);
+      const pay = Math.max(0, itemPounds - credit);
+      const excess = credit - itemPounds;
+      out.innerHTML = `<div class="px-line">Trade in your <b>${esc(model)}</b> → pay <span class="px-pay">£${pay}</span> <span class="was">instead of £${itemPounds}</span></div>
+        <div class="px-note">${excess > 0 ? `+ £${excess} cash back to you · ` : ''}Trade-in credit £${credit} — £${credit - cash} more than our cash offer</div>`;
+      cta.href = waLink(`Hi CFY — I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
+    } else {
+      out.innerHTML = `<div class="px-line">Trade in your <b>${esc(model)}</b> → <b>photo valuation over WhatsApp</b></div>
+        <div class="px-note">Send us a few photos — part-ex credit is 15% above our cash offer</div>`;
+      cta.href = waLink(`Hi CFY — I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). I'll send a few photos of my console for a trade-in valuation.`);
+    }
+  };
+  [modelSel, condSel].forEach(el => el.addEventListener('change', update));
+  update();
+}
+
+function detailHTML(u){
+  const sold = isSold(u), sample = isSample(u);
+  const chips = [
+    !sold ? condChip(u) : '<span class="chip chip-sold">Sold</span>',
+    sample ? '<span class="chip chip-sample">Example listing</span>' : '',
+    (u.video_url && !sample) ? '<span class="chip chip-video">▶ Tested on video</span>' : '',
+  ].join('');
+  const tested = fmtDate(u.tested_date);
+  const sub = [
+    tested ? `Tested ${tested}` : null,
+    u.serial_last4 ? `Serial ending ···${esc(u.serial_last4)}` : null,
+    sold && u.sold_at ? `Sold ${fmtDate(u.sold_at)}` : null,
+  ].filter(Boolean).map(s => `<span>${s}</span>`).join('');
+  const grade = u.grade_note ? `<div class="d-grade"><b>Grade note</b>${esc(u.grade_note)}</div>` : '';
+  const inbox = (Array.isArray(u.in_box) && u.in_box.length)
+    ? `<div class="d-block"><div class="bt">What's in the box</div>
+        <ul class="inbox-list">${u.in_box.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : '';
+  const cex = (u.cex_price && u.cex_price > u.price && !sold)
+    ? `<div class="d-cex">CeX price <b>${gbp(u.cex_price)}</b><span class="save">You save ${gbp(u.cex_price - u.price)}</span></div>` : '';
+  const price = `<div class="d-price-card"><div class="crt"></div>
+    <div class="d-price-row">
+      <div><span class="d-price-label">${sold ? 'Sold for' : sample ? 'Example price' : 'Price — tested & graded'}</span>
+      <div class="d-price${sold ? ' muted' : ''}">${gbp(u.price)}</div></div>
+      ${cex}
+    </div></div>`;
+
+  let ctas;
+  if (sold) {
+    ctas = `<div class="d-ctas">
+      <a class="btn btn-ghost" href="?" data-back-link>See what's live now</a>
+      <a class="btn btn-wa" href="${waLink(`Hi CFY — the ${u.name} has sold. Can you let me know when the next one lands?`)}" target="_blank" rel="noopener">
+        <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
+        Tell me about the next one</a></div>`;
+  } else if (sample) {
+    ctas = `<div class="d-ctas">
+      <a class="btn btn-primary" href="${waLink(`Hi CFY — I saw the ${u.name} example listing (${gbp(u.price)}). What similar units do you have coming in?`)}" target="_blank" rel="noopener">
+        <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
+        Ask about this one</a></div>
+      <p class="sample-note">This is an example listing — it shows exactly how real units are presented. Real listings come with photos of the actual unit and a test video.</p>`;
+  } else {
+    const buy = u.stripe_link
+      ? `<a class="btn btn-primary" href="${esc(u.stripe_link)}" target="_blank" rel="noopener">Buy now — ${gbp(u.price)}</a>` : '';
+    ctas = `<div class="d-ctas">${buy}
+      <a class="btn ${buy ? 'btn-wa' : 'btn-primary'}" href="${waLink(`Hi CFY — I'd like to reserve the ${u.name} (${gbp(u.price)})`)}" target="_blank" rel="noopener">
+        <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
+        Reserve on WhatsApp</a></div>`;
+  }
+
+  const px = (!sold && !sample) ? partexHTML(u) : '';
+  const delivery = `<div class="d-block"><div class="bt">Delivery & collection</div>
+    <div class="d-delivery">
+      <div class="dl"><div class="dt">// Free tracked delivery</div><p>2–3 working days, tracked to your door. Packed properly.</p></div>
+      <div class="dl"><div class="dt">// Free local collection</div><p>Arranged on WhatsApp after purchase.</p></div>
+    </div>
+    <p class="d-rights">14-day change of mind · faulty = free return — <a href="terms.html">full terms</a>. Sold under the Consumer Rights Act 2015.</p></div>`;
+
+  return `<div class="detail-grid view-enter">
+    <div class="d-media">
+      ${mediaBlockHTML(u)}
+      <div id="gal-mount"></div>
+    </div>
+    <div class="d-info">
+      <div class="d-chips">${chips}</div>
+      <h1 class="d-name">${esc(u.name)}</h1>
+      ${sub ? `<div class="d-sub">${sub}</div>` : ''}
+      ${grade}
+      ${inbox}
+      ${price}
+      ${px}
+      ${ctas}
+      ${delivery}
+    </div></div>`;
+}
+
+function notFoundHTML(id){
+  return `<div class="state nf-wrap view-enter">
+    <span class="eyebrow">Not found</span>
+    <h2 class="h-md">That unit isn't<br>listed any more.</h2>
+    <p>It's most likely sold — stock here is one of each. See what's live now, or message us and we'll tell you what's on the test bench.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="?" data-back-link>Browse live stock</a>
+      <a class="btn btn-ghost" href="${waLink(`Hi CFY — I was looking at a unit on your shop (ref ${id}) but it's gone. What do you have that's similar?`)}" target="_blank" rel="noopener">WhatsApp us</a>
+    </div></div>`;
+}
+
+async function renderDetail(id){
+  const root = $('#detail-root');
+  const u = unitById(id);
+  if (!u) { root.innerHTML = notFoundHTML(id); bindBackLinks(); return; }
+  document.title = `${u.name} — ${gbp(u.price)} | Consoles For You`;
+  root.innerHTML = detailHTML(u);
+  bindBackLinks();
+  wireVideo(u);
+  wirePartex(u);
+
+  // gallery: media subcollection is only fetched when a detail opens
+  const mount = $('#gal-mount');
+  const cover = safeImg(u.thumb_b64);
+  if (hasVideo(u)) {
+    // facade already shows the cover — skeleton while the photo set loads
+    mount.innerHTML = `<div class="gal"><div class="gal-skel"><div class="shimmer"></div><div class="shimmer"></div></div></div>`;
+  } else if (cover) {
+    // gallery IS the main media block — show the cover instantly, swap in full shots when loaded
+    mount.innerHTML = galleryHTML([cover]);
+    wireGallery([cover]);
+  }
+  const media = await loadMedia(id);
+  if (!root.isConnected) return; // view changed while loading
+  const current = new URLSearchParams(location.search).get('item');
+  if (current !== id) return;
+  const shots = media.map(m => safeImg(m.b64)).filter(Boolean);
+  if (shots.length) {
+    mount.innerHTML = galleryHTML(shots);
+    wireGallery(shots);
+  } else if (hasVideo(u)) {
+    mount.innerHTML = ''; // no photo set yet — the facade already covers it
+  } // else: keep the cover gallery already rendered
+}
+
+function bindBackLinks(){
+  document.querySelectorAll('[data-back-link]').forEach(a => a.addEventListener('click', (e) => {
+    e.preventDefault(); closeDetail(true);
+  }));
+}
+
+/* ================= routing ================= */
+function openDetail(id, push){
+  gridScrollY = window.scrollY;
+  if (push) history.pushState({item:id}, '', `?item=${encodeURIComponent(id)}`);
+  $('#view-grid').hidden = true;
+  $('#view-detail').hidden = false;
+  window.scrollTo({top:0, behavior:'instant'});
+  renderDetail(id);
+}
+function closeDetail(push){
+  if (push) history.pushState({}, '', location.pathname);
+  showGrid();
+}
+function showGrid(){
+  $('#view-detail').hidden = true;
+  $('#view-grid').hidden = false;
+  document.title = 'Shop Tested Consoles — Consoles For You | UK';
+  window.scrollTo({top:gridScrollY, behavior:'instant'});
+}
+function route(){
+  const id = new URLSearchParams(location.search).get('item');
+  if (id) openDetail(id, false); else showGrid();
+}
+window.addEventListener('popstate', route);
+$('#back-btn').addEventListener('click', () => {
+  if (history.state && 'item' in (history.state || {})) history.back();
+  else closeDetail(true);
+});
+
+/* ================= lightbox ================= */
+const lb = $('#lb'), lbTrack = $('#lb-track'), lbCount = $('#lb-count');
+let lbShots = [];
+function openLightbox(shots, index){
+  lbShots = shots;
+  lbTrack.innerHTML = shots.map((s, i) =>
+    `<div class="lb-slide"><img src="${s}" alt="Photo ${i+1} of ${shots.length}"></div>`).join('');
+  lb.classList.add('open');
+  document.documentElement.style.overflow = 'hidden';
+  requestAnimationFrame(() => {
+    lbTrack.scrollTo({left: lbTrack.clientWidth * index, behavior:'instant'});
+    updateLbCount();
+  });
+  $('#lb-close').focus();
+}
+function closeLightbox(){
+  lb.classList.remove('open');
+  document.documentElement.style.overflow = '';
+}
+function lbIndex(){ return Math.round(lbTrack.scrollLeft / Math.max(1, lbTrack.clientWidth)); }
+function updateLbCount(){ lbCount.textContent = `${Math.min(lbIndex()+1, lbShots.length)} / ${lbShots.length}`; }
+let lbRaf = 0;
+lbTrack.addEventListener('scroll', () => { cancelAnimationFrame(lbRaf); lbRaf = requestAnimationFrame(updateLbCount); }, {passive:true});
+$('#lb-close').addEventListener('click', closeLightbox);
+$('#lb-prev').addEventListener('click', () => lbTrack.scrollTo({left:(lbIndex()-1)*lbTrack.clientWidth, behavior:'smooth'}));
+$('#lb-next').addEventListener('click', () => lbTrack.scrollTo({left:(lbIndex()+1)*lbTrack.clientWidth, behavior:'smooth'}));
+lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('lb-slide')) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') $('#lb-prev').click();
+  if (e.key === 'ArrowRight') $('#lb-next').click();
+});
+
+/* ================= mobile nav (copied from index.html) ================= */
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.getElementById('navmenu');
+const setMenu = (open) => { navToggle.setAttribute('aria-expanded', String(open)); navMenu.classList.toggle('open', open); };
+navToggle.addEventListener('click', () => setMenu(navToggle.getAttribute('aria-expanded') !== 'true'));
+navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+/* ================= boot ================= */
+async function boot(){
+  $('#grid-state').innerHTML = '';
+  renderSkeletons();
+  const ok = await loadStock();
+  if (!ok) { renderError(); return; }
+  renderReadout();
+  renderFilters();
+  renderGrid();
+  route();
+}
+boot();
+</script>
+</body>
+</html>
