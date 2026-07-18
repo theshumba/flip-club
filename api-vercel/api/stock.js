@@ -1,6 +1,6 @@
 /**
  * POST /api/stock — admin writes for stock/{id} docs.
- * Body: { action: 'create'|'update'|'delete'|'markSold'|'seed', id?, data? }
+ * Body: { action: 'auth'|'create'|'update'|'delete'|'markSold'|'seed', id?, data? }
  * Auth: header x-cfy-key === env CFY_ADMIN_KEY. All responses JSON.
  */
 import {
@@ -49,6 +49,10 @@ export default async function handler(req, res) {
 
   try {
     switch (action) {
+      case 'auth':
+        // passcode check for the admin gate — auth already passed above, no side effects
+        return sendJson(res, 200, { ok: true });
+
       case 'create': {
         const out = await createUnit(data);
         return sendJson(res, out.status, out.body);
@@ -114,7 +118,7 @@ export default async function handler(req, res) {
       }
 
       default:
-        return sendJson(res, 400, { error: "action must be one of: create | update | delete | markSold | seed" });
+        return sendJson(res, 400, { error: "action must be one of: auth | create | update | delete | markSold | seed" });
     }
   } catch (e) {
     if (e.status === 404) return sendJson(res, 404, { error: 'stock unit not found' });

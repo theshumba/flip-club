@@ -686,7 +686,7 @@ $('gate-form').addEventListener('submit', async (e) => {
       r = await fetch(API_BASE + '/stock', {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-cfy-key': key },
-        body: JSON.stringify({ action: 'noop' }),
+        body: JSON.stringify({ action: 'auth' }),
       });
     } catch (netErr) {
       err.textContent = "Can't reach the server — check your internet and try again.";
@@ -698,7 +698,11 @@ $('gate-form').addEventListener('submit', async (e) => {
       err.hidden = false;
       return;
     }
-    // any non-401 (e.g. 400 for the unknown action) means the key was accepted
+    if (!r.ok) {
+      err.textContent = "The server had a hiccup — give it a second and try again.";
+      err.hidden = false;
+      return;
+    }
     setKey(key);
     $('gate-key').value = '';
     showView('list');
