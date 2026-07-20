@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="noindex,nofollow">
+<title>Studio · Consoles For You</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b09;
+  --bg-2:#101310;
+  --surface:#161a12;
+  --surface-2:#1c2117;
+  --line:#2c3322;
+  --line-bright:#434d26;
+  --green:#c5f82a;
+  --green-dim:#9bc41f;
+  --green-glow:rgba(197,248,42,.35);
+  --ink:#f6f6ec;
+  --muted:#b6bda9;
+  --muted-2:#838a73;
+  --warn:#ffb84d;
+  --display:'Anton',sans-serif;
+  --body:'Hanken Grotesk',sans-serif;
+  --mono:'Space Mono',monospace;
+  --ease:cubic-bezier(0.23,1,0.32,1);
+  --maxw:680px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--body);
+  min-height:100dvh;line-height:1.55;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+::selection{background:var(--green);color:#0a0b09}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,11,9,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.hbar{max-width:var(--maxw);margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:12px}
+.wordmark{font-family:var(--display);font-size:22px;letter-spacing:.5px;text-decoration:none;color:var(--ink)}
+.wordmark span{color:var(--green)}
+.studio-tag{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--green);border:1px solid var(--line-bright);border-radius:4px;padding:3px 7px}
+#backBtn{
+  display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:8px;
+  color:var(--muted);font-family:var(--mono);font-size:12px;padding:8px 12px;cursor:pointer;
+  transition:transform 160ms var(--ease),border-color 160ms var(--ease),color 160ms var(--ease);
+}
+#backBtn:active{transform:scale(0.97)}
+@media (hover:hover) and (pointer:fine){#backBtn:hover{border-color:var(--line-bright);color:var(--ink)}}
+body.in-flow #backBtn{display:block}
+
+/* ---------- views ---------- */
+main{max-width:var(--maxw);margin:0 auto;padding:26px 18px 120px}
+.view{display:none}
+.view.active{display:block}
+
+/* stagger-in for cards */
+.pop{
+  opacity:0;transform:translateY(10px);
+  transition:opacity 260ms var(--ease),transform 260ms var(--ease);
+}
+.pop[data-in]{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .pop{transform:none;transition:opacity 200ms ease}
+}
+
+/* ---------- home ---------- */
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:8px}
+h1{font-family:var(--display);font-size:clamp(34px,9vw,52px);line-height:1.05;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:28px;max-width:46ch}
+.door{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:20px 20px 18px;margin-bottom:14px;color:var(--ink);font-family:var(--body);
+  transition:transform 160ms var(--ease),border-color 160ms var(--ease),background 160ms var(--ease);
+}
+.door:active{transform:scale(0.98)}
+@media (hover:hover) and (pointer:fine){
+  .door:not(.soon):hover{border-color:var(--line-bright);background:var(--surface-2)}
+}
+.door .num{font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:2px}
+.door .t{font-family:var(--display);font-size:24px;text-transform:uppercase;letter-spacing:.5px;margin:6px 0 4px;display:flex;align-items:center;gap:10px}
+.door .d{color:var(--muted);font-size:15px}
+.door.soon{opacity:.55}
+.chip-soon{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--green);border:1px solid var(--line-bright);border-radius:4px;padding:2px 6px;transform:translateY(-2px)}
+
+/* ---------- flow form ---------- */
+h2{font-family:var(--display);font-size:clamp(26px,7vw,36px);text-transform:uppercase;letter-spacing:.5px;line-height:1.1;margin-bottom:4px}
+.step-label{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin:26px 0 10px}
+.step-label:first-of-type{margin-top:20px}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chip{
+  cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:12px 14px;color:var(--ink);text-align:left;font-family:var(--body);
+  transition:transform 140ms var(--ease),border-color 140ms var(--ease),background 140ms var(--ease),box-shadow 140ms var(--ease);
+}
+.chip:active{transform:scale(0.97)}
+@media (hover:hover) and (pointer:fine){.chip:hover{border-color:var(--line-bright)}}
+.chip .cl{font-weight:700;font-size:14.5px}
+.chip .cs{color:var(--muted-2);font-size:12.5px;margin-top:2px}
+.chip.sel{border-color:var(--green);background:var(--surface-2);box-shadow:0 0 0 1px var(--green)}
+.chip.sel .cl{color:var(--green)}
+.chips.small{grid-template-columns:repeat(3,1fr)}
+.chips.small .chip{padding:10px 8px;text-align:center}
+.chips.small .cl{font-size:13px;font-weight:600}
+@media (max-width:420px){.chips.small{grid-template-columns:1fr 1fr}}
+
+textarea,input[type=text]{
+  width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
+  color:var(--ink);font-family:var(--body);font-size:16px;padding:14px;
+  transition:border-color 160ms var(--ease);
+}
+textarea:focus,input[type=text]:focus{outline:none;border-color:var(--green-dim)}
+textarea{min-height:120px;resize:vertical;line-height:1.5}
+.hint{color:var(--muted-2);font-size:12.5px;margin-top:6px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+.optional{color:var(--muted-2);font-weight:400;text-transform:none;letter-spacing:0}
+
+/* ---------- generate bar ---------- */
+.genbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:linear-gradient(to top,var(--bg) 55%,transparent);
+  padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom));
+  display:none;
+}
+body.in-flow .genbar{display:block}
+.genbtn{
+  display:block;max-width:var(--maxw);margin:0 auto;width:100%;
+  background:var(--green);color:#0a0b09;border:none;border-radius:14px;
+  font-family:var(--display);font-size:20px;letter-spacing:1px;text-transform:uppercase;
+  padding:16px;cursor:pointer;
+  transition:transform 160ms var(--ease),box-shadow 160ms var(--ease),opacity 160ms var(--ease);
+  box-shadow:0 6px 30px -8px var(--green-glow);
+}
+.genbtn:active{transform:scale(0.97)}
+.genbtn[disabled]{opacity:.35;box-shadow:none;cursor:default}
+
+/* ---------- result cards ---------- */
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:20px;margin-bottom:16px;
+}
+.card h3{font-family:var(--display);font-size:19px;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.card h3 .tag{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted-2);border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-weight:400}
+.card .chd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.beat{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.beat:first-of-type{border-top:none}
+.beat .bt{font-family:var(--mono);font-size:11px;color:var(--green);min-width:74px;padding-top:2px}
+.beat .bl{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--muted-2);text-transform:uppercase;margin-bottom:3px}
+.beat .bx{font-size:15.5px;font-weight:600}
+.beat .bh{color:var(--muted-2);font-size:12.5px;margin-top:3px}
+.warnchip{
+  display:flex;gap:8px;align-items:flex-start;margin-top:14px;
+  background:rgba(255,184,77,.07);border:1px solid rgba(255,184,77,.35);border-radius:10px;
+  padding:10px 12px;color:var(--warn);font-size:13.5px;
+}
+.capblock{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.capblock:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.cap-plat{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.cap-plat .note{color:var(--muted-2);letter-spacing:0;text-transform:none}
+.captext{white-space:pre-wrap;font-size:15px;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+.tagwrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.htag{font-family:var(--mono);font-size:12.5px;color:var(--muted);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.sbtn{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+  color:var(--ink);font-family:var(--mono);font-size:12.5px;padding:10px 14px;cursor:pointer;
+  transition:transform 140ms var(--ease),border-color 140ms var(--ease),color 200ms ease,background 200ms ease;
+}
+.sbtn:active{transform:scale(0.96)}
+@media (hover:hover) and (pointer:fine){.sbtn:hover{border-color:var(--line-bright)}}
+.sbtn.copied{border-color:var(--green);color:var(--green)}
+
+.check{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);cursor:pointer}
+.check:first-of-type{border-top:none}
+.check input{margin-top:4px;accent-color:var(--green);width:17px;height:17px;flex-shrink:0}
+.check span{font-size:14.5px;color:var(--muted)}
+.check input:checked ~ span{color:var(--ink)}
+
+.toast{
+  position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:60;
+  transform:translateX(-50%) translateY(8px);opacity:0;pointer-events:none;
+  background:var(--surface-2);border:1px solid var(--line-bright);border-radius:10px;
+  color:var(--ink);font-family:var(--mono);font-size:12.5px;padding:10px 16px;
+  transition:opacity 200ms var(--ease),transform 200ms var(--ease);
+  max-width:88vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbar">
+    <a class="wordmark" href="studio.html">CF<span>Y</span></a>
+    <span class="studio-tag">STUDIO</span>
+    <button id="backBtn" type="button">&larr; Start again</button>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HOME ============ -->
+  <section id="view-home" class="view active">
+    <div class="kicker">CFY Content Studio</div>
+    <h1>What have you<br>got today?</h1>
+    <p class="sub">Pick one. The studio gives you the script, the captions and the hashtags, ready to post.</p>
+
+    <button class="door pop" id="doorFilmed" type="button">
+      <span class="num">01</span>
+      <div class="t">I filmed something</div>
+      <div class="d">Pickup, repair, restoration, drop: tell it like you'd tell a mate and get a script, captions and hashtags.</div>
+    </button>
+
+    <button class="door soon pop" data-soon type="button">
+      <span class="num">02</span>
+      <div class="t">Need a post, nothing filmed <span class="chip-soon">SOON</span></div>
+      <div class="d">One tap. A finished CFY carousel with caption and hashtags, ready to upload.</div>
+    </button>
+
+    <button class="door soon pop" data-soon type="button">
+      <span class="num">03</span>
+      <div class="t">Give me an idea to shoot <span class="chip-soon">SOON</span></div>
+      <div class="d">Mini-doc scripts: console history, retro deep dives, buyer's guides. Script, shot list, thumbnail.</div>
+    </button>
+  </section>
+
+  <!-- ============ FILMED FLOW ============ -->
+  <section id="view-flow" class="view">
+    <h2>I filmed something</h2>
+    <p class="sub" style="margin-bottom:0">Answer in plain words. The studio does the rest.</p>
+
+    <div class="step-label">What kind of video is it?</div>
+    <div class="chips" id="pillarChips"></div>
+
+    <div class="step-label">Tell the story <span class="optional">· like you'd tell a mate</span></div>
+    <textarea id="fStory" placeholder="Picked up a PS2 today at a car boot in Wycombe. Seller thought it was broken. Turned out it just needed a new laser. Boxed too."></textarea>
+    <div class="hint">A couple of sentences is plenty. What happened, in your words.</div>
+
+    <div class="step-label">The console <span class="optional">· if there is one</span></div>
+    <input type="text" id="fConsole" list="consoleList" placeholder="PS2, Series S, Game Boy...">
+    <datalist id="consoleList"></datalist>
+
+    <div class="step-label">Where did it happen? <span class="optional">· optional</span></div>
+    <div class="chips small" id="placeChips"></div>
+
+    <div class="row2" style="margin-top:26px">
+      <div>
+        <div class="step-label" style="margin-top:0">What you paid <span class="optional">· optional</span></div>
+        <input type="text" id="fPrice" inputmode="numeric" placeholder="£15">
+      </div>
+      <div>
+        <div class="step-label" style="margin-top:0">One surprising detail <span class="optional">· optional</span></div>
+        <input type="text" id="fDetail" placeholder="Seller thought it was dead">
+      </div>
+    </div>
+
+    <div id="results" style="margin-top:34px"></div>
+  </section>
+</main>
+
+<div class="genbar">
+  <button class="genbtn" id="genBtn" type="button" disabled>Make my post</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+/* ================= CONFIG ================= */
+var IG_RESTRICTION_END = new Date('2026-08-06T00:00:00');
+var igRestricted = new Date() < IG_RESTRICTION_END;
+
+/* ================= DATA ================= */
+var PILLARS = [
+  {id:'pickup',    label:'Pickup · sourcing',     sub:'Car boot, collection, post day'},
+  {id:'resto',     label:'Restoration · repair',  sub:'Dirty or dead unit brought back'},
+  {id:'tradein',   label:'Trade-in · pricing',    sub:'Grading and what it pays'},
+  {id:'edu',       label:'Education · how-to',    sub:'Tips, checks, explainers'},
+  {id:'drop',      label:'Shop drop · sold',      sub:'New stock in, sold flex'},
+  {id:'community', label:'Behind the scenes',     sub:'The brothers, the bench, the week'}
+];
+
+var PLACES = ['Car boot','Facebook Marketplace','Doorstep collection','Came in the post','The bench','The shop'];
+
+var HOOKS = {
+  pickup: [
+    '7am car boot. Look what came home with us.',
+    'POV: you run a console shop and it’s sourcing day',
+    'Someone was about to bin this {console}.',
+    'We drove 40 minutes for this. Worth it?',
+    'Everything we picked up for the shop today',
+    'The best find we’ve had all month',
+    'This {console} has been sat in a drawer for years',
+    'You won’t believe where we found this {console}',
+    'Monday in-tray. Let’s open everything.',
+    'The seller said it was broken. Was it?',
+    'Picked up this morning, on the shelf by 5pm',
+    'Rescue mission: one {console} and a bag of mystery cables'
+  ],
+  resto: [
+    'The filthiest {console} we’ve ever bought',
+    'This {console} was “dead”. Watch.',
+    'Deep clean, fresh paste, basically a new machine',
+    'From the loft to the shop shelf in one video',
+    'The £12 part that saves a £300 console',
+    'Nobody wanted this {console}. Big mistake.',
+    'Watch this {console} come back to life',
+    'Ten years of dust inside this {console}',
+    'We buy the consoles other shops reject',
+    'Before and after: {console} edition',
+    'Jet engine to whisper quiet in 20 minutes',
+    'Rated: the dirtiest trade-in of the week'
+  ],
+  tradein: [
+    'Your {console} is worth more than you think',
+    'Don’t sell your console before watching this',
+    'Live grading: what this {console} actually gets you',
+    'Boxed vs unboxed: the box matters more than you think',
+    'What “we test everything” actually means',
+    'This is how we price every console that comes in',
+    'Got one of these in a drawer? Watch this.',
+    'The 12-point check every console gets before the shelf',
+    'Retro prices have gone mental. Check your loft.',
+    'Part-exchange explained in 30 seconds',
+    'We graded this {console} live on camera',
+    'What every PlayStation trades for in 2026'
+  ],
+  edu: [
+    'How to spot a fake controller in 10 seconds',
+    '3 things to check before buying ANY used console',
+    'Why your PS5 sounds like a jet, and the fix',
+    'The 3 things that kill an Xbox',
+    'Never buy a used {console} without checking this',
+    'The mistake everyone makes when selling a console',
+    'Consoles quietly going UP in value right now',
+    'Controller drifting? Here’s what’s actually happening.',
+    'The truth about refurbished consoles',
+    'Do THIS before you sell any console',
+    'Wipe your data properly before selling. Here’s how.',
+    'What dust actually does inside your console'
+  ],
+  drop: [
+    'Just landed: fresh stock, tested and ready',
+    'Listed at 9am. Gone by 2pm.',
+    'New in the shop this weekend',
+    'Members saw this yesterday. Now it’s yours.',
+    'Fresh {console} just hit the shelf',
+    'The weekend drop is live',
+    'Every unit on this table is tested and ready to go',
+    'This {console} will not last the day',
+    'Restocked. Who’s quickest?',
+    'The one everyone keeps asking for is back',
+    'Today’s shelf, in 15 seconds',
+    'Sold before we even finished editing this video'
+  ],
+  community: [
+    'A day running a console shop with my brother',
+    'Packing today’s orders. Come with us.',
+    'Replying to your comments on camera',
+    'What we bought, fixed and shipped this week',
+    'You asked. We answered.',
+    'Behind the counter at CFY',
+    'Sunday recap: the week in 30 seconds',
+    'Two brothers, one console shop',
+    'Reading your DMs. The polite ones.',
+    'How the shop actually runs day to day',
+    'This week’s wins, and one massive fail',
+    'Meet the bench where everything gets fixed'
+  ]
+};
+
+/* Spoken CTA bank: tt = TikTok/YouTube wording, ig = Instagram-safe wording */
+var SPOKEN_CTAS = [
+  {tt:'Got one in a drawer? Instant quote at consoles for you dot com.', ig:'Got one in a drawer? DM us the word QUOTE and we’ll price it in minutes.'},
+  {tt:'Broken console? We fix or we buy. The site’s in the description.', ig:'Broken console? We fix or we buy. Send us a DM.'},
+  {tt:'Tested, warrantied and cheaper than the high street. Link below.', ig:'Tested, warrantied and cheaper than the high street. DM us for anything on the shelf.'},
+  {tt:'Follow for the next one off the bench.', ig:'Follow for the next one off the bench.'},
+  {tt:'Want it? It’s on the site right now.', ig:'Want it? DM us before it goes.'}
+];
+
+/* Caption templates. {console}=console or fallback, {place}=lowercase place, {price}=price. */
+var CAPTIONS = {
+  pickup: {
+    tt: [
+      'Today’s find: {console}, straight off the {place}{pricebit}. On the bench for the full 12-point check, then it’s shop-bound.',
+      '{console} rescued{pricebit}. Testing tonight, on the shelf tomorrow. This is the bit of the job we love.',
+      'Sourcing day done. {console} in the tray{pricebit}. Watch this space for the glow-up.'
+    ],
+    ig: [
+      'Today’s find: {console}, straight off the {place}. On the bench for the full 12-point check, then it’s shop-bound.',
+      '{console} rescued. Testing tonight, on the shelf tomorrow. This is the bit of the job we love.',
+      'Sourcing day done. {console} in the tray. The glow-up video is coming.'
+    ]
+  },
+  resto: {
+    tt: [
+      'This {console} came in rough. Deep clean, fresh thermal paste, full test: good as the day it left the factory. Every unit we sell gets this treatment.',
+      'From “it’s probably dead” to shelf-ready. The bench never loses. {console} restoration, start to finish.',
+      'Nobody wanted this {console}. An hour on the bench says otherwise. Tested, cleaned, ready for a new home.'
+    ],
+    ig: [
+      'This {console} came in rough. Deep clean, fresh thermal paste, full test: good as the day it left the factory. Every unit we sell gets this treatment.',
+      'From “it’s probably dead” to shelf-ready. The bench never loses. {console} restoration, start to finish.',
+      'Nobody wanted this {console}. An hour on the bench says otherwise. Tested, cleaned, ready for a new home.'
+    ]
+  },
+  tradein: {
+    tt: [
+      'Graded live: {console}. Honest condition call, real number, same-day bank transfer once it’s tested. That’s the whole process.',
+      'What’s a {console} actually worth in 2026? We grade it on camera so you can see exactly how we price.',
+      'Boxed, unboxed or faulty: every {console} gets a real offer. No lowballs on marketplace, no waiting rooms.'
+    ],
+    ig: [
+      'Graded live: {console}. Honest condition call, fair offer, same-day bank transfer once it’s tested. That’s the whole process.',
+      'Wondering what your {console} is worth? We grade on camera so you can see exactly how we work.',
+      'Boxed, unboxed or faulty: every {console} gets a genuine offer and a straight answer.'
+    ]
+  },
+  edu: {
+    tt: [
+      'Save this one. It’ll save you money next time you’re buying or selling a console.',
+      'The stuff we check every single day at the bench, in one video. Watch before you buy used.',
+      'Nobody tells you this before you buy a used console. Now you know.'
+    ],
+    ig: [
+      'Save this one. It’ll save you money next time you’re buying or selling a console.',
+      'The stuff we check every single day at the bench, in one video. Watch before you buy used.',
+      'Nobody tells you this before you buy a used console. Now you know.'
+    ]
+  },
+  drop: {
+    tt: [
+      'Fresh stock: {console} tested, warrantied and ready to go. First come, first served.',
+      'New on the shelf today. Every unit through the full 12-point check before it’s listed. Quickest fingers win.',
+      'The drop is live. {console} and friends, all tested, all ready. These do not hang around.'
+    ],
+    ig: [
+      'Fresh stock: {console} tested, warrantied and ready to go. First come, first served.',
+      'New on the shelf today. Every unit through the full 12-point check before it’s listed. Quickest fingers win.',
+      'The drop is live. {console} and friends, all tested, all ready. These do not hang around.'
+    ]
+  },
+  community: {
+    tt: [
+      'Another week at CFY: consoles in, consoles fixed, consoles out the door. Thanks for being here.',
+      'Two brothers, one bench, a lot of consoles. This is what the week actually looks like.',
+      'The bits between the videos. Running a real console shop, day by day.'
+    ],
+    ig: [
+      'Another week at CFY: consoles in, consoles fixed, consoles out the door. Thanks for being here.',
+      'Two brothers, one bench, a lot of consoles. This is what the week actually looks like.',
+      'The bits between the videos. Running a real console shop, day by day.'
+    ]
+  }
+};
+
+var CAPTION_CTAS = {
+  tt: [
+    'Got one gathering dust? Instant quote at consolesforyou.com',
+    'Sell yours the easy way: consolesforyou.com',
+    'Shop, sell or fix: consolesforyou.com'
+  ],
+  ig_restricted: [
+    'Got one gathering dust? DM us the word QUOTE.',
+    'Selling? DM us QUOTE and we’ll sort you a price in minutes.',
+    'Questions? DMs are open.'
+  ],
+  ig_open: [
+    'Got one gathering dust? DM us QUOTE, or hit the link in bio.',
+    'Selling? DM us QUOTE and we’ll sort you a price in minutes.',
+    'Everything’s on the site: link in bio.'
+  ]
+};
+
+var BASE_TAGS = ['#consolesforyou','#gaming','#gamingcommunity','#ukgaming'];
+var PILLAR_TAGS = {
+  pickup:['#carbootfinds','#gamingfinds','#smallbusinessuk'],
+  resto:['#restoration','#satisfying','#consolerepair'],
+  tradein:['#usedconsoles','#gamingdeals','#sellyourconsole'],
+  edu:['#gamingtips','#didyouknow','#usedconsoles'],
+  drop:['#gamingdeals','#ukgamers','#gamersofinstagram'],
+  community:['#smallbusinessuk','#behindthescenes','#gaminglife']
+};
+
+/* longest-match-first console detection */
+var CONSOLE_MAP = [
+  ['xbox series x', ['#xboxseriesx','#xbox']],
+  ['xbox series s', ['#xboxseriess','#xbox']],
+  ['series x',      ['#xboxseriesx','#xbox']],
+  ['series s',      ['#xboxseriess','#xbox']],
+  ['xbox one',      ['#xboxone','#xbox']],
+  ['xbox 360',      ['#xbox360','#xbox','#retrogaming']],
+  ['xbox',          ['#xbox']],
+  ['ps5 pro',       ['#ps5','#playstation']],
+  ['ps5',           ['#ps5','#playstation']],
+  ['playstation 5', ['#ps5','#playstation']],
+  ['ps4',           ['#ps4','#playstation']],
+  ['playstation 4', ['#ps4','#playstation']],
+  ['ps3',           ['#ps3','#playstation','#retrogaming']],
+  ['ps2',           ['#ps2','#playstation','#retrogaming']],
+  ['ps1',           ['#ps1','#playstation','#retrogaming']],
+  ['psp',           ['#psp','#playstation','#retrogaming']],
+  ['ps vita',       ['#psvita','#playstation','#retrogaming']],
+  ['playstation',   ['#playstation']],
+  ['switch 2',      ['#switch2','#nintendo']],
+  ['switch oled',   ['#nintendoswitch','#nintendo']],
+  ['switch lite',   ['#nintendoswitch','#nintendo']],
+  ['switch',        ['#nintendoswitch','#nintendo']],
+  ['game boy advance',['#gameboyadvance','#nintendo','#retrogaming']],
+  ['game boy color',['#gameboycolor','#nintendo','#retrogaming']],
+  ['game boy',      ['#gameboy','#nintendo','#retrogaming']],
+  ['gameboy',       ['#gameboy','#nintendo','#retrogaming']],
+  ['gamecube',      ['#gamecube','#nintendo','#retrogaming']],
+  ['3ds',           ['#nintendo3ds','#nintendo','#retrogaming']],
+  ['wii u',         ['#wiiu','#nintendo','#retrogaming']],
+  ['wii',           ['#wii','#nintendo','#retrogaming']],
+  ['n64',           ['#n64','#nintendo','#retrogaming']],
+  ['snes',          ['#snes','#supernintendo','#retrogaming']],
+  ['super nintendo',['#snes','#supernintendo','#retrogaming']],
+  ['nes',           ['#nes','#nintendo','#retrogaming']],
+  ['nintendo',      ['#nintendo']],
+  ['mega drive',    ['#megadrive','#sega','#retrogaming']],
+  ['dreamcast',     ['#dreamcast','#sega','#retrogaming']],
+  ['saturn',        ['#segasaturn','#sega','#retrogaming']],
+  ['game gear',     ['#gamegear','#sega','#retrogaming']],
+  ['sega',          ['#sega','#retrogaming']],
+  ['steam deck',    ['#steamdeck','#pcgaming']],
+  ['dualsense',     ['#dualsense','#ps5','#playstation']],
+  ['controller',    ['#controller']]
+];
+
+var CONSOLE_SUGGESTIONS = ['PS5','PS5 Pro','PS4','PS4 Pro','PS3','PS2','PS1','Xbox Series X','Xbox Series S','Xbox One','Xbox 360','Switch','Switch 2','Switch OLED','Switch Lite','Game Boy','Game Boy Color','Game Boy Advance','GameCube','N64','SNES','NES','Wii','Wii U','3DS','Mega Drive','Dreamcast','Steam Deck'];
+
+/* beat plans per pillar: story sentences fill the middle beats in order */
+var BEAT_PLANS = {
+  pickup: [
+    {label:'The find',       hint:'Show it exactly as you found it. Wide shot, then in your hands.'},
+    {label:'The story',      hint:'Talk over your journey footage. Keep it moving.'},
+    {label:'Where it’s headed', hint:'Bench shot. “Full test tonight, shop shelf tomorrow.”'}
+  ],
+  resto: [
+    {label:'Arrival state',  hint:'The damage or dirt, up close. Do not rush this bit.'},
+    {label:'The work',       hint:'Montage: opening up, cleaning, the fix. SFX on every beat.'},
+    {label:'The reveal',     hint:'Slow pan of the finished unit, powered on.'}
+  ],
+  tradein: [
+    {label:'The unit',       hint:'Show the console and call its condition honestly.'},
+    {label:'The check',      hint:'Run the checks on camera: ports, drives, sticks, seals.'},
+    {label:'The verdict',    hint:'The grade and outcome. Keep exact numbers for TikTok and YouTube.'}
+  ],
+  edu: [
+    {label:'The problem',    hint:'Show the thing going wrong or the trap people fall into.'},
+    {label:'The fix',        hint:'Demonstrate it step by step. Slow enough to follow.'},
+    {label:'Proof',          hint:'Show it working. Before vs after if you can.'}
+  ],
+  drop: [
+    {label:'What’s landed', hint:'The units on the table. Clean backdrop, good light.'},
+    {label:'Tested + ready', hint:'One line on the checks every unit gets.'},
+    {label:'How to get it',  hint:'Where and how to buy, said to camera.'}
+  ],
+  community: [
+    {label:'The scene',      hint:'Set it up: where you are, what today is.'},
+    {label:'The moment',     hint:'The best bit of the day. Real beats staged.'},
+    {label:'The wrap',       hint:'One honest line to close the day out.'}
+  ]
+};
+
+var CHECKLIST = [
+  'Vertical 9:16, bench wiped, dark backdrop where you can',
+  'Hook text on screen in the first 1.5 seconds',
+  'Burned-in subtitles: most people watch on mute',
+  'Sound EFFECTS, not background music: clicks, taps, air-duster hiss',
+  'Text overlays in brand style: money-green on dark, Anton for headlines',
+  'CFY wordmark end-card, half a second',
+  'CTA said or shown: no CTA, no post',
+  '15 to 40 seconds. Longer only for repair storytimes'
+];
+
+/* words that trip Meta: warn, never block */
+var MONEY_TALK = /(profit|make money|guaranteed|get rich|financial freedom|passive income|side hustle|\bearn(ed|ing|ings)?\b|\bincome\b|turn £?\d+ into)/i;
+
+/* ================= STATE ================= */
+var state = { pillar:null, place:null, hookIdx:{}, capIdx:{tt:0, ig:0}, ctaIdx:0 };
+var LS_DRAFT='cfy_studio_draft', LS_HOOKS='cfy_studio_hooks';
+
+function lsGet(k,f){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+
+/* ================= HELPERS ================= */
+function $(id){ return document.getElementById(id); }
+function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function toast(msg){
+  var t=$('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._h); t._h=setTimeout(function(){ t.classList.remove('show'); },2200);
+}
+function fallbackConsole(c){ return c && c.trim() ? c.trim() : 'this console'; }
+function fillSlots(tpl,d){
+  return tpl
+    .replace(/\{console\}/g, fallbackConsole(d.console))
+    .replace(/\{place\}/g, d.place ? d.place.toLowerCase() : 'morning run')
+    .replace(/\{pricebit\}/g, d.priceTT || '');
+}
+function sentences(text){
+  var m = (text||'').trim().match(/[^.!?\n]+[.!?]*/g);
+  return m ? m.map(function(s){ return s.trim(); }).filter(Boolean) : [];
+}
+/* rotate through a bank without repeats until exhausted */
+function nextFromBank(bankKey, len){
+  var used = lsGet(LS_HOOKS,{});
+  var u = used[bankKey]||[];
+  if(u.length>=len) u=[];
+  var pool=[]; for(var i=0;i<len;i++) if(u.indexOf(i)<0) pool.push(i);
+  var pick = pool[Math.floor(Math.random()*pool.length)];
+  u.push(pick); used[bankKey]=u; lsSet(LS_HOOKS,used);
+  return pick;
+}
+function detectConsoleTags(str){
+  var s=(str||'').toLowerCase(), out=[];
+  for(var i=0;i<CONSOLE_MAP.length;i++){
+    if(s.indexOf(CONSOLE_MAP[i][0])>=0){ out=CONSOLE_MAP[i][1]; break; }
+  }
+  return out;
+}
+function copyText(text, btn){
+  function done(){
+    if(btn){ var old=btn.textContent; btn.textContent='Copied ✓'; btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent=old; btn.classList.remove('copied'); },1600); }
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ legacyCopy(text); done(); });
+  } else { legacyCopy(text); done(); }
+}
+function legacyCopy(text){
+  var ta=document.createElement('textarea'); ta.value=text;
+  ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+/* ================= INIT UI ================= */
+(function init(){
+  /* pillar chips */
+  var pc=$('pillarChips');
+  PILLARS.forEach(function(p){
+    var b=document.createElement('button');
+    b.type='button'; b.className='chip'; b.dataset.id=p.id;
+    b.innerHTML='<div class="cl">'+esc(p.label)+'</div><div class="cs">'+esc(p.sub)+'</div>';
+    b.addEventListener('click',function(){
+      state.pillar=p.id;
+      Array.prototype.forEach.call(pc.children,function(c){ c.classList.toggle('sel', c===b); });
+      saveDraft(); updateGenBtn();
+    });
+    pc.appendChild(b);
+  });
+  /* place chips */
+  var plc=$('placeChips');
+  PLACES.forEach(function(p){
+    var b=document.createElement('button');
+    b.type='button'; b.className='chip'; b.innerHTML='<div class="cl">'+esc(p)+'</div>';
+    b.addEventListener('click',function(){
+      state.place = (state.place===p) ? null : p;
+      Array.prototype.forEach.call(plc.children,function(c){ c.classList.toggle('sel', c.textContent.trim()===state.place); });
+      saveDraft();
+    });
+    plc.appendChild(b);
+  });
+  /* console datalist */
+  var dl=$('consoleList');
+  CONSOLE_SUGGESTIONS.forEach(function(c){ var o=document.createElement('option'); o.value=c; dl.appendChild(o); });
+
+  ['fStory','fConsole','fPrice','fDetail'].forEach(function(id){
+    $(id).addEventListener('input',function(){ saveDraft(); updateGenBtn(); });
+  });
+
+  $('doorFilmed').addEventListener('click',function(){ showFlow(); });
+  document.querySelectorAll('[data-soon]').forEach(function(b){
+    b.addEventListener('click',function(){ toast('Coming in the next update'); });
+  });
+  $('backBtn').addEventListener('click',function(){ showHome(); });
+  $('genBtn').addEventListener('click', generate);
+
+  restoreDraft();
+
+  /* stagger home cards in */
+  var pops=document.querySelectorAll('#view-home .pop');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    pops.forEach(function(el,i){ el.style.transitionDelay=(i*60)+'ms'; el.setAttribute('data-in',''); });
+  });});
+})();
+
+function showFlow(){
+  $('view-home').classList.remove('active');
+  $('view-flow').classList.add('active');
+  document.body.classList.add('in-flow');
+  window.scrollTo(0,0);
+  updateGenBtn();
+}
+function showHome(){
+  $('view-flow').classList.remove('active');
+  $('view-home').classList.add('active');
+  document.body.classList.remove('in-flow');
+  $('results').innerHTML='';
+  window.scrollTo(0,0);
+}
+function updateGenBtn(){
+  $('genBtn').disabled = !(state.pillar && $('fStory').value.trim().length>=10);
+}
+function saveDraft(){
+  lsSet(LS_DRAFT,{ pillar:state.pillar, place:state.place,
+    story:$('fStory').value, console:$('fConsole').value,
+    price:$('fPrice').value, detail:$('fDetail').value });
+}
+function restoreDraft(){
+  var d=lsGet(LS_DRAFT,null); if(!d) return;
+  $('fStory').value=d.story||''; $('fConsole').value=d.console||'';
+  $('fPrice').value=d.price||''; $('fDetail').value=d.detail||'';
+  if(d.pillar){ state.pillar=d.pillar;
+    Array.prototype.forEach.call($('pillarChips').children,function(c){ c.classList.toggle('sel', c.dataset.id===d.pillar); });
+  }
+  if(d.place){ state.place=d.place;
+    Array.prototype.forEach.call($('placeChips').children,function(c){ c.classList.toggle('sel', c.textContent.trim()===d.place); });
+  }
+}
+
+/* ================= GENERATE ================= */
+function currentInputs(){
+  var price = $('fPrice').value.trim().replace(/[^0-9.]/g,'');
+  return {
+    pillar: state.pillar,
+    story: $('fStory').value.trim(),
+    console: $('fConsole').value.trim(),
+    place: state.place,
+    detail: $('fDetail').value.trim(),
+    price: price,
+    /* price only ever surfaces in TikTok caption, and only for pickups */
+    priceTT: (price && state.pillar==='pickup') ? ' for £'+price : ''
+  };
+}
+
+function generate(){
+  var d=currentInputs();
+  state.hookIdx[d.pillar]=nextFromBank('hook_'+d.pillar, HOOKS[d.pillar].length);
+  state.capIdx={ tt:Math.floor(Math.random()*CAPTIONS[d.pillar].tt.length),
+                 ig:Math.floor(Math.random()*CAPTIONS[d.pillar].ig.length) };
+  state.ctaIdx=Math.floor(Math.random()*SPOKEN_CTAS.length);
+  renderResults(d);
+}
+
+function buildScript(d){
+  var hook = fillSlots(HOOKS[d.pillar][state.hookIdx[d.pillar]], d);
+  var plan = BEAT_PLANS[d.pillar];
+  var sents = sentences(d.story);
+  var mids = plan.length;
+  /* distribute sentences across the middle beats */
+  var buckets=[]; for(var i=0;i<mids;i++) buckets.push([]);
+  sents.forEach(function(s,i){ buckets[Math.min(Math.floor(i*mids/Math.max(sents.length,1)),mids-1)].push(s); });
+  var beats=[{t:'0:00',label:'Hook',text:hook,hint:'Text overlay on your strongest frame. Green on dark, Anton.'}];
+  var times=['0:03','0:10','0:20'];
+  plan.forEach(function(b,i){
+    var txt = buckets[i].join(' ');
+    if(i===mids-1 && d.detail){ txt = txt ? txt+' '+d.detail : d.detail; }
+    beats.push({t:times[i]||'', label:b.label, text: txt || '(your footage carries this beat)', hint:b.hint});
+  });
+  var cta=SPOKEN_CTAS[state.ctaIdx];
+  beats.push({t:'end',label:'CTA',text:'TikTok / YouTube: “'+cta.tt+'”\nInstagram: “'+cta.ig+'”',hint:'Say it to camera or overlay it. Then the CFY end-card.'});
+  return beats;
+}
+
+function buildCaption(plat,d){
+  var tpl=CAPTIONS[d.pillar][plat][state.capIdx[plat]];
+  var body=fillSlots(tpl,d);
+  var ctaBank = plat==='tt' ? CAPTION_CTAS.tt : (igRestricted ? CAPTION_CTAS.ig_restricted : CAPTION_CTAS.ig_open);
+  var cta=ctaBank[state.ctaIdx % ctaBank.length];
+  var tags=buildTags(d);
+  return body+'\n\n'+cta+'\n\n'+tags.join(' ');
+}
+
+function buildTags(d){
+  var tags=BASE_TAGS.slice(0,3)
+    .concat(PILLAR_TAGS[d.pillar].slice(0,3))
+    .concat(detectConsoleTags(d.console+' '+d.story).slice(0,3));
+  var seen={}, out=[];
+  tags.forEach(function(t){ if(!seen[t]){ seen[t]=1; out.push(t); } });
+  return out.slice(0,9);
+}
+
+function renderResults(d){
+  var r=$('results'); r.innerHTML='';
+  var moneyTalk=MONEY_TALK.test(d.story+' '+d.detail);
+
+  /* ---- script card ---- */
+  var beats=buildScript(d);
+  var card=document.createElement('div'); card.className='card pop';
+  var h='<div class="chd"><h3>Script <span class="tag">say this over your clips</span></h3>'+
+        '<button class="sbtn" id="reHook" type="button">Another hook</button></div>';
+  beats.forEach(function(b){
+    h+='<div class="beat"><div class="bt">'+esc(b.t)+'</div><div>'+
+       '<div class="bl">'+esc(b.label)+'</div>'+
+       '<div class="bx">'+esc(b.text).replace(/\n/g,'<br>')+'</div>'+
+       '<div class="bh">'+esc(b.hint)+'</div></div></div>';
+  });
+  if(moneyTalk){
+    h+='<div class="warnchip"><span>⚠</span><span>Money talk spotted in your story. Fine on TikTok and YouTube as “what we paid, what it sells for” shop honesty. Cut every number from the Instagram edit and caption: Meta is strict with the shop right now.</span></div>';
+  }
+  card.innerHTML=h; r.appendChild(card);
+  card.querySelector('#reHook').addEventListener('click',function(){
+    state.hookIdx[d.pillar]=nextFromBank('hook_'+d.pillar,HOOKS[d.pillar].length);
+    renderResults(currentInputs());
+  });
+
+  /* ---- captions card ---- */
+  var cap=document.createElement('div'); cap.className='card pop';
+  var ttCap=buildCaption('tt',d), igCap=buildCaption('ig',d);
+  cap.innerHTML=
+    '<div class="chd"><h3>Captions</h3><button class="sbtn" id="reCap" type="button">Another take</button></div>'+
+    '<div class="capblock"><div class="cap-plat">TikTok · YouTube</div>'+
+    '<div class="captext">'+esc(ttCap)+'</div>'+
+    '<div class="btnrow"><button class="sbtn" data-copy="tt" type="button">Copy caption</button></div></div>'+
+    '<div class="capblock"><div class="cap-plat">Instagram '+(igRestricted?'<span class="note">· no links until 6 Aug, CTA is DM QUOTE</span>':'')+'</div>'+
+    '<div class="captext">'+esc(igCap)+'</div>'+
+    '<div class="btnrow"><button class="sbtn" data-copy="ig" type="button">Copy caption</button></div></div>';
+  r.appendChild(cap);
+  cap.querySelector('[data-copy=tt]').addEventListener('click',function(){ copyText(ttCap,this); });
+  cap.querySelector('[data-copy=ig]').addEventListener('click',function(){ copyText(igCap,this); });
+  cap.querySelector('#reCap').addEventListener('click',function(){
+    state.capIdx={ tt:(state.capIdx.tt+1)%CAPTIONS[d.pillar].tt.length,
+                   ig:(state.capIdx.ig+1)%CAPTIONS[d.pillar].ig.length };
+    state.ctaIdx=(state.ctaIdx+1)%SPOKEN_CTAS.length;
+    renderResults(currentInputs());
+  });
+
+  /* ---- hashtags card ---- */
+  var tags=buildTags(d);
+  var tg=document.createElement('div'); tg.className='card pop';
+  tg.innerHTML='<div class="chd"><h3>Hashtags</h3><button class="sbtn" id="cpTags" type="button">Copy all</button></div>'+
+    '<div class="tagwrap">'+tags.map(function(t){ return '<span class="htag">'+esc(t)+'</span>'; }).join('')+'</div>'+
+    '<div class="hint">Already added to both captions above. Keep it under 10: it reads cleaner and works better.</div>';
+  r.appendChild(tg);
+  tg.querySelector('#cpTags').addEventListener('click',function(){ copyText(tags.join(' '),this); });
+
+  /* ---- checklist card ---- */
+  var ck=document.createElement('div'); ck.className='card pop';
+  var ch='<div class="chd"><h3>Before you post</h3></div>';
+  CHECKLIST.forEach(function(c,i){
+    ch+='<label class="check"><input type="checkbox"><span>'+esc(c)+'</span></label>';
+  });
+  ck.innerHTML=ch; r.appendChild(ck);
+
+  /* stagger in */
+  var cards=r.querySelectorAll('.pop');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    cards.forEach(function(el,i){ el.style.transitionDelay=(i*55)+'ms'; el.setAttribute('data-in',''); });
+  });});
+
+  /* scroll to results */
+  var top=r.getBoundingClientRect().top+window.pageYOffset-70;
+  window.scrollTo({top:top,behavior:(matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
+}
+</script>
+</body>
+</html>
