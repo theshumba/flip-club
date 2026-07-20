@@ -216,6 +216,30 @@ body.in-flow .genbar{display:block}
 .check span{font-size:14.5px;color:var(--muted)}
 .check input:checked ~ span{color:var(--ink)}
 
+/* ---------- extras (phase 4) ---------- */
+.check span b{color:var(--ink);font-weight:700}
+.streakrow{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.streaknum{font-family:var(--display);font-size:54px;line-height:1;color:var(--green);min-width:60px}
+.streakmeta{flex:1;min-width:120px}
+.streakmeta .sm1{font-weight:700;font-size:15px}
+.streakmeta .sm2{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--muted-2);margin-top:3px}
+.reply{
+  display:block;width:100%;text-align:left;cursor:pointer;background:none;border:none;
+  border-top:1px solid var(--line);padding:11px 0;color:var(--ink);font-family:var(--body);
+  transition:opacity 140ms var(--ease);
+}
+.reply:first-of-type{border-top:none}
+.reply:active{opacity:.6}
+.reply .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--muted-2);text-transform:uppercase;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.reply .rc{flex-shrink:0;letter-spacing:1px}
+.reply.copied .rc{color:var(--green)}
+.reply .rt{font-size:14.5px;line-height:1.5}
+.trend{padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted);line-height:1.5}
+.trend:first-of-type{border-top:none}
+.trend b{color:var(--ink)}
+.trend .tk2{font-family:var(--mono);font-size:9.5px;letter-spacing:1px;color:var(--muted-2);border:1px solid var(--line);border-radius:4px;padding:1px 5px;margin-left:6px;white-space:nowrap}
+a.sbtn{display:inline-block;text-decoration:none}
+
 .toast{
   position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:60;
   transform:translateX(-50%) translateY(8px);opacity:0;pointer-events:none;
@@ -261,6 +285,47 @@ body.in-flow .genbar{display:block}
       <div class="t">Give me an idea to shoot</div>
       <div class="d">Mini-doc scripts: console history and retro deep dives. Script, shot list, captions, thumbnail.</div>
     </button>
+
+    <!-- ============ EXTRAS (phase 4) ============ -->
+    <div class="step-label" style="margin-top:36px">Extras</div>
+
+    <div class="card pop" id="streakCard">
+      <div class="chd"><h3>Posting streak</h3><button class="sbtn" id="streakBtn" type="button">I posted today</button></div>
+      <div class="streakrow">
+        <div class="streaknum" id="streakNum">0</div>
+        <div class="streakmeta">
+          <div class="sm1" id="streakLine">days in a row</div>
+          <div class="sm2" id="streakBest">BEST: 0</div>
+        </div>
+      </div>
+      <div class="hint" style="margin-top:10px">Tap the button every day you post anywhere. Miss a day and it starts over.</div>
+    </div>
+
+    <div class="card pop">
+      <div class="chd"><h3>Quick replies <span class="tag">tap to copy</span></h3></div>
+      <div id="replyRows"></div>
+      <div class="hint" style="margin-top:10px">Safe on every platform: no links, no money talk. Tweak the details before you send.</div>
+    </div>
+
+    <div class="card pop">
+      <div class="chd"><h3>One pickup, three posts</h3></div>
+      <div class="hint" style="margin-bottom:6px">Every console that comes in is three videos, not one. Film these while you work, then door 01 turns each clip into a post.</div>
+      <label class="check"><input type="checkbox"><span><b>The arrival.</b> Film it exactly as it came in, dirt and all. Post it as a pickup.</span></label>
+      <label class="check"><input type="checkbox"><span><b>The work.</b> The clean, the fix, the testing on the bench. Post it as a restoration.</span></label>
+      <label class="check"><input type="checkbox"><span><b>The reveal.</b> Powered on, spotless, on the shelf. Post it as a shop drop.</span></label>
+    </div>
+
+    <div class="card pop">
+      <div class="chd"><h3>What&rsquo;s working <span class="tag">checked July 2026</span></h3></div>
+      <div class="trend"><b>Before and after</b> with one hard cut on the beat. Restorations are made for this.</div>
+      <div class="trend"><b>Rapid-fire tier lists.</b> Rate every console you can trade in, 60 seconds, no pauses.</div>
+      <div class="trend"><b>&ldquo;Guess what we paid.&rdquo;</b> Hold the reveal to the very last second.<span class="tk2">TIKTOK &middot; YT ONLY</span></div>
+      <div class="trend"><b>POV text over b-roll.</b> &ldquo;POV: you run a console shop&rdquo; over ordinary bench footage.</div>
+      <div class="trend"><b>ASMR cleaning.</b> No talking, sound effects only, let the clean carry it.</div>
+      <div class="trend" style="border-top:1px solid var(--line-bright)"><b>Instagram tip:</b> in Reels, an arrow next to the audio name means it&rsquo;s trending right now. Tap it, save it, and run it quietly under your sound effects while it&rsquo;s still climbing.</div>
+      <div class="btnrow" style="margin-top:14px"><a class="sbtn" href="https://ads.tiktok.com/business/creativecenter/pc/en" target="_blank" rel="noopener">Open TikTok Creative Center &#8599;</a></div>
+      <div class="hint" style="margin-top:8px">Live trending hashtags, songs and videos, updated daily. The list above is the formats that keep working either way.</div>
+    </div>
   </section>
 
   <!-- ============ FILMED FLOW ============ -->
@@ -629,6 +694,18 @@ var CHECKLIST = [
   '15 to 40 seconds. Longer only for repair storytimes'
 ];
 
+/* quick replies for DMs and comments: link-free so they are safe on every platform */
+var REPLIES=[
+  {k:'“What will you give me for it?”', t:'Send over a photo, the model and whether it’s boxed, and we’ll have a price for you in minutes.'},
+  {k:'“Is it still available?”', t:'Still available. Tested, warrantied and ready to go. Want us to put your name on it?'},
+  {k:'“Do you buy broken consoles?”', t:'We do. Faulty, dusty or completely dead, send a photo and we’ll make you an honest offer.'},
+  {k:'“Can you do it any cheaper?”', t:'Every unit goes through the full 12-point check and comes with a warranty. That’s what the price buys, and it’s a fair one.'},
+  {k:'“Can you fix mine?”', t:'Most likely. Tell us what it’s doing, or not doing, and we’ll tell you straight if it’s worth fixing.'},
+  {k:'“Do you post?”', t:'We do, tracked and packed properly. Collection around Chesham works too, whichever suits.'},
+  {k:'“Can I trade mine in?”', t:'Course. We grade yours in front of you, agree a value, and you just pay the difference on the upgrade.'},
+  {k:'Someone leaves a nice comment', t:'Appreciate that. New one off the bench most days, stick around.'}
+];
+
 /* words that trip Meta: warn, never block */
 var MONEY_TALK = /(profit|make money|guaranteed|get rich|financial freedom|passive income|side hustle|\bearn(ed|ing|ings)?\b|\bincome\b|turn £?\d+ into)/i;
 
@@ -849,7 +926,7 @@ var TOPICS = [
 /* ================= STATE ================= */
 var state = { pillar:null, place:null, hookIdx:{}, capIdx:{tt:0, ig:0}, ctaIdx:0 };
 var caroState = { topicIdx:null, ctaIdx:0 };
-var LS_DRAFT='cfy_studio_draft', LS_HOOKS='cfy_studio_hooks';
+var LS_DRAFT='cfy_studio_draft', LS_HOOKS='cfy_studio_hooks', LS_STREAK='cfy_studio_streak';
 
 function lsGet(k,f){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
@@ -1626,6 +1703,53 @@ function staggerIn(root){
     pops.forEach(function(el,i){ el.style.transitionDelay=(Math.min(i,8)*45)+'ms'; el.setAttribute('data-in',''); });
   });});
 }
+
+/* ================= EXTRAS (phase 4) ================= */
+function dayStr(d){ return d.getFullYear()+'-'+two(d.getMonth()+1)+'-'+two(d.getDate()); }
+function streakInfo(){
+  var s=lsGet(LS_STREAK,{last:null,streak:0,best:0});
+  var y=new Date(); y.setDate(y.getDate()-1);
+  var today=dayStr(new Date());
+  var alive = s.last===today || s.last===dayStr(y);
+  return { s:s, today:today, loggedToday:s.last===today, current: alive ? s.streak : 0 };
+}
+function renderStreak(){
+  var i=streakInfo();
+  $('streakNum').textContent=i.current;
+  $('streakLine').textContent = i.current===1 ? 'day in a row' : 'days in a row';
+  $('streakBest').textContent = 'BEST: '+(i.s.best||0);
+  var b=$('streakBtn');
+  b.textContent = i.loggedToday ? 'Logged ✓' : 'I posted today';
+  b.classList.toggle('copied', i.loggedToday);
+}
+(function initExtras(){
+  $('streakBtn').addEventListener('click',function(){
+    var i=streakInfo();
+    if(i.loggedToday){ toast('Already logged for today'); return; }
+    var s=i.s;
+    s.streak=i.current+1; s.last=i.today;
+    if(s.streak>(s.best||0)) s.best=s.streak;
+    lsSet(LS_STREAK,s);
+    renderStreak();
+    toast(s.streak===1 ? 'Day one. Keep it going.' : s.streak+' days in a row');
+  });
+  renderStreak();
+
+  var rr=$('replyRows');
+  REPLIES.forEach(function(rp){
+    var b=document.createElement('button');
+    b.type='button'; b.className='reply';
+    b.innerHTML='<div class="rk"><span>'+esc(rp.k)+'</span><span class="rc">COPY</span></div>'+
+      '<div class="rt">'+esc(rp.t)+'</div>';
+    b.addEventListener('click',function(){
+      copyText(rp.t,null);
+      b.classList.add('copied'); b.querySelector('.rc').textContent='COPIED ✓';
+      clearTimeout(b._h); b._h=setTimeout(function(){ b.classList.remove('copied'); b.querySelector('.rc').textContent='COPY'; },1600);
+      toast('Reply copied');
+    });
+    rr.appendChild(b);
+  });
+})();
 </script>
 </body>
 </html>
