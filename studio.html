@@ -58,7 +58,7 @@ header{
 }
 #backBtn:active{transform:scale(0.97)}
 @media (hover:hover) and (pointer:fine){#backBtn:hover{border-color:var(--line-bright);color:var(--ink)}}
-body.in-flow #backBtn{display:block}
+body.in-flow #backBtn,body.in-carousel #backBtn{display:block}
 
 /* ---------- views ---------- */
 main{max-width:var(--maxw);margin:0 auto;padding:26px 18px 120px}
@@ -174,6 +174,16 @@ body.in-flow .genbar{display:block}
 .tagwrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .htag{font-family:var(--mono);font-size:12.5px;color:var(--muted);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
 
+/* ---------- carousel ---------- */
+.topicbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.topicbar .tk{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase}
+.topicbar .tt2{font-weight:800;font-size:17px;margin-top:4px;line-height:1.3}
+.topicbar .sbtn{flex-shrink:0}
+.slides{display:grid;gap:14px;margin-bottom:16px}
+.slide{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg-2)}
+.slide img{display:block;width:100%;height:auto}
+.slide .sv{position:absolute;right:10px;bottom:10px;background:rgba(10,11,9,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
 .btnrow{display:flex;gap:10px;flex-wrap:wrap}
 .sbtn{
   background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
@@ -224,9 +234,9 @@ body.in-flow .genbar{display:block}
       <div class="d">Pickup, repair, restoration, drop: tell it like you'd tell a mate and get a script, captions and hashtags.</div>
     </button>
 
-    <button class="door soon pop" data-soon type="button">
+    <button class="door pop" id="doorCarousel" type="button">
       <span class="num">02</span>
-      <div class="t">Need a post, nothing filmed <span class="chip-soon">SOON</span></div>
+      <div class="t">Need a post, nothing filmed</div>
       <div class="d">One tap. A finished CFY carousel with caption and hashtags, ready to upload.</div>
     </button>
 
@@ -268,6 +278,13 @@ body.in-flow .genbar{display:block}
     </div>
 
     <div id="results" style="margin-top:34px"></div>
+  </section>
+
+  <!-- ============ CAROUSEL FLOW ============ -->
+  <section id="view-carousel" class="view">
+    <h2>Need a post, nothing filmed</h2>
+    <p class="sub" style="margin-bottom:0">A ready-made CFY carousel. Save the slides, copy the caption, upload in order.</p>
+    <div id="caroResults" style="margin-top:26px"></div>
   </section>
 </main>
 
@@ -592,8 +609,223 @@ var CHECKLIST = [
 /* words that trip Meta: warn, never block */
 var MONEY_TALK = /(profit|make money|guaranteed|get rich|financial freedom|passive income|side hustle|\bearn(ed|ing|ings)?\b|\bincome\b|turn £?\d+ into)/i;
 
+/* ============ CAROUSEL TOPIC BANK (all public-safe, Meta-safe) ============ */
+var TOPICS = [
+  {id:'used-checks', pillar:'edu', kicker:'Buyer’s guide', title:'Check these 3 things before buying any used console',
+   cap:'Three checks that save you from a bad deal on any used console. Save this for your next one.',
+   slides:[
+    {h:'Ports and leads', b:'Wiggle the HDMI and power leads while it’s running. Flickering or cut-outs mean a worn port, and that’s a repair, not a haggle.'},
+    {h:'Listen to it', b:'Run a game for ten minutes. Healthy consoles hum. Grinding, clicking or jet-engine fans are trouble you’ll pay for later.'},
+    {h:'Test the sticks', b:'Open a menu and let go of the pad. If the cursor creeps on its own, that’s drift. Ask for money off or walk away.'}
+   ]},
+  {id:'fake-pads', pillar:'edu', kicker:'Buyer’s guide', title:'How to spot a fake controller in 10 seconds',
+   cap:'Fake pads are everywhere on marketplace. Here’s how to catch one before it costs you.',
+   slides:[
+    {h:'The weight', b:'Fakes feel light and hollow. A real pad has heft, tight seams and nothing that creaks when you squeeze it.'},
+    {h:'The details', b:'Mushy buttons, off-colour logos, fuzzy printing on the box. Real controllers get the details right every time.'},
+    {h:'The price', b:'A brand-new official pad at half price is not a bargain. It’s a fake with your name on it.'}
+   ]},
+  {id:'ps5-jet', pillar:'edu', kicker:'From the bench', title:'Why your PS5 sounds like a jet engine',
+   cap:'That roar isn’t normal, and it’s fixable. Here’s what’s actually happening inside.',
+   slides:[
+    {h:'It’s dust', b:'A blanket of dust sits over the intakes and the cooler, so the fan spins flat out just to keep up.'},
+    {h:'It’s old paste', b:'Thermal paste dries out over the years. Dry paste means heat, and heat means noise.'},
+    {h:'The fix', b:'A deep clean and fresh paste takes it back to a whisper. It’s a bench job, not a bin job.'}
+   ]},
+  {id:'console-killers', pillar:'edu', kicker:'From the bench', title:'The 3 things that actually kill consoles',
+   cap:'Most consoles don’t die of old age. They die of these three, and all three are avoidable.',
+   slides:[
+    {h:'Heat', b:'Sealed TV cabinets cook consoles alive. Give it open air and clear vents and it’ll last years longer.'},
+    {h:'Dust', b:'Dust insulates the chips and chokes the fans. A monthly once-over with a soft brush keeps it breathing.'},
+    {h:'Spills', b:'Sugary drinks and electronics never end well. Keep drinks off the setup, full stop.'}
+   ]},
+  {id:'drift', pillar:'edu', kicker:'From the bench', title:'Controller drift, explained properly',
+   cap:'Drift ruins games, but it doesn’t always mean a new pad. Here’s the honest version.',
+   slides:[
+    {h:'What it is', b:'The stick sensor wears and starts reporting movement that isn’t happening. That’s the creep you’re seeing.'},
+    {h:'Try this first', b:'Raise the deadzone in settings and give the stick base a careful blast of contact cleaner.'},
+    {h:'If it persists', b:'A stick module swap costs a lot less than a new pad, and it’s a routine fix on our bench.'}
+   ]},
+  {id:'wipe-data', pillar:'edu', kicker:'Seller’s guide', title:'Wipe your console properly before you sell it',
+   cap:'Your accounts, cards and saves are on that console. Do this before it leaves the house.',
+   slides:[
+    {h:'PlayStation', b:'Settings, System, Reset Options, then full Reset. The quick option leaves your data behind, take the long one.'},
+    {h:'Xbox', b:'Settings, System, Console info, Reset. Choose remove everything, not the keep-games option.'},
+    {h:'Switch', b:'Deregister your account first, then System Settings, Formatting, initialise the console.'}
+   ]},
+  {id:'box-matters', pillar:'edu', kicker:'Seller’s guide', title:'Why the box is worth keeping',
+   cap:'That box in the loft is doing more work than you think. Don’t bin it, and don’t bin the inserts either.',
+   slides:[
+    {h:'It sells higher', b:'A boxed console is worth noticeably more than the same console loose. It always has been.'},
+    {h:'It protects', b:'Original foam and card survive the loft, the move and the post far better than a bag ever will.'},
+    {h:'Keep the lot', b:'Manuals, inserts, even the cable ties. Complete-in-box is the magic phrase for collectors.'}
+   ]},
+  {id:'scam-signs', pillar:'edu', kicker:'Buyer’s guide', title:'3 signs a used console listing is a scam',
+   cap:'Marketplace has bargains and it has traps. These three tells catch most of the traps.',
+   slides:[
+    {h:'Too cheap', b:'Way under market price is bait, not luck. Nobody accidentally sells a PS5 for pocket change.'},
+    {h:'No proof', b:'Stock photos only, and excuses when you ask for a video of it running. Real sellers show the console.'},
+    {h:'The rush', b:'Pushing you to pay by bank transfer to “hold it” before you’ve seen it. That money is gone.'}
+   ]},
+  {id:'no-signal', pillar:'edu', kicker:'From the bench', title:'Console says no signal? Try this first',
+   cap:'Half the “dead” consoles we see aren’t dead. Run through this before you panic.',
+   slides:[
+    {h:'Swap the cable', b:'HDMI leads fail quietly and constantly. A known-good cable clears half of these cases on the spot.'},
+    {h:'Check the input', b:'Right port, right source on the telly. It sounds daft until it fixes it.'},
+    {h:'Look in the port', b:'A torch in the HDMI port. Bent or blackened pins mean a port repair, which is routine surgery, not a death sentence.'}
+   ]},
+  {id:'myths', pillar:'edu', kicker:'Straight answers', title:'3 console myths, busted',
+   cap:'Gaming folklore costs people real money. Three myths, three straight answers.',
+   slides:[
+    {h:'“Used is worn out”', b:'A properly tested used console runs exactly like a new one. The testing is the part that matters.'},
+    {h:'“Rice fixes spills”', b:'Rice buys corrosion time, it doesn’t dry anything. A spilled-on console needs opening and cleaning, fast.'},
+    {h:'“Dear cables are better”', b:'HDMI is digital. The picture works or it doesn’t. The £40 cable is the same picture as the £5 one.'}
+   ]},
+  {id:'setup-used', pillar:'edu', kicker:'Buyer’s guide', title:'Set up a used console like it’s new',
+   cap:'Bought used? Ten minutes of setup makes it feel box-fresh. Do these in order.',
+   slides:[
+    {h:'Update first', b:'System update, then controller firmware, before you touch a game. Half of all glitches vanish right here.'},
+    {h:'Make it yours', b:'Fresh accounts, your settings, your privacy options. It should hold no trace of the last owner.'},
+    {h:'Re-pair the pads', b:'Pair every controller from scratch once. It stops the random disconnects later.'}
+   ]},
+  {id:'dust-inside', pillar:'edu', kicker:'From the bench', title:'What dust actually does inside a console',
+   cap:'Dust is the slowest console killer there is. Here’s what it’s doing in there right now.',
+   slides:[
+    {h:'The blanket', b:'It settles on the chips and traps heat exactly where you don’t want it.'},
+    {h:'The choke', b:'Fans work harder to pull air through clogged vents. Harder means louder, and louder means dying sooner.'},
+    {h:'The habit', b:'Vents brushed monthly, a proper internal clean once a year. That’s the whole routine.'}
+   ]},
+  {id:'trade-in-works', pillar:'tradein', kicker:'Trade-in', title:'What actually happens when you trade in',
+   cap:'Never traded a console in? This is the whole process, start to finish.',
+   slides:[
+    {h:'The check', b:'Every console goes through a 12-point test on the bench. Ports, drive, pads, heat, the lot.'},
+    {h:'The grade', b:'You get an honest condition call and a real offer. No games, no mystery deductions.'},
+    {h:'The payment', b:'Offer accepted means same-day bank transfer. Console out of the drawer, money in the bank.'}
+   ]},
+  {id:'twelve-point', pillar:'tradein', kicker:'Trade-in', title:'The 12-point check, explained',
+   cap:'Every console we buy or sell goes through the same 12-point check. Here’s what it covers.',
+   slides:[
+    {h:'Outside', b:'Every port tested, seals checked, cosmetic condition graded honestly, stickers and serials verified.'},
+    {h:'Inside', b:'Drive read tests, fan health, temperatures under load. The stuff you can’t see from a photo.'},
+    {h:'In hand', b:'Every stick, button and trigger on every pad. If it ships with us, it’s been pressed.'}
+   ]},
+  {id:'boxed-retro', pillar:'tradein', kicker:'Retro corner', title:'Boxed retro in the loft? Read this first',
+   cap:'That boxed PS2 or Game Boy in the loft is having a moment. A few things to know before you do anything.',
+   slides:[
+    {h:'The moment', b:'Collectors are paying serious attention to boxed retro right now. PS1, PS2 and Nintendo especially.'},
+    {h:'Condition is king', b:'Box, inserts and manuals multiply what it’s worth. Complete beats mint-but-loose.'},
+    {h:'Don’t scrub it', b:'Harsh cleaning wrecks labels and finishes. Bring it as it is and let the bench handle it.'}
+   ]},
+  {id:'faulty-value', pillar:'tradein', kicker:'Trade-in', title:'Faulty console? It still has value',
+   cap:'Broken doesn’t mean worthless. We buy faulty consoles every week, and here’s why.',
+   slides:[
+    {h:'We buy faulty', b:'Dead drives, HDMI faults, drifting pads, no power at all. All of it is welcome on the bench.'},
+    {h:'Because it’s fixable', b:'Most faults are routine repairs to us. Your dead console is our Tuesday.'},
+    {h:'Graded straight', b:'You’re told exactly what’s wrong and what it’s worth as it stands. No lowballs, no theatre.'}
+   ]},
+  {id:'part-exchange', pillar:'tradein', kicker:'Trade-in', title:'Part-exchange, explained in 3 slides',
+   cap:'Old console plus a top-up equals next-gen. Part-exchange in plain English.',
+   slides:[
+    {h:'The idea', b:'Your old console is money off the next one. Simple as that.'},
+    {h:'The process', b:'We grade it in front of you, agree the value, and you only pay the difference.'},
+    {h:'One trip', b:'Walk in with the old one, walk out with the upgrade. Done in one visit.'}
+   ]},
+  {id:'raise-value', pillar:'tradein', kicker:'Seller’s guide', title:'3 things that raise your trade-in offer',
+   cap:'Five minutes of prep gets you a better offer on any console. Here’s the prep.',
+   slides:[
+    {h:'Find the box', b:'Box and inserts lift every offer. It’s worth the trip to the loft.'},
+    {h:'Bring everything', b:'Official pads, original leads, all the bits it came with. Complete kit grades higher.'},
+    {h:'Reset it first', b:'Data wiped and accounts signed out means it can be tested and paid for on the spot.'}
+   ]},
+  {id:'tested-warrantied', pillar:'drop', kicker:'Shop talk', title:'What “tested and warrantied” actually means',
+   cap:'Every console on our shelf comes with those two words. This is what they mean in practice.',
+   slides:[
+    {h:'Tested', b:'The full 12-point check before it’s ever listed. If it’s on the shelf, it passed.'},
+    {h:'Warrantied', b:'Used doesn’t mean unprotected. Every unit is backed after it leaves, in writing.'},
+    {h:'Why it matters', b:'Marketplace is a coin flip with a stranger. A shop answers when you knock.'}
+   ]},
+  {id:'new-vs-used', pillar:'drop', kicker:'Straight answers', title:'New vs used: the honest comparison',
+   cap:'Should you buy new or used? The honest answer depends on one thing: testing.',
+   slides:[
+    {h:'The gap', b:'A tested used console plays the same games for a lot less money.'},
+    {h:'The catch', b:'That’s only true when it’s genuinely tested. Untested used is just a gamble with a discount.'},
+    {h:'The rule', b:'Buy new for launch-day hardware. Buy tested used for everything else and keep the difference.'}
+   ]},
+  {id:'shop-vs-stranger', pillar:'drop', kicker:'Shop talk', title:'Why buy from a shop and not a stranger',
+   cap:'Marketplace can be great, until it isn’t. What a shop gets you that a stranger can’t.',
+   slides:[
+    {h:'It’s tested', b:'The console worked before it was listed, and there’s a record of the checks.'},
+    {h:'It’s backed', b:'Warranty and returns exist here. A ghosted chat thread is not a returns policy.'},
+    {h:'It’s human', b:'A counter to come back to, real people who answer, and a reputation that matters to us.'}
+   ]},
+  {id:'shelf-journey', pillar:'drop', kicker:'Shop talk', title:'How a console earns its place on our shelf',
+   cap:'Nothing goes straight from a car boot to the shelf. This is the journey every unit takes.',
+   slides:[
+    {h:'It lands', b:'Logged and photographed exactly as it arrived, warts and all.'},
+    {h:'The bench', b:'Deep clean, any repairs, fresh paste where needed, then testing under load.'},
+    {h:'The shelf', b:'Graded, warrantied and priced fairly. Only then does it get listed.'}
+   ]},
+  {id:'deep-clean', pillar:'resto', kicker:'From the bench', title:'What a proper deep clean involves',
+   cap:'A deep clean is not a wipe-down. This is what every restoration actually gets.',
+   slides:[
+    {h:'Full teardown', b:'Shell off, boards out, every panel and port accessible. No shortcuts.'},
+    {h:'The clean', b:'Dust out of every corner, contacts cleaned, fans stripped, fresh thermal paste on the chip.'},
+    {h:'The proof', b:'Rebuilt, then tested under load for heat and noise. It leaves the bench better than it arrived.'}
+   ]},
+  {id:'not-dead', pillar:'resto', kicker:'From the bench', title:'“Dead” consoles that were never dead',
+   cap:'A lot of consoles get binned for faults that cost pennies. The three we see most.',
+   slides:[
+    {h:'The £5 lead', b:'A huge share of “broken” consoles are just a failed HDMI or power lead. Try the cable first.'},
+    {h:'The dusty fan', b:'Thermal shutdown looks exactly like death. A choked cooler turns a console off mid-game.'},
+    {h:'Real surgery', b:'HDMI ports and disc drives can genuinely fail. Both are repairable, and both cost less than a new console.'}
+   ]},
+  {id:'before-after', pillar:'resto', kicker:'From the bench', title:'Before the bench, and after',
+   cap:'Same console, one afternoon apart. This is what the bench does.',
+   slides:[
+    {h:'Before', b:'Sticky shell, roaring fan, disc errors, and a previous life you can smell.'},
+    {h:'The work', b:'Teardown, deep clean, fresh paste, worn parts swapped, every function tested.'},
+    {h:'After', b:'Quiet, cool, spotless and warrantied. Ready for another decade of games.'}
+   ]},
+  {id:'where-from', pillar:'pickup', kicker:'Sourcing', title:'Where our consoles actually come from',
+   cap:'People ask where the stock comes from. Three places, mostly.',
+   slides:[
+    {h:'Car boots', b:'Early starts, torch in hand, checking sockets in the boot of a car. The classics are out there.'},
+    {h:'Your drawers', b:'Trade-ins and buy-ins all week. The console you forgot about is stock we’re looking for.'},
+    {h:'Collections', b:'We drive out for the good stuff. Boxed retro and bundles are worth the miles.'}
+   ]},
+  {id:'carboot-101', pillar:'pickup', kicker:'Sourcing', title:'Car boot console hunting 101',
+   cap:'Our car boot rules, learned over a lot of 7am starts. Use them wisely.',
+   slides:[
+    {h:'Go early', b:'The good stuff is gone by nine. Seven o’clock is when the finds happen.'},
+    {h:'Ask to test', b:'Plenty of pitches have a socket or a battery pack. If you can’t test it, price the risk in.'},
+    {h:'Check the small stuff', b:'Battery doors, port pins, corrosion. The little details tell you how it was kept.'}
+   ]},
+  {id:'two-brothers', pillar:'community', kicker:'The shop', title:'Two brothers, one console shop',
+   cap:'The whole operation is two brothers and a bench in Chesham. Here’s how it splits.',
+   slides:[
+    {h:'The counter', b:'One of us runs the front: quotes, sales, and every DM you send.'},
+    {h:'The bench', b:'The other lives at the bench: cleaning, repairs and testing, every day.'},
+    {h:'The why', b:'Consoles shouldn’t cost the earth or end up in landfill. That’s the whole idea.'}
+   ]},
+  {id:'cfy-week', pillar:'community', kicker:'The shop', title:'A week at the shop, in 3 slides',
+   cap:'What a console shop’s week actually looks like from the inside.',
+   slides:[
+    {h:'Monday', b:'The in-tray. Everything bought over the weekend gets logged and lined up for the bench.'},
+    {h:'Midweek', b:'Bench days. Cleaning, repairs, testing, and the shelf slowly filling back up.'},
+    {h:'The weekend', b:'Drops go live, car boots get raided, and the week gets its scoreboard.'}
+   ]},
+  {id:'second-life', pillar:'community', kicker:'The shop', title:'What happens to your old console',
+   cap:'Sell us a console and it starts a second life. This is where it goes.',
+   slides:[
+    {h:'It lands', b:'Logged, photographed and queued for the bench, exactly as it arrived.'},
+    {h:'It’s reborn', b:'Cleaned, repaired if it needs it, tested until we trust it.'},
+    {h:'It lives again', b:'A new home, a warranty, and years more play. Better than landfill, every time.'}
+   ]}
+];
+
 /* ================= STATE ================= */
 var state = { pillar:null, place:null, hookIdx:{}, capIdx:{tt:0, ig:0}, ctaIdx:0 };
+var caroState = { topicIdx:null, ctaIdx:0 };
 var LS_DRAFT='cfy_studio_draft', LS_HOOKS='cfy_studio_hooks';
 
 function lsGet(k,f){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
@@ -687,6 +919,7 @@ function legacyCopy(text){
   });
 
   $('doorFilmed').addEventListener('click',function(){ showFlow(); });
+  $('doorCarousel').addEventListener('click',function(){ showCarousel(); });
   document.querySelectorAll('[data-soon]').forEach(function(b){
     b.addEventListener('click',function(){ toast('Coming in the next update'); });
   });
@@ -711,9 +944,12 @@ function showFlow(){
 }
 function showHome(){
   $('view-flow').classList.remove('active');
+  $('view-carousel').classList.remove('active');
   $('view-home').classList.add('active');
   document.body.classList.remove('in-flow');
+  document.body.classList.remove('in-carousel');
   $('results').innerHTML='';
+  $('caroResults').innerHTML='';
   window.scrollTo(0,0);
 }
 function updateGenBtn(){
@@ -869,6 +1105,211 @@ function renderResults(d){
   /* scroll to results */
   var top=r.getBoundingClientRect().top+window.pageYOffset-70;
   window.scrollTo({top:top,behavior:(matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
+}
+
+/* ================= CAROUSEL (door 02) ================= */
+var SLIDE_W=1080, SLIDE_H=1350, SLIDE_M=96, SLIDE_TW=SLIDE_W-SLIDE_M*2;
+
+function showCarousel(){
+  $('view-home').classList.remove('active');
+  $('view-carousel').classList.add('active');
+  document.body.classList.add('in-carousel');
+  window.scrollTo(0,0);
+  newCarousel();
+}
+function newCarousel(){
+  caroState.topicIdx=nextFromBank('carousel',TOPICS.length);
+  caroState.ctaIdx=Math.floor(Math.random()*CAPTION_CTAS.tt.length);
+  fontsReady(function(){ renderCarousel(TOPICS[caroState.topicIdx]); });
+}
+function fontsReady(cb){
+  if(!document.fonts||!document.fonts.load){ cb(); return; }
+  Promise.all([
+    document.fonts.load('80px Anton'),
+    document.fonts.load('500 46px "Hanken Grotesk"'),
+    document.fonts.load('700 46px "Hanken Grotesk"'),
+    document.fonts.load('30px "Space Mono"')
+  ]).then(function(){ cb(); },function(){ cb(); });
+}
+
+/* ---- canvas helpers ---- */
+function two(n){ return (n<10?'0':'')+n; }
+function wrapLines(ctx,text,maxW){
+  var words=text.split(/\s+/),lines=[],cur='';
+  words.forEach(function(w){
+    var t=cur?cur+' '+w:w;
+    if(ctx.measureText(t).width>maxW && cur){ lines.push(cur); cur=w; }
+    else cur=t;
+  });
+  if(cur) lines.push(cur);
+  return lines;
+}
+function fitFont(ctx,text,fontTpl,startPx,minPx,maxW,maxLines){
+  var px=startPx,lines;
+  while(px>minPx){
+    ctx.font=fontTpl.replace('{px}',px);
+    lines=wrapLines(ctx,text,maxW);
+    if(lines.length<=maxLines) return {px:px,lines:lines};
+    px-=6;
+  }
+  ctx.font=fontTpl.replace('{px}',minPx);
+  return {px:minPx,lines:wrapLines(ctx,text,maxW)};
+}
+function drawLines(ctx,lines,x,y,lh){
+  lines.forEach(function(l,i){ ctx.fillText(l,x,y+i*lh); });
+  return y+lines.length*lh;
+}
+function slideBG(ctx,green){
+  if(green){ ctx.fillStyle='#c5f82a'; ctx.fillRect(0,0,SLIDE_W,SLIDE_H); return; }
+  var g=ctx.createLinearGradient(0,0,0,SLIDE_H);
+  g.addColorStop(0,'#111410'); g.addColorStop(.55,'#0a0b09');
+  ctx.fillStyle=g; ctx.fillRect(0,0,SLIDE_W,SLIDE_H);
+}
+function slideChrome(ctx,idx,total,dark,swipe){
+  var ink=dark?'#0a0b09':'#f6f6ec', green=dark?'#0a0b09':'#c5f82a', muted=dark?'rgba(10,11,9,.6)':'#838a73';
+  ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+  ctx.font='54px Anton';
+  ctx.fillStyle=ink; ctx.fillText('CF',SLIDE_M,SLIDE_M+44);
+  var w=ctx.measureText('CF').width;
+  ctx.fillStyle=green; ctx.fillText('Y',SLIDE_M+w+3,SLIDE_M+44);
+  ctx.font='30px "Space Mono"'; ctx.fillStyle=muted; ctx.textAlign='right';
+  ctx.fillText(two(idx)+' / '+two(total),SLIDE_W-SLIDE_M,SLIDE_M+38);
+  ctx.textAlign='left';
+  ctx.fillText('@consolesforyou',SLIDE_M,SLIDE_H-SLIDE_M+10);
+  if(swipe){
+    ctx.textAlign='right'; ctx.fillStyle=green; ctx.font='30px "Space Mono"';
+    ctx.fillText('SWIPE >>',SLIDE_W-SLIDE_M,SLIDE_H-SLIDE_M+10);
+    ctx.textAlign='left';
+  }
+}
+function setSpacing(ctx,v){ if('letterSpacing' in ctx) ctx.letterSpacing=v; }
+
+function drawCover(ctx,topic,total){
+  slideBG(ctx,false); slideChrome(ctx,1,total,false,true);
+  setSpacing(ctx,'6px');
+  ctx.font='34px "Space Mono"'; ctx.fillStyle='#c5f82a';
+  ctx.fillText(topic.kicker.toUpperCase(),SLIDE_M,486);
+  setSpacing(ctx,'0px');
+  var f=fitFont(ctx,topic.title.toUpperCase(),'{px}px Anton',108,68,SLIDE_TW,4);
+  ctx.font=f.px+'px Anton'; ctx.fillStyle='#f6f6ec';
+  var end=drawLines(ctx,f.lines,SLIDE_M,486+f.px+28,Math.round(f.px*1.1));
+  ctx.fillStyle='#c5f82a'; ctx.fillRect(SLIDE_M,end+8,120,10);
+}
+function drawBody(ctx,s,n,idx,total){
+  slideBG(ctx,false); slideChrome(ctx,idx,total,false,idx<total-1);
+  ctx.font='40px "Space Mono"'; ctx.fillStyle='#c5f82a';
+  ctx.fillText(two(n),SLIDE_M,366);
+  var f=fitFont(ctx,s.h.toUpperCase(),'{px}px Anton',80,54,SLIDE_TW,3);
+  ctx.font=f.px+'px Anton'; ctx.fillStyle='#f6f6ec';
+  var end=drawLines(ctx,f.lines,SLIDE_M,366+f.px+34,Math.round(f.px*1.1));
+  ctx.font='500 46px "Hanken Grotesk"'; ctx.fillStyle='#d8dcc9';
+  drawLines(ctx,wrapLines(ctx,s.b,SLIDE_TW),SLIDE_M,end+62,72);
+}
+function drawCTA(ctx,idx,total){
+  slideBG(ctx,true); slideChrome(ctx,idx,total,true,false);
+  setSpacing(ctx,'6px');
+  ctx.font='34px "Space Mono"'; ctx.fillStyle='rgba(10,11,9,.6)';
+  ctx.fillText('CONSOLES FOR YOU · CHESHAM',SLIDE_M,486);
+  setSpacing(ctx,'0px');
+  var head='GOT ONE IN A DRAWER?';
+  var body=igRestricted
+    ? 'DM us the word QUOTE and we’ll price it in minutes. We buy, sell and fix consoles, every day.'
+    : 'Instant quote at consolesforyou.com. We buy, sell and fix consoles, every day.';
+  var f=fitFont(ctx,head,'{px}px Anton',104,68,SLIDE_TW,3);
+  ctx.font=f.px+'px Anton'; ctx.fillStyle='#0a0b09';
+  var end=drawLines(ctx,f.lines,SLIDE_M,486+f.px+28,Math.round(f.px*1.1));
+  ctx.font='600 46px "Hanken Grotesk"'; ctx.fillStyle='rgba(10,11,9,.78)';
+  drawLines(ctx,wrapLines(ctx,body,SLIDE_TW),SLIDE_M,end+58,72);
+}
+
+/* ---- carousel captions + tags (reuse phase-1 engines) ---- */
+function caroTags(topic){
+  var story=topic.title+' '+topic.slides.map(function(s){ return s.h+' '+s.b; }).join(' ');
+  return buildTags({ pillar:topic.pillar, console:'', story:story });
+}
+function buildCaroCaption(plat,topic){
+  var ctaBank = plat==='tt' ? CAPTION_CTAS.tt : (igRestricted ? CAPTION_CTAS.ig_restricted : CAPTION_CTAS.ig_open);
+  var cta=ctaBank[caroState.ctaIdx % ctaBank.length];
+  return topic.cap+'\n\n'+cta+'\n\n'+caroTags(topic).join(' ');
+}
+function saveSlide(url,name,btn){
+  var a=document.createElement('a'); a.href=url; a.download=name;
+  document.body.appendChild(a); a.click(); a.remove();
+  if(btn){ var old=btn.textContent; btn.textContent='Saved ✓'; btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent=old; btn.classList.remove('copied'); },1600); }
+}
+
+function renderCarousel(topic){
+  var r=$('caroResults'); r.innerHTML='';
+  var total=topic.slides.length+2;
+
+  /* topic bar */
+  var bar=document.createElement('div'); bar.className='topicbar pop';
+  bar.innerHTML='<div><div class="tk">'+esc(topic.kicker)+' · '+total+' slides</div>'+
+    '<div class="tt2">'+esc(topic.title)+'</div></div>'+
+    '<button class="sbtn" id="reTopic" type="button">Another topic</button>';
+  r.appendChild(bar);
+  bar.querySelector('#reTopic').addEventListener('click',function(){ newCarousel(); });
+
+  /* slides */
+  var urls=[];
+  for(var i=0;i<total;i++){
+    var cv=document.createElement('canvas'); cv.width=SLIDE_W; cv.height=SLIDE_H;
+    var ctx=cv.getContext('2d');
+    if(i===0) drawCover(ctx,topic,total);
+    else if(i===total-1) drawCTA(ctx,total,total);
+    else drawBody(ctx,topic.slides[i-1],i,i+1,total);
+    urls.push(cv.toDataURL('image/png'));
+  }
+  var grid=document.createElement('div'); grid.className='slides pop';
+  urls.forEach(function(u,i){
+    var d=document.createElement('div'); d.className='slide';
+    d.innerHTML='<img alt="Slide '+(i+1)+' of '+total+'" src="'+u+'">'+
+      '<button class="sbtn sv" type="button">Save '+(i+1)+'</button>';
+    d.querySelector('.sv').addEventListener('click',function(){ saveSlide(u,'cfy-'+topic.id+'-'+(i+1)+'.png',this); });
+    grid.appendChild(d);
+  });
+  r.appendChild(grid);
+
+  /* download all + phone hint */
+  var act=document.createElement('div'); act.className='card pop';
+  act.innerHTML='<div class="btnrow"><button class="sbtn" id="dlAll" type="button">Download all '+total+' slides</button></div>'+
+    '<div class="hint" style="margin-top:10px">On a phone: press and hold a slide, then Save Image. Upload them in order, 1 to '+total+'.</div>';
+  r.appendChild(act);
+  act.querySelector('#dlAll').addEventListener('click',function(){
+    urls.forEach(function(u,i){ setTimeout(function(){ saveSlide(u,'cfy-'+topic.id+'-'+(i+1)+'.png',null); }, i*400); });
+    toast('Saving '+total+' slides');
+  });
+
+  /* captions card */
+  var ttCap=buildCaroCaption('tt',topic), igCap=buildCaroCaption('ig',topic);
+  var cap=document.createElement('div'); cap.className='card pop';
+  cap.innerHTML=
+    '<div class="chd"><h3>Caption</h3></div>'+
+    '<div class="capblock"><div class="cap-plat">TikTok · YouTube</div>'+
+    '<div class="captext">'+esc(ttCap)+'</div>'+
+    '<div class="btnrow"><button class="sbtn" data-ccopy="tt" type="button">Copy caption</button></div></div>'+
+    '<div class="capblock"><div class="cap-plat">Instagram '+(igRestricted?'<span class="note">· no links until 6 Aug, CTA is DM QUOTE</span>':'')+'</div>'+
+    '<div class="captext">'+esc(igCap)+'</div>'+
+    '<div class="btnrow"><button class="sbtn" data-ccopy="ig" type="button">Copy caption</button></div></div>';
+  r.appendChild(cap);
+  cap.querySelector('[data-ccopy=tt]').addEventListener('click',function(){ copyText(ttCap,this); });
+  cap.querySelector('[data-ccopy=ig]').addEventListener('click',function(){ copyText(igCap,this); });
+
+  /* hashtags card */
+  var tags=caroTags(topic);
+  var tg=document.createElement('div'); tg.className='card pop';
+  tg.innerHTML='<div class="chd"><h3>Hashtags</h3><button class="sbtn" id="cpCaroTags" type="button">Copy all</button></div>'+
+    '<div class="tagwrap">'+tags.map(function(t){ return '<span class="htag">'+esc(t)+'</span>'; }).join('')+'</div>'+
+    '<div class="hint">Already added to both captions above.</div>';
+  r.appendChild(tg);
+  tg.querySelector('#cpCaroTags').addEventListener('click',function(){ copyText(tags.join(' '),this); });
+
+  /* stagger in */
+  var pops=r.querySelectorAll('.pop');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    pops.forEach(function(el,i){ el.style.transitionDelay=(i*55)+'ms'; el.setAttribute('data-in',''); });
+  });});
 }
 </script>
 </body>
