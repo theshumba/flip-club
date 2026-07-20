@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="robots" content="noindex,nofollow" />
 <meta name="theme-color" content="#0a0b09" />
-<title>CFY — Stockroom</title>
+<title>CFY · Stockroom</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
@@ -262,7 +262,7 @@ body.has-pubbar #toasts{bottom:calc(140px + env(safe-area-inset-bottom))}
 
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="index.html" aria-label="Consoles For You — home">
+    <a class="brand" href="index.html" aria-label="Consoles For You, home">
       <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
     </a>
     <span class="roomtag">Stockroom</span>
@@ -330,9 +330,9 @@ body.has-pubbar #toasts{bottom:calc(140px + env(safe-area-inset-bottom))}
         <div class="q-field">
           <label for="f-condition">Condition</label>
           <select id="f-condition">
-            <option value="boxed">Boxed — like new</option>
-            <option value="good" selected>Good — fully working</option>
-            <option value="faulty">Faulty — for repair</option>
+            <option value="boxed">Boxed (like new)</option>
+            <option value="good" selected>Good (fully working)</option>
+            <option value="faulty">Faulty (for repair)</option>
           </select>
         </div>
         <div class="q-field">
@@ -370,7 +370,7 @@ body.has-pubbar #toasts{bottom:calc(140px + env(safe-area-inset-bottom))}
             <p class="field-err" hidden></p>
           </div>
         </div>
-        <p class="hint" style="margin:-6px 0 14px">CeX price must be their real, current price for the same model &amp; condition — it shows as "CeX £X — save £Y" on the listing.</p>
+        <p class="hint" style="margin:-6px 0 14px">CeX price must be their real, current price for the same model &amp; condition. It shows as "CeX £X · save £Y" on the listing.</p>
       </div>
 
       <div class="fgroup">
@@ -405,8 +405,8 @@ body.has-pubbar #toasts{bottom:calc(140px + env(safe-area-inset-bottom))}
         <div class="q-field">
           <label for="f-status">Status</label>
           <select id="f-status">
-            <option value="live" selected>Live — on sale now</option>
-            <option value="sample">Sample — example listing only</option>
+            <option value="live" selected>Live (on sale now)</option>
+            <option value="sample">Sample (example listing only)</option>
             <option value="sold">Sold</option>
           </select>
           <p class="hint">Samples show an "Example listing" badge and can't be bought.</p>
@@ -467,7 +467,7 @@ const FS_KEY   = 'AIzaSyBrfCxE1BZjQGyDkY-8bqLYkzpyXdzsa3I'; // public web key (s
 const KEY_LS   = 'cfy-admin-key';
 const MAX_PHOTOS = 12;
 
-/* model quick-pick — mirrors index.html's priceTable + inquiryModels (26 models) */
+/* model quick-pick - mirrors index.html's priceTable + inquiryModels (26 models) */
 const PS5_MODELS = [
   'PlayStation 5 (Disc)','PlayStation 5 (Digital)','PlayStation 5 Slim (Disc)',
   'PlayStation 5 Slim (Digital)','PlayStation 5 Pro',
@@ -492,7 +492,7 @@ const state = {
   dirty: false,
   busy: false,
 };
-window.__cfyAdmin = state; // debug/test hook — no secrets in here
+window.__cfyAdmin = state; // debug/test hook - no secrets in here
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s == null ? '' : s)
@@ -569,14 +569,14 @@ async function api(path, body) {
       body: JSON.stringify(body),
     });
   } catch (e) {
-    throw new Error("Can't reach the server — check your internet and try again.");
+    throw new Error("Can't reach the server. Check your internet and try again.");
   }
   let j = null;
   try { j = await r.json(); } catch (e) {}
   if (r.status === 401) {
     setKey('');
     showView('gate');
-    throw new Error('Passcode no longer accepted — sign in again.');
+    throw new Error('Passcode no longer accepted. Sign in again.');
   }
   if (!r.ok) throw new Error((j && j.error) || ('Something went wrong (' + r.status + '). Try again.'));
   return j || {};
@@ -689,7 +689,7 @@ $('gate-form').addEventListener('submit', async (e) => {
         body: JSON.stringify({ action: 'auth' }),
       });
     } catch (netErr) {
-      err.textContent = "Can't reach the server — check your internet and try again.";
+      err.textContent = "Can't reach the server. Check your internet and try again.";
       err.hidden = false;
       return;
     }
@@ -699,7 +699,7 @@ $('gate-form').addEventListener('submit', async (e) => {
       return;
     }
     if (!r.ok) {
-      err.textContent = "The server had a hiccup — give it a second and try again.";
+      err.textContent = "The server had a hiccup. Give it a second and try again.";
       err.hidden = false;
       return;
     }
@@ -728,13 +728,13 @@ $('btn-signout').addEventListener('click', async () => {
 function buildModelPicker() {
   const sel = $('f-model');
   sel.innerHTML = '';
-  sel.add(new Option('— Pick a model —', ''));
+  sel.add(new Option('Pick a model…', ''));
   const g1 = document.createElement('optgroup'); g1.label = 'PlayStation 5';
   PS5_MODELS.forEach((m) => g1.appendChild(new Option(m, m)));
   const g2 = document.createElement('optgroup'); g2.label = 'More consoles';
   MORE_MODELS.forEach((m) => g2.appendChild(new Option(m, m)));
   sel.appendChild(g1); sel.appendChild(g2);
-  sel.add(new Option('Other — type the name yourself', '__other__'));
+  sel.add(new Option('Other (type the name yourself)', '__other__'));
 }
 function platformFor(name) {
   const n = name.toLowerCase();
@@ -821,7 +821,7 @@ async function loadMedia(id) {
     state.photos = [];
     state.photosChanged = false;
     renderTray();
-    toast('Couldn’t load this unit’s photos — adding new ones will replace them.', 'err');
+    toast('Couldn’t load this unit’s photos. Adding new ones will replace them.', 'err');
   }
 }
 
@@ -876,7 +876,7 @@ $('photo-file').addEventListener('change', async (e) => {
       state.photos.push(photo);
       state.photosChanged = true; state.dirty = true;
     } catch (err) {
-      toast('Couldn’t read one of those photos — try a different one.', 'err');
+      toast('Couldn’t read one of those photos. Try a different one.', 'err');
     }
   }
   renderTray();
@@ -968,14 +968,14 @@ function readForm() {
 function validateForm(data) {
   clearErrors();
   const errors = [];
-  if (!data.name) errors.push(['qf-name', 'Give it a name — this shows in the shop.']);
+  if (!data.name) errors.push(['qf-name', 'Give it a name. This shows in the shop.']);
   if (data.price == null || data.price <= 0) errors.push(['qf-price', 'Enter the price in pounds, e.g. 249.']);
-  if (data.cex_price != null && data.cex_price <= 0) errors.push(['qf-cex', 'CeX price must be more than £0 — or leave it empty.']);
+  if (data.cex_price != null && data.cex_price <= 0) errors.push(['qf-cex', 'CeX price must be more than £0, or leave it empty.']);
   if (data.serial_last4 && !/^[0-9A-Za-z]{1,4}$/.test(data.serial_last4)) errors.push(['qf-serial', 'Just the last 4 characters of the serial.']);
-  if (data.video_url && !/^https?:\/\//i.test(data.video_url)) errors.push(['qf-video', 'Paste the full link — it starts with https://']);
-  if (data.stripe_link && !/^https?:\/\//i.test(data.stripe_link)) errors.push(['qf-stripe', 'Paste the full link — it starts with https://']);
+  if (data.video_url && !/^https?:\/\//i.test(data.video_url)) errors.push(['qf-video', 'Paste the full link. It starts with https://']);
+  if (data.stripe_link && !/^https?:\/\//i.test(data.stripe_link)) errors.push(['qf-stripe', 'Paste the full link. It starts with https://']);
   const hasKeepableThumb = state.editingUnit && state.editingUnit.thumb_b64 && !state.photosChanged;
-  if (!state.photos.length && !hasKeepableThumb) errors.push(['qf-photos', 'Add at least one photo — the first one is the cover.']);
+  if (!state.photos.length && !hasKeepableThumb) errors.push(['qf-photos', 'Add at least one photo. The first one is the cover.']);
   errors.forEach(([id, msg]) => fieldError(id, msg));
   if (errors.length) {
     const first = $(errors[0][0]);
@@ -1025,7 +1025,7 @@ $('btn-publish').addEventListener('click', async () => {
       data.sold_at = null;
       const res = await api('/stock', { action: 'create', data });
       id = res.id;
-      if (!id) throw new Error('The server didn’t return an id — try again.');
+      if (!id) throw new Error('The server didn’t return an id. Try again.');
     }
     done++; setProgress(done, total, 'Unit saved.');
 
@@ -1043,7 +1043,7 @@ $('btn-publish').addEventListener('click', async () => {
       }
     }
     setProgress(total, total, 'Done.');
-    toast(editing ? 'Unit updated — it’s live on the shop.' : 'Published — it’s live on the shop.');
+    toast(editing ? 'Unit updated. It’s live on the shop.' : 'Published. It’s live on the shop.');
     state.dirty = false;
     setTimeout(() => { $('progress').hidden = true; }, 400);
     showView('list');
@@ -1059,7 +1059,7 @@ $('btn-publish').addEventListener('click', async () => {
 /* ---------- mark sold / delete ---------- */
 $('btn-sold').addEventListener('click', async () => {
   if (state.busy || !state.editingId) return;
-  const yes = await confirmAction('Mark as sold?', 'It moves to the Sold section on the shop with a SOLD banner. You can’t undo this from here.', 'Yes — it’s sold', 'amber');
+  const yes = await confirmAction('Mark as sold?', 'It moves to the Sold section on the shop with a SOLD banner. You can’t undo this from here.', 'Yes, it’s sold', 'amber');
   if (!yes) return;
   setBusy(true);
   try {

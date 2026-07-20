@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shop Tested Consoles — Consoles For You | UK</title>
+<meta name="format-detection" content="telephone=no" />
+<title>Shop Tested Consoles · Consoles For You | UK</title>
 <meta name="description" content="Shop tested pre-owned consoles from Consoles For You. Every unit tested on camera, honestly graded, with real photos. Free tracked UK delivery, free local collection, 14-day return." />
 <meta name="theme-color" content="#0a0b09" />
 
@@ -16,7 +17,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Consoles For You" />
 <meta property="og:url" content="https://consolesforyou.com/shop.html" />
-<meta property="og:title" content="Shop Tested Consoles — Consoles For You" />
+<meta property="og:title" content="Shop Tested Consoles · Consoles For You" />
 <meta property="og:description" content="Tested pre-owned consoles with honest grades and real photos. Free tracked UK delivery and a 14-day return on every unit." />
 <meta property="og:image" content="https://consolesforyou.com/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -437,7 +438,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 <!-- ===== NAV (mirrors index.html, Shop active) ===== -->
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="index.html" aria-label="Consoles For You — home">
+    <a class="brand" href="index.html" aria-label="Consoles For You, home">
       <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navmenu">
@@ -466,7 +467,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
         <span class="sep">·</span>
         <span>Every unit tested by a real person</span>
         <span class="sep">·</span>
-        <span>One of each — when it's gone, it's gone</span>
+        <span>One of each. When it's gone, it's gone</span>
       </div>
     </div>
   </section>
@@ -496,9 +497,9 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
   <section class="trust-strip">
     <div class="wrap">
       <div class="trust-in">
-        <div class="trust"><div class="tt">// Delivery</div><p>Free tracked delivery, 2–3 working days — or free local collection, arranged on WhatsApp after purchase.</p></div>
+        <div class="trust"><div class="tt">// Delivery</div><p>Free tracked delivery, 2–3 working days, or free local collection arranged on WhatsApp after purchase.</p></div>
         <div class="trust"><div class="tt">// Tested &amp; graded</div><p>Every unit is tested by a real person before it's listed. The grade you read is the unit you get.</p></div>
-        <div class="trust"><div class="tt">// Your rights</div><p>14-day change of mind · faulty = free return. Sold under the Consumer Rights Act 2015 — <a href="terms.html">full terms</a>.</p></div>
+        <div class="trust"><div class="tt">// Your rights</div><p>14-day change of mind · faulty = free return. Sold under the Consumer Rights Act 2015. <a href="terms.html">Full terms</a>.</p></div>
       </div>
     </div>
   </section>
@@ -529,7 +530,7 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
 <footer>
   <div class="wrap">
     <div class="foot-in">
-      <a class="brand" href="index.html" aria-label="Consoles For You — home">
+      <a class="brand" href="index.html" aria-label="Consoles For You, home">
         <span class="wm"><span class="wm-1">CF<i>Y</i></span><span class="wm-2">Consoles For You</span></span>
       </a>
       <div class="foot-links">
@@ -545,8 +546,8 @@ footer{border-top:1px solid var(--line);padding:52px 0 42px;background:var(--bg-
     </div>
     <p class="disclaimer">
       <strong style="color:var(--ink)">Consoles For You</strong> is a UK console buying, selling and repair business founded by Ayyub Ahmed, and home of the Flip Club community.<br>
-      Contact: <a href="mailto:hello@consolesforyou.com" style="color:var(--green)">hello@consolesforyou.com</a> · WhatsApp 07786&nbsp;607434<br><br>
-      Shop consoles are tested and graded, and sold under the Consumer Rights Act 2015 with a 14-day right to return. CeX prices shown are their current advertised sell price for the same model and condition at the time of listing — checkable on their site. Free local collection is arranged on WhatsApp after purchase. Read our full <a href="terms.html" style="color:var(--green)">Terms &amp; Conditions</a>. © 2026 Consoles For You.
+      Contact: <a href="mailto:ayyub@consolesforyou.com" style="color:var(--green)">ayyub@consolesforyou.com</a> · <a href="https://wa.me/447786607434" style="color:var(--green)" target="_blank" rel="noopener">WhatsApp 07786&nbsp;607434</a><br><br>
+      Shop consoles are tested and graded, and sold under the Consumer Rights Act 2015 with a 14-day right to return. CeX prices shown are their current advertised sell price for the same model and condition at the time of listing, checkable on their site. Free local collection is arranged on WhatsApp after purchase. Read our full <a href="terms.html" style="color:var(--green)">Terms &amp; Conditions</a>. © 2026 Consoles For You.
     </p>
   </div>
 </footer>
@@ -564,7 +565,7 @@ const firebaseConfig = {
   appId: "1:391845334721:web:01b81ef180e1b972868e40"
 };
 
-/* ===== part-exchange data (copied from index.html — keep in sync) ===== */
+/* ===== part-exchange data (copied from index.html - keep in sync) ===== */
 // model : [ boxed/like-new , good/working , faulty/for-repair ]
 const priceTable = {
   'PlayStation 5 (Disc)':         [226, 205, 80],
@@ -618,8 +619,8 @@ const fmtDate = (iso) => {
 const condChip = (u) => {
   const c = String(u.condition || 'good').toLowerCase();
   if (c === 'boxed')  return '<span class="chip chip-boxed">Boxed</span>';
-  if (c === 'faulty') return '<span class="chip chip-faulty">Faulty — for repair</span>';
-  return '<span class="chip chip-good">Good — tested working</span>';
+  if (c === 'faulty') return '<span class="chip chip-faulty">Faulty · for repair</span>';
+  return '<span class="chip chip-good">Good · tested working</span>';
 };
 const isSample = (u) => u.status === 'sample';
 const isSold   = (u) => u.status === 'sold';
@@ -723,12 +724,12 @@ function cardHTML(u, i){
   const meta = [tested ? `Tested ${tested}` : null, u.serial_last4 ? `Serial ···${esc(u.serial_last4)}` : null]
     .filter(Boolean).join(' &nbsp;·&nbsp; ');
   const save = (u.cex_price && u.cex_price > u.price)
-    ? `<span class="ucard-cex">CeX ${gbp(u.cex_price)} — <b>save ${gbp(u.cex_price - u.price)}</b></span>` : '';
+    ? `<span class="ucard-cex">CeX ${gbp(u.cex_price)} · <b>save ${gbp(u.cex_price - u.price)}</b></span>` : '';
   const soldCls = isSold(u) ? ' is-sold' : '';
   const price = isSold(u)
     ? `<span class="ucard-cex" style="margin:0 0 4px">Sold for</span><span class="ucard-price">${gbp(u.price)}</span>`
     : `<span class="ucard-price">${gbp(u.price)}</span>${save}`;
-  return `<a class="ucard${soldCls}" href="?item=${encodeURIComponent(u.id)}" data-id="${esc(u.id)}" style="animation-delay:${Math.min(i*45, 360)}ms" aria-label="${esc(u.name)} — ${isSold(u) ? 'sold for ' : ''}${gbp(u.price)}">
+  return `<a class="ucard${soldCls}" href="?item=${encodeURIComponent(u.id)}" data-id="${esc(u.id)}" style="animation-delay:${Math.min(i*45, 360)}ms" aria-label="${esc(u.name)}, ${isSold(u) ? 'sold for ' : ''}${gbp(u.price)}">
     <div class="ucard-ph">${media}${!isSold(u) ? condChip(u) : ''}${video}${sample}</div>
     <div class="ucard-body">
       <h3 class="ucard-name">${esc(u.name)}</h3>
@@ -742,9 +743,9 @@ function emptyStateHTML(){
     return `<div class="state">
       <span class="eyebrow">Stock room</span>
       <h2 class="h-md">Nothing on the bench<br>right now.</h2>
-      <p>Every console we buy gets tested, photographed and listed here — one of each, honestly graded. New stock lands weekly. Tell us what you're after and you'll hear about it first.</p>
+      <p>Every console we buy gets tested, photographed and listed here. One of each, honestly graded. New stock lands weekly. Tell us what you're after and you'll hear about it first.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="${waLink("Hi CFY — what consoles do you have coming into the shop? I'm looking for:")}" target="_blank" rel="noopener">Ask what's coming in</a>
+        <a class="btn btn-primary" href="${waLink("Hi CFY, what consoles do you have coming into the shop? I'm looking for:")}" target="_blank" rel="noopener">Ask what's coming in</a>
         <a class="btn btn-ghost" href="index.html#quote">Sell us your console</a>
       </div></div>`;
   }
@@ -753,9 +754,9 @@ function emptyStateHTML(){
   return `<div class="state">
     <span class="eyebrow">Restocking</span>
     <h2 class="h-md">No ${esc(nm)} units in<br>right now.</h2>
-    <p>Stock moves fast — one of each, and when it's gone, it's gone. Message us and we'll tell you what's on the test bench this week.</p>
+    <p>Stock moves fast. One of each, and when it's gone, it's gone. Message us and we'll tell you what's on the test bench this week.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="${waLink(`Hi CFY — do you have any ${nm} stock coming in? I'd like first refusal.`)}" target="_blank" rel="noopener">Ask about ${esc(nm)}</a>
+      <a class="btn btn-primary" href="${waLink(`Hi CFY, do you have any ${nm} stock coming in? I'd like first refusal.`)}" target="_blank" rel="noopener">Ask about ${esc(nm)}</a>
       <a class="btn btn-ghost" href="#" data-show-all>See everything live</a>
     </div></div>`;
 }
@@ -780,7 +781,7 @@ function renderGrid(){
   $('#sold-sec').hidden = sold.length === 0;
   if (sold.length) {
     $('#sold-grid').innerHTML = sold.map(cardHTML).join('');
-    $('#sold-wa').href = waLink('Hi CFY — I saw the recently sold units on the shop. Can you tell me when similar stock lands?');
+    $('#sold-wa').href = waLink('Hi CFY, I saw the recently sold units on the shop. Can you tell me when similar stock lands?');
   }
   bindCardClicks();
 }
@@ -812,10 +813,10 @@ function renderError(){
   $('#grid-state').innerHTML = `<div class="state">
     <span class="eyebrow" style="color:var(--amber)">Connection hiccup</span>
     <h2 class="h-md">The stock list<br>didn't load.</h2>
-    <p>That's on our end, not yours. Try again in a second — or message us and we'll send you what's live right now.</p>
+    <p>That's on our end, not yours. Try again in a second, or message us and we'll send you what's live right now.</p>
     <div class="hero-cta">
       <button class="btn btn-primary" type="button" data-retry>Try again</button>
-      <a class="btn btn-ghost" href="${waLink("Hi CFY — the shop page wouldn't load for me. What's in stock right now?")}" target="_blank" rel="noopener">WhatsApp us instead</a>
+      <a class="btn btn-ghost" href="${waLink("Hi CFY, the shop page wouldn't load for me. What's in stock right now?")}" target="_blank" rel="noopener">WhatsApp us instead</a>
     </div></div>`;
   $('#readout-count').textContent = 'Stock offline';
   $('#grid-state').querySelector('[data-retry]').addEventListener('click', boot);
@@ -846,7 +847,7 @@ function wireVideo(u){
     const id = ytId(url);
     if (id) {
       main.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
-        title="Test video — ${esc(u.name)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+        title="Test video: ${esc(u.name)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
     } else if (/\.mp4($|\?)/i.test(url)) {
       main.innerHTML = `<video src="${esc(url)}" controls autoplay playsinline></video>`;
     } else {
@@ -865,7 +866,7 @@ function galleryHTML(shots){
     </div>
     ${multi ? `<div class="gal-dots" id="gal-dots" role="tablist" aria-label="Photos">${shots.map((_, i) =>
       `<button class="gal-dot" data-i="${i}" aria-current="${i===0}" aria-label="Photo ${i+1}"></button>`).join('')}</div>
-    <div class="gal-hint">Swipe photos — tap to zoom</div>` : `<div class="gal-hint">Tap the photo to zoom</div>`}
+    <div class="gal-hint">Swipe photos · tap to zoom</div>` : `<div class="gal-hint">Tap the photo to zoom</div>`}
   </div>`;
 }
 
@@ -900,10 +901,10 @@ function wireGallery(shots){
 
 function partexHTML(u){
   return `<div class="d-block">
-    <div class="bt">Part-exchange — pay less</div>
+    <div class="bt">Part-exchange: pay less</div>
     <div class="px-card">
       <div class="px-fields">
-        <div class="q-field" style="margin:0"><label for="pxd-model">Trade in — your console</label>
+        <div class="q-field" style="margin:0"><label for="pxd-model">Trade in: your console</label>
           <select class="q-select" id="pxd-model">${allModels.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('')}</select></div>
         <div class="q-field" style="margin:0"><label for="pxd-cond">Condition</label>
           <select class="q-select" id="pxd-cond">${conditions.map((c, i) => `<option value="${i}">${esc(c)}</option>`).join('')}</select></div>
@@ -928,12 +929,12 @@ function wirePartex(u){
       const pay = Math.max(0, itemPounds - credit);
       const excess = credit - itemPounds;
       out.innerHTML = `<div class="px-line">Trade in your <b>${esc(model)}</b> → pay <span class="px-pay">£${pay}</span> <span class="was">instead of £${itemPounds}</span></div>
-        <div class="px-note">${excess > 0 ? `+ £${excess} cash back to you · ` : ''}Trade-in credit £${credit} — £${credit - cash} more than our cash offer</div>`;
-      cta.href = waLink(`Hi CFY — I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
+        <div class="px-note">${excess > 0 ? `+ £${excess} cash back to you · ` : ''}Trade-in credit £${credit}, £${credit - cash} more than our cash offer</div>`;
+      cta.href = waLink(`Hi CFY, I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
     } else {
       out.innerHTML = `<div class="px-line">Trade in your <b>${esc(model)}</b> → <b>photo valuation over WhatsApp</b></div>
-        <div class="px-note">Send us a few photos — part-ex credit is 15% above our cash offer</div>`;
-      cta.href = waLink(`Hi CFY — I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). I'll send a few photos of my console for a trade-in valuation.`);
+        <div class="px-note">Send us a few photos. Part-ex credit is 15% above our cash offer</div>`;
+      cta.href = waLink(`Hi CFY, I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). I'll send a few photos of my console for a trade-in valuation.`);
     }
   };
   [modelSel, condSel].forEach(el => el.addEventListener('change', update));
@@ -961,7 +962,7 @@ function detailHTML(u){
     ? `<div class="d-cex">CeX price <b>${gbp(u.cex_price)}</b><span class="save">You save ${gbp(u.cex_price - u.price)}</span></div>` : '';
   const price = `<div class="d-price-card"><div class="crt"></div>
     <div class="d-price-row">
-      <div><span class="d-price-label">${sold ? 'Sold for' : sample ? 'Example price' : 'Price — tested & graded'}</span>
+      <div><span class="d-price-label">${sold ? 'Sold for' : sample ? 'Example price' : 'Price · tested & graded'}</span>
       <div class="d-price${sold ? ' muted' : ''}">${gbp(u.price)}</div></div>
       ${cex}
     </div></div>`;
@@ -970,20 +971,20 @@ function detailHTML(u){
   if (sold) {
     ctas = `<div class="d-ctas">
       <a class="btn btn-ghost" href="?" data-back-link>See what's live now</a>
-      <a class="btn btn-wa" href="${waLink(`Hi CFY — the ${u.name} has sold. Can you let me know when the next one lands?`)}" target="_blank" rel="noopener">
+      <a class="btn btn-wa" href="${waLink(`Hi CFY, the ${u.name} has sold. Can you let me know when the next one lands?`)}" target="_blank" rel="noopener">
         <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
         Tell me about the next one</a></div>`;
   } else if (sample) {
     ctas = `<div class="d-ctas">
-      <a class="btn btn-primary" href="${waLink(`Hi CFY — I saw the ${u.name} example listing (${gbp(u.price)}). What similar units do you have coming in?`)}" target="_blank" rel="noopener">
+      <a class="btn btn-primary" href="${waLink(`Hi CFY, I saw the ${u.name} example listing (${gbp(u.price)}). What similar units do you have coming in?`)}" target="_blank" rel="noopener">
         <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
         Ask about this one</a></div>
-      <p class="sample-note">This is an example listing — it shows exactly how real units are presented. Real listings come with photos of the actual unit and a test video.</p>`;
+      <p class="sample-note">This is an example listing. It shows exactly how real units are presented. Real listings come with photos of the actual unit and a test video.</p>`;
   } else {
     const buy = u.stripe_link
-      ? `<a class="btn btn-primary" href="${esc(u.stripe_link)}" target="_blank" rel="noopener">Buy now — ${gbp(u.price)}</a>` : '';
+      ? `<a class="btn btn-primary" href="${esc(u.stripe_link)}" target="_blank" rel="noopener">Buy now · ${gbp(u.price)}</a>` : '';
     ctas = `<div class="d-ctas">${buy}
-      <a class="btn ${buy ? 'btn-wa' : 'btn-primary'}" href="${waLink(`Hi CFY — I'd like to reserve the ${u.name} (${gbp(u.price)})`)}" target="_blank" rel="noopener">
+      <a class="btn ${buy ? 'btn-wa' : 'btn-primary'}" href="${waLink(`Hi CFY, I'd like to reserve the ${u.name} (${gbp(u.price)})`)}" target="_blank" rel="noopener">
         <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
         Reserve on WhatsApp</a></div>`;
   }
@@ -994,7 +995,7 @@ function detailHTML(u){
       <div class="dl"><div class="dt">// Free tracked delivery</div><p>2–3 working days, tracked to your door. Packed properly.</p></div>
       <div class="dl"><div class="dt">// Free local collection</div><p>Arranged on WhatsApp after purchase.</p></div>
     </div>
-    <p class="d-rights">14-day change of mind · faulty = free return — <a href="terms.html">full terms</a>. Sold under the Consumer Rights Act 2015.</p></div>`;
+    <p class="d-rights">14-day change of mind · faulty = free return · <a href="terms.html">full terms</a>. Sold under the Consumer Rights Act 2015.</p></div>`;
 
   return `<div class="detail-grid view-enter">
     <div class="d-media">
@@ -1018,10 +1019,10 @@ function notFoundHTML(id){
   return `<div class="state nf-wrap view-enter">
     <span class="eyebrow">Not found</span>
     <h2 class="h-md">That unit isn't<br>listed any more.</h2>
-    <p>It's most likely sold — stock here is one of each. See what's live now, or message us and we'll tell you what's on the test bench.</p>
+    <p>It's most likely sold. Stock here is one of each. See what's live now, or message us and we'll tell you what's on the test bench.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="?" data-back-link>Browse live stock</a>
-      <a class="btn btn-ghost" href="${waLink(`Hi CFY — I was looking at a unit on your shop (ref ${id}) but it's gone. What do you have that's similar?`)}" target="_blank" rel="noopener">WhatsApp us</a>
+      <a class="btn btn-ghost" href="${waLink(`Hi CFY, I was looking at a unit on your shop (ref ${id}) but it's gone. What do you have that's similar?`)}" target="_blank" rel="noopener">WhatsApp us</a>
     </div></div>`;
 }
 
@@ -1029,7 +1030,7 @@ async function renderDetail(id){
   const root = $('#detail-root');
   const u = unitById(id);
   if (!u) { root.innerHTML = notFoundHTML(id); bindBackLinks(); return; }
-  document.title = `${u.name} — ${gbp(u.price)} | Consoles For You`;
+  document.title = `${u.name} · ${gbp(u.price)} | Consoles For You`;
   root.innerHTML = detailHTML(u);
   bindBackLinks();
   wireVideo(u);
@@ -1039,10 +1040,10 @@ async function renderDetail(id){
   const mount = $('#gal-mount');
   const cover = safeImg(u.thumb_b64);
   if (hasVideo(u)) {
-    // facade already shows the cover — skeleton while the photo set loads
+    // facade already shows the cover - skeleton while the photo set loads
     mount.innerHTML = `<div class="gal"><div class="gal-skel"><div class="shimmer"></div><div class="shimmer"></div></div></div>`;
   } else if (cover) {
-    // gallery IS the main media block — show the cover instantly, swap in full shots when loaded
+    // gallery IS the main media block - show the cover instantly, swap in full shots when loaded
     mount.innerHTML = galleryHTML([cover]);
     wireGallery([cover]);
   }
@@ -1055,7 +1056,7 @@ async function renderDetail(id){
     mount.innerHTML = galleryHTML(shots);
     wireGallery(shots);
   } else if (hasVideo(u)) {
-    mount.innerHTML = ''; // no photo set yet — the facade already covers it
+    mount.innerHTML = ''; // no photo set yet - the facade already covers it
   } // else: keep the cover gallery already rendered
 }
 
@@ -1081,7 +1082,7 @@ function closeDetail(push){
 function showGrid(){
   $('#view-detail').hidden = true;
   $('#view-grid').hidden = false;
-  document.title = 'Shop Tested Consoles — Consoles For You | UK';
+  document.title = 'Shop Tested Consoles · Consoles For You | UK';
   window.scrollTo({top:gridScrollY, behavior:'instant'});
 }
 function route(){
