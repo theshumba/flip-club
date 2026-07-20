@@ -58,7 +58,7 @@ header{
 }
 #backBtn:active{transform:scale(0.97)}
 @media (hover:hover) and (pointer:fine){#backBtn:hover{border-color:var(--line-bright);color:var(--ink)}}
-body.in-flow #backBtn,body.in-carousel #backBtn{display:block}
+body.in-flow #backBtn,body.in-carousel #backBtn,body.in-docs #backBtn{display:block}
 
 /* ---------- views ---------- */
 main{max-width:var(--maxw);margin:0 auto;padding:26px 18px 120px}
@@ -184,6 +184,22 @@ body.in-flow .genbar{display:block}
 .slide img{display:block;width:100%;height:auto}
 .slide .sv{position:absolute;right:10px;bottom:10px;background:rgba(10,11,9,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 
+/* ---------- mini-doc library ---------- */
+.docitem{
+  display:flex;gap:14px;align-items:center;width:100%;text-align:left;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin-bottom:10px;color:var(--ink);font-family:var(--body);
+  transition:transform 140ms var(--ease),border-color 140ms var(--ease),background 140ms var(--ease);
+}
+.docitem:active{transform:scale(0.98)}
+@media (hover:hover) and (pointer:fine){.docitem:hover{border-color:var(--line-bright);background:var(--surface-2)}}
+.docitem .ep{font-family:var(--mono);font-size:12px;color:var(--green);min-width:32px;letter-spacing:1px}
+.docitem .dt{font-weight:700;font-size:15.5px;line-height:1.3}
+.docitem .ds{color:var(--muted-2);font-size:12.5px;margin-top:2px}
+.docitem .done{margin-left:auto;flex-shrink:0;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--green);border:1px solid var(--line-bright);border-radius:4px;padding:2px 6px}
+.thumbwrap{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.thumbwrap img{display:block;width:min(240px,42vw);height:auto;border:1px solid var(--line);border-radius:12px}
+
 .btnrow{display:flex;gap:10px;flex-wrap:wrap}
 .sbtn{
   background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
@@ -240,10 +256,10 @@ body.in-flow .genbar{display:block}
       <div class="d">One tap. A finished CFY carousel with caption and hashtags, ready to upload.</div>
     </button>
 
-    <button class="door soon pop" data-soon type="button">
+    <button class="door pop" id="doorDocs" type="button">
       <span class="num">03</span>
-      <div class="t">Give me an idea to shoot <span class="chip-soon">SOON</span></div>
-      <div class="d">Mini-doc scripts: console history, retro deep dives, buyer's guides. Script, shot list, thumbnail.</div>
+      <div class="t">Give me an idea to shoot</div>
+      <div class="d">Mini-doc scripts: console history and retro deep dives. Script, shot list, captions, thumbnail.</div>
     </button>
   </section>
 
@@ -285,6 +301,13 @@ body.in-flow .genbar{display:block}
     <h2>Need a post, nothing filmed</h2>
     <p class="sub" style="margin-bottom:0">A ready-made CFY carousel. Save the slides, copy the caption, upload in order.</p>
     <div id="caroResults" style="margin-top:26px"></div>
+  </section>
+
+  <!-- ============ MINI-DOC LIBRARY ============ -->
+  <section id="view-docs" class="view">
+    <h2>Give me an idea to shoot</h2>
+    <p class="sub" style="margin-bottom:0">Twelve mini-docs, ready to film. Pick one: script, shot list, captions and a thumbnail.</p>
+    <div id="docResults" style="margin-top:26px"></div>
   </section>
 </main>
 
@@ -862,7 +885,13 @@ function nextFromBank(bankKey, len){
 function detectConsoleTags(str){
   var s=(str||'').toLowerCase(), out=[];
   for(var i=0;i<CONSOLE_MAP.length;i++){
-    if(s.indexOf(CONSOLE_MAP[i][0])>=0){ out=CONSOLE_MAP[i][1]; break; }
+    var k=CONSOLE_MAP[i][0], at=s.indexOf(k);
+    /* key must not start mid-word: "business" is not an NES */
+    while(at>=0){
+      if(at===0 || !/[a-z0-9]/.test(s.charAt(at-1))){ out=CONSOLE_MAP[i][1]; break; }
+      at=s.indexOf(k,at+1);
+    }
+    if(out.length) break;
   }
   return out;
 }
@@ -920,10 +949,14 @@ function legacyCopy(text){
 
   $('doorFilmed').addEventListener('click',function(){ showFlow(); });
   $('doorCarousel').addEventListener('click',function(){ showCarousel(); });
+  $('doorDocs').addEventListener('click',function(){ showDocs(); });
   document.querySelectorAll('[data-soon]').forEach(function(b){
     b.addEventListener('click',function(){ toast('Coming in the next update'); });
   });
-  $('backBtn').addEventListener('click',function(){ showHome(); });
+  $('backBtn').addEventListener('click',function(){
+    if(document.body.classList.contains('in-docs') && docOpen){ renderDocLibrary(); }
+    else showHome();
+  });
   $('genBtn').addEventListener('click', generate);
 
   restoreDraft();
@@ -945,11 +978,15 @@ function showFlow(){
 function showHome(){
   $('view-flow').classList.remove('active');
   $('view-carousel').classList.remove('active');
+  $('view-docs').classList.remove('active');
   $('view-home').classList.add('active');
   document.body.classList.remove('in-flow');
   document.body.classList.remove('in-carousel');
+  document.body.classList.remove('in-docs');
   $('results').innerHTML='';
   $('caroResults').innerHTML='';
+  $('docResults').innerHTML='';
+  docOpen=null;
   window.scrollTo(0,0);
 }
 function updateGenBtn(){
@@ -1309,6 +1346,284 @@ function renderCarousel(topic){
   var pops=r.querySelectorAll('.pop');
   requestAnimationFrame(function(){ requestAnimationFrame(function(){
     pops.forEach(function(el,i){ el.style.transitionDelay=(i*55)+'ms'; el.setAttribute('data-in',''); });
+  });});
+}
+
+/* ================= MINI-DOC LIBRARY (door 03) ================= */
+var LS_DOCS='cfy_studio_docs_filmed';
+var docOpen=null;
+
+var DOC_BEAT_META=[
+  {t:'0:00',label:'Hook'},
+  {t:'0:06',label:'The setup'},
+  {t:'0:20',label:'The story'},
+  {t:'0:40',label:'The twist'},
+  {t:'0:55',label:'Why it matters'}
+];
+
+var DOCS=[
+  {id:'odyssey', kicker:'Console history', title:'The first games console ever', thumb:'THE FIRST CONSOLE EVER',
+   cap:'Before PlayStation, before Nintendo, before Atari, there was a brown box from 1972. Episode one of our console history series.',
+   beats:[
+    {say:'The first games console ever made had no sound, no real graphics, and you had to sellotape the scenery to your telly.', shot:'Text card on the hook. Hold up any retro console as a prop if one’s on the shelf.'},
+    {say:'It’s 1972. A TV engineer called Ralph Baer has spent years pitching a mad idea: playing games on your television.', shot:'Talking head at the counter. Keep it conversational.'},
+    {say:'Magnavox released it as the Odyssey. No sound chip. Blocky white dots for players. The graphics were plastic overlays you stuck on the screen.', shot:'Text cards for the facts: 1972, no sound, plastic screen overlays.'},
+    {say:'Then a young company called Atari saw the Odyssey’s tennis game, built Pong, and got sued for it. The first console war started with the very first console.', shot:'Any pong-style footage or a bold text card: THE FIRST LAWSUIT.'},
+    {say:'Every console on our shelf, from the PS5 down, traces straight back to that brown box. Fifty years of consoles, one idea: games in your living room.', shot:'Slow pan across the shop shelf.'}
+   ]},
+  {id:'ps1-betrayal', kicker:'Console history', title:'PlayStation exists because Nintendo broke a deal', thumb:'NINTENDO CREATED PLAYSTATION',
+   cap:'The PlayStation started life as a Nintendo add-on. Then one press conference changed gaming forever.',
+   beats:[
+    {say:'The PlayStation only exists because Nintendo humiliated Sony in public.', shot:'Straight to camera. Let the line land.'},
+    {say:'Late eighties: Sony and Nintendo are partners, building a CD add-on for the Super Nintendo. Its working name? The Play Station.', shot:'Talking head. Text card: PLAY STATION, two words.'},
+    {say:'Then in 1991, at the biggest trade show of the year, Nintendo walks on stage and announces a deal with Philips instead. Sony finds out with the rest of the world.', shot:'Text card: 1991. Dramatic pause is the whole edit here.'},
+    {say:'Sony engineer Ken Kutaragi convinces the bosses to finish the machine alone. In 1995 it launches here as the PlayStation, and it goes on to sell over a hundred million.', shot:'Hold up a PS1 or any PlayStation pad.'},
+    {say:'Nintendo’s snub built its biggest rival. Every PlayStation we sell exists because that handshake fell through.', shot:'Shelf pan across the PlayStation section.'}
+   ]},
+  {id:'ps2-king', kicker:'Console history', title:'The best-selling console of all time', thumb:'THE BEST SELLER EVER',
+   cap:'Not the Switch. Not the PS5. The best-selling console ever launched in the year 2000, and we still buy them every week.',
+   beats:[
+    {say:'The best-selling console of all time is not the one you think.', shot:'Straight to camera, then cut.'},
+    {say:'Year 2000. The PlayStation 2 launches, and it has a secret weapon that has nothing to do with games.', shot:'Hold up a PS2 if there’s one in. This doc is best with the real thing.'},
+    {say:'It was the cheapest DVD player you could buy. Families bought it for films and got the best games library ever made thrown in.', shot:'Text card: THE CHEAPEST DVD PLAYER IN THE SHOP.'},
+    {say:'Over 155 million sold. Production only stopped in 2013, thirteen years after launch.', shot:'Text card with the number. Let it sit on screen.'},
+    {say:'Boxed PS2s are collector pieces now, and clean ones never sit on our shelf for long. Check your loft before you next visit.', shot:'Close-up of a PS2 on the bench or shelf.'}
+   ]},
+  {id:'gameboy-tank', kicker:'Console history', title:'The console that survived a war', thumb:'IT SURVIVED A BOMBING',
+   cap:'A Game Boy got bombed in the Gulf War and kept working. This thing was built differently.',
+   beats:[
+    {say:'There is a Game Boy that survived a bombing, and it still plays Tetris.', shot:'Straight to camera. If there’s a Game Boy in stock, it’s in your hand.'},
+    {say:'1989. Nintendo launches a chunky grey brick with a green screen, while rivals ship fancy colour handhelds.', shot:'Talking head, Game Boy in hand.'},
+    {say:'The rivals’ colour screens ate batteries in a couple of hours. The Game Boy ran about thirty hours on four AAs, and it came bundled with Tetris. Game over.', shot:'Text cards: 30 HOURS vs 3 HOURS.'},
+    {say:'One unit came back scorched from a bombed barracks in the Gulf War. Nintendo put it on display, still switched on.', shot:'Text card: STILL WORKS. Bold type, nothing else.'},
+    {say:'Well over a hundred million sold across the line, and they still turn up at car boots every summer. We test every single one that comes in.', shot:'B-roll of the bench, a handheld being tested.'}
+   ]},
+  {id:'sega-nintendo', kicker:'Console history', title:'The nastiest console war ever fought', thumb:'SEGA VS NINTENDO',
+   cap:'Sega vs Nintendo in the nineties was the pettiest, most personal fight in gaming history.',
+   beats:[
+    {say:'In the nineties, two companies went to war over your living room, and it got personal.', shot:'Straight to camera.'},
+    {say:'Nintendo owned gaming. Then Sega turned up with the Mega Drive, a blue hedgehog, and an attitude problem.', shot:'Hold up a Mega Drive or SNES if either is in stock.'},
+    {say:'Sega’s adverts openly mocked Nintendo by name. Playgrounds split down the middle: Sonic’s speed or Mario’s polish.', shot:'Text card: SONIC vs MARIO, split screen style.'},
+    {say:'Nintendo won the war worldwide, but round here Sega landed real blows: the Mega Drive was huge in Britain.', shot:'Text card: BRITAIN WAS SEGA COUNTRY.'},
+    {say:'Both machines are proper collectibles now, and that rivalry is why they got so good so fast. We love seeing either one come through the door.', shot:'Both consoles side by side if possible, or the retro shelf.'}
+   ]},
+  {id:'crash-83', kicker:'Console history', title:'The year video games nearly died', thumb:'GAMES NEARLY DIED IN 1983',
+   cap:'In 1983 the games industry collapsed so hard they buried the evidence in the desert. True story.',
+   beats:[
+    {say:'Video games nearly died in 1983, and there is literally a landfill full of the evidence.', shot:'Straight to camera. This hook does the work.'},
+    {say:'America was drowning in shovelware. Rushed games, broken games, shelves full of cartridges nobody wanted.', shot:'Talking head. Text card: 1983.'},
+    {say:'The famous one, E.T. on Atari, was built in five weeks. It was so bad that lorryloads of unsold copies were buried in a New Mexico landfill. They dug them up in 2014 to prove it.', shot:'Text cards: 5 WEEKS. BURIED IN THE DESERT. DUG UP IN 2014.'},
+    {say:'Two years later Nintendo revived the entire industry by disguising the NES as a toy, complete with a little robot.', shot:'NES or any Nintendo kit in hand, or a text card: SOLD AS A TOY.'},
+    {say:'That crash is why quality control exists, and why an official seal of quality still means something. The industry learned the hard way.', shot:'Close on a boxed game’s seal, or straight to camera.'}
+   ]},
+  {id:'dreamcast', kicker:'Console history', title:'The console that was too early', thumb:'KILLED FOR BEING FIRST',
+   cap:'Online play, a screen in the controller, all in 1999. The Dreamcast did everything first, and it died for it.',
+   beats:[
+    {say:'The most ahead-of-its-time console ever made lasted barely two years on sale.', shot:'Straight to camera. Dreamcast in hand if you’re lucky enough to have one in.'},
+    {say:'1999: Sega launches the Dreamcast with a modem in the box, online play as standard, and a memory card with its own little screen.', shot:'Text cards: ONLINE IN 1999. A SCREEN IN THE PAD.'},
+    {say:'The games were incredible. Crazy Taxi, Shenmue, Jet Set Radio. But the PS2 was coming, and everyone knew it.', shot:'Talking head, pace up.'},
+    {say:'Barely nine million sold. By 2001, Sega was out of the console business forever, killed off after the hardware that deserved it least.', shot:'Text card: 2001. THE END. Hold it a beat.'},
+    {say:'Dreamcasts are beloved collector machines now, worth far more attention than they got at the time. When one lands here, it does not hang around.', shot:'Slow pan of the Dreamcast or the retro shelf.'}
+   ]},
+  {id:'flops', kicker:'Console history', title:'Gaming’s biggest flops', thumb:'THE BIGGEST FLOPS EVER',
+   cap:'Even the giants ship a disaster sometimes. Three consoles that face-planted, and what each one got wrong.',
+   beats:[
+    {say:'Nintendo once sold a console that gave people headaches. It did not go well.', shot:'Straight to camera, deadpan.'},
+    {say:'The Virtual Boy, 1995: virtual reality rendered entirely in eye-strain red, played hunched over a tripod. Dead within a year.', shot:'Text card: VIRTUAL BOY, 1995. Red on black if you can.'},
+    {say:'Nokia’s N-Gage made you hold a taco-shaped phone sideways against your head to take calls. And the Wii U was pitched so confusingly that people thought it was an accessory for the Wii.', shot:'Text cards for each name. Quick cuts, one per flop.'},
+    {say:'But every flop taught its maker something. The Wii U’s best ideas became the Switch, one of the best-selling consoles in history.', shot:'Hold up a Switch. The redemption beat.'},
+    {say:'And here’s the kicker: flops become collectibles. A boxed Virtual Boy is worth silly money now, precisely because nobody bought one at the time.', shot:'Straight to camera for the last line.'}
+   ]},
+  {id:'wii-nan', kicker:'Console history', title:'The console your nan played', thumb:'THE CONSOLE YOUR NAN PLAYED',
+   cap:'The Wii ignored the console war completely and sold over a hundred million by going after everyone else.',
+   beats:[
+    {say:'Nintendo’s best-selling home console ever won by refusing to fight.', shot:'Straight to camera.'},
+    {say:'2006: Sony and Microsoft are locked in a horsepower race. Nintendo shows up with a motion-controlled remote and a bowling game.', shot:'Wii remote in hand. Mime the bowling swing.'},
+    {say:'Wii Sports did what no shooter could: it got nans, mums and entire offices playing. The Wii was sold out for two straight years.', shot:'Text card: SOLD OUT FOR 2 YEARS.'},
+    {say:'Over a hundred million sold, mostly to people who had never owned a console in their lives.', shot:'Text card with the number.'},
+    {say:'There’s probably one in your house right now, and it still makes people smile at parties. They come through the shop constantly, and they always find a new home.', shot:'Wii on the shelf or bench, pad in the dock.'}
+   ]},
+  {id:'xbox-gamble', kicker:'Console history', title:'Microsoft’s most expensive gamble', thumb:'MICROSOFT’S BIG GAMBLE',
+   cap:'In 2001 a software company decided to fight Sony and Nintendo with a giant black box and one alien shooter.',
+   beats:[
+    {say:'The original Xbox lost Microsoft billions, and they would do it again tomorrow.', shot:'Straight to camera.'},
+    {say:'2001: a software company with zero console experience walks into a two-horse race against Sony and Nintendo.', shot:'Talking head. Text card: 2001.'},
+    {say:'The machine was a monster. Built-in hard drive, broadband port, and a controller nicknamed The Duke that barely fit human hands.', shot:'Original Xbox or Duke pad in hand if stocked. It’s a great prop.'},
+    {say:'One launch game saved the whole bet: Halo. It sold the console, defined online console shooters, and built the Xbox brand we have today.', shot:'Text card: HALO SAVED IT.'},
+    {say:'Original Xboxes are creeping into collectible territory now, especially boxed. And The Duke is a conversation piece on any shelf.', shot:'Close-up of the console or pad, slow pan.'}
+   ]},
+  {id:'boxed-premium', kicker:'Retro deep dive', title:'Why boxed retro costs so much now', thumb:'WHY THE BOX MATTERS',
+   cap:'A boxed console can be worth several times the loose one. The reasons are actually fascinating.',
+   beats:[
+    {say:'The most valuable part of a retro console is sometimes the cardboard it came in.', shot:'Hold up a boxed console. This doc needs a boxed prop or b-roll.'},
+    {say:'Here’s the trick: consoles survived by the million, but boxes went out with the Christmas wrapping.', shot:'Talking head, box in frame.'},
+    {say:'Collectors chase complete-in-box: console, inserts, manuals, even the cable ties. Scarcity does the rest.', shot:'Lay out the full contents of a boxed console on the bench.'},
+    {say:'And nostalgia runs on roughly a twenty-five year cycle. The kids of the nineties have grown-up money now, and they want their childhood back. Boxed.', shot:'Text card: THE 25-YEAR CYCLE.'},
+    {say:'So never bin a box, and check the loft before you sell anything retro. The cardboard might be the best bit.', shot:'Straight to camera for the advice.'}
+   ]},
+  {id:'switch-comeback', kicker:'Console history', title:'The comeback console', thumb:'FROM FLOP TO PHENOMENON',
+   cap:'Nintendo followed its worst-selling home console with one of the best-selling consoles ever made. Here’s how.',
+   beats:[
+    {say:'Nintendo’s biggest triumph came straight after its biggest failure.', shot:'Straight to camera.'},
+    {say:'2017: the Wii U has flopped so badly that people are writing Nintendo’s obituary.', shot:'Talking head. Text card: 2017.'},
+    {say:'The Switch takes the Wii U’s best idea, playing away from the telly, and commits properly. One console, handheld and docked, no compromise.', shot:'Do the dock-undock move on camera. That IS the story.'},
+    {say:'It becomes one of the best-selling consoles in history, and its games barely drop in price for eight years.', shot:'Text card: GAMES THAT NEVER GET CHEAPER.'},
+    {say:'Switches hold their value like almost nothing else we buy and sell. If yours is gathering dust, it’s worth more than you think.', shot:'Switch on the bench, then straight to camera.'}
+   ]}
+];
+
+function docFilmed(){ return lsGet(LS_DOCS,{}); }
+function showDocs(){
+  $('view-home').classList.remove('active');
+  $('view-docs').classList.add('active');
+  document.body.classList.add('in-docs');
+  renderDocLibrary();
+}
+function renderDocLibrary(){
+  docOpen=null;
+  var r=$('docResults'); r.innerHTML='';
+  var filmed=docFilmed();
+  DOCS.forEach(function(doc,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='docitem pop';
+    b.innerHTML='<span class="ep">'+two(i+1)+'</span>'+
+      '<span><span class="dt">'+esc(doc.title)+'</span>'+
+      '<span class="ds" style="display:block">'+esc(doc.kicker)+' · 60-90s</span></span>'+
+      (filmed[doc.id]?'<span class="done">FILMED ✓</span>':'');
+    b.addEventListener('click',function(){ fontsReady(function(){ renderDoc(doc); }); });
+    r.appendChild(b);
+  });
+  staggerIn(r);
+  window.scrollTo(0,0);
+}
+
+function docBeats(doc){
+  var beats=doc.beats.map(function(b,i){
+    return {t:DOC_BEAT_META[i].t, label:DOC_BEAT_META[i].label, text:b.say, hint:b.shot};
+  });
+  beats.push({t:'1:10', label:'CTA',
+    text:'TikTok / YouTube: “Follow for the next episode. Got console history in a drawer? Instant quote at consoles for you dot com.”\nInstagram: “Follow for the next episode. Got console history in a drawer? DM us the word QUOTE.”',
+    hint:'Say it to camera, then the CFY end-card.'});
+  return beats;
+}
+function docTags(doc){
+  var story=doc.title+' '+doc.beats.map(function(b){ return b.say; }).join(' ');
+  var tags=['#consolesforyou','#gaminghistory','#retrogaming','#didyouknow']
+    .concat(detectConsoleTags(story).slice(0,3))
+    .concat(['#gaming','#ukgaming']);
+  var seen={},out=[];
+  tags.forEach(function(t){ if(!seen[t]){ seen[t]=1; out.push(t); } });
+  return out.slice(0,9);
+}
+function buildDocCaption(plat,doc){
+  var ctaBank = plat==='tt' ? CAPTION_CTAS.tt : (igRestricted ? CAPTION_CTAS.ig_restricted : CAPTION_CTAS.ig_open);
+  var cta=ctaBank[(DOCS.indexOf(doc))%ctaBank.length];
+  return doc.cap+'\n\n'+cta+'\n\n'+docTags(doc).join(' ');
+}
+
+/* 1080x1920 thumbnail title card */
+function drawThumb(ctx,doc,ep){
+  var W=1080,H=1920,M=96,TW=W-M*2;
+  var g=ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#111410'); g.addColorStop(.55,'#0a0b09');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+  ctx.font='54px Anton';
+  ctx.fillStyle='#f6f6ec'; ctx.fillText('CF',M,M+44);
+  var w=ctx.measureText('CF').width;
+  ctx.fillStyle='#c5f82a'; ctx.fillText('Y',M+w+3,M+44);
+  ctx.font='30px "Space Mono"'; ctx.fillStyle='#838a73'; ctx.textAlign='right';
+  ctx.fillText('MINI-DOC',W-M,M+38);
+  ctx.textAlign='left';
+  setSpacing(ctx,'6px');
+  ctx.font='34px "Space Mono"'; ctx.fillStyle='#c5f82a';
+  ctx.fillText(doc.kicker.toUpperCase()+' · EP '+two(ep),M,760);
+  setSpacing(ctx,'0px');
+  var f=fitFont(ctx,doc.thumb,'{px}px Anton',132,80,TW,4);
+  ctx.font=f.px+'px Anton'; ctx.fillStyle='#f6f6ec';
+  var end=drawLines(ctx,f.lines,M,760+f.px+32,Math.round(f.px*1.1));
+  ctx.fillStyle='#c5f82a'; ctx.fillRect(M,end+10,120,10);
+  ctx.font='30px "Space Mono"'; ctx.fillStyle='#838a73';
+  ctx.fillText('@consolesforyou',M,H-M+10);
+}
+
+function renderDoc(doc){
+  docOpen=doc.id;
+  var r=$('docResults'); r.innerHTML='';
+  var ep=DOCS.indexOf(doc)+1;
+  var filmed=docFilmed();
+
+  /* header bar */
+  var bar=document.createElement('div'); bar.className='topicbar pop';
+  bar.innerHTML='<div><div class="tk">'+esc(doc.kicker)+' · EP '+two(ep)+' · 60-90s</div>'+
+    '<div class="tt2">'+esc(doc.title)+'</div></div>'+
+    '<button class="sbtn" id="filmedBtn" type="button">'+(filmed[doc.id]?'Filmed ✓':'Mark as filmed')+'</button>';
+  r.appendChild(bar);
+  var fb=bar.querySelector('#filmedBtn');
+  if(filmed[doc.id]) fb.classList.add('copied');
+  fb.addEventListener('click',function(){
+    var f=docFilmed();
+    if(f[doc.id]){ delete f[doc.id]; fb.textContent='Mark as filmed'; fb.classList.remove('copied'); }
+    else{ f[doc.id]=true; fb.textContent='Filmed ✓'; fb.classList.add('copied'); }
+    lsSet(LS_DOCS,f);
+  });
+
+  /* script card */
+  var beats=docBeats(doc);
+  var card=document.createElement('div'); card.className='card pop';
+  var h='<div class="chd"><h3>Script <span class="tag">read it in your own words</span></h3></div>';
+  beats.forEach(function(b){
+    h+='<div class="beat"><div class="bt">'+esc(b.t)+'</div><div>'+
+       '<div class="bl">'+esc(b.label)+'</div>'+
+       '<div class="bx">'+esc(b.text).replace(/\n/g,'<br>')+'</div>'+
+       '<div class="bh">'+esc(b.hint)+'</div></div></div>';
+  });
+  h+='<div class="hint" style="margin-top:12px">Mini-docs can run 60 to 90 seconds. Everything else still applies: burned-in subtitles, sound effects not music, CFY end-card.</div>';
+  card.innerHTML=h; r.appendChild(card);
+
+  /* thumbnail card */
+  var cv=document.createElement('canvas'); cv.width=1080; cv.height=1920;
+  drawThumb(cv.getContext('2d'),doc,ep);
+  var turl=cv.toDataURL('image/png');
+  var tc=document.createElement('div'); tc.className='card pop';
+  tc.innerHTML='<div class="chd"><h3>Thumbnail</h3><button class="sbtn" id="saveThumb" type="button">Save thumbnail</button></div>'+
+    '<div class="thumbwrap"><img alt="Thumbnail title card" src="'+turl+'">'+
+    '<div class="hint" style="flex:1;min-width:160px">Use it as the cover when you post, and as the title card for the first second. On a phone: press and hold, then Save Image.</div></div>';
+  r.appendChild(tc);
+  tc.querySelector('#saveThumb').addEventListener('click',function(){ saveSlide(turl,'cfy-minidoc-'+doc.id+'.png',this); });
+
+  /* captions card */
+  var ttCap=buildDocCaption('tt',doc), igCap=buildDocCaption('ig',doc);
+  var cap=document.createElement('div'); cap.className='card pop';
+  cap.innerHTML=
+    '<div class="chd"><h3>Caption</h3></div>'+
+    '<div class="capblock"><div class="cap-plat">TikTok · YouTube</div>'+
+    '<div class="captext">'+esc(ttCap)+'</div>'+
+    '<div class="btnrow"><button class="sbtn" data-dcopy="tt" type="button">Copy caption</button></div></div>'+
+    '<div class="capblock"><div class="cap-plat">Instagram '+(igRestricted?'<span class="note">· no links until 6 Aug, CTA is DM QUOTE</span>':'')+'</div>'+
+    '<div class="captext">'+esc(igCap)+'</div>'+
+    '<div class="btnrow"><button class="sbtn" data-dcopy="ig" type="button">Copy caption</button></div></div>';
+  r.appendChild(cap);
+  cap.querySelector('[data-dcopy=tt]').addEventListener('click',function(){ copyText(ttCap,this); });
+  cap.querySelector('[data-dcopy=ig]').addEventListener('click',function(){ copyText(igCap,this); });
+
+  /* hashtags card */
+  var tags=docTags(doc);
+  var tg=document.createElement('div'); tg.className='card pop';
+  tg.innerHTML='<div class="chd"><h3>Hashtags</h3><button class="sbtn" id="cpDocTags" type="button">Copy all</button></div>'+
+    '<div class="tagwrap">'+tags.map(function(t){ return '<span class="htag">'+esc(t)+'</span>'; }).join('')+'</div>'+
+    '<div class="hint">Already added to both captions above.</div>';
+  r.appendChild(tg);
+  tg.querySelector('#cpDocTags').addEventListener('click',function(){ copyText(tags.join(' '),this); });
+
+  staggerIn(r);
+  window.scrollTo(0,0);
+}
+
+function staggerIn(root){
+  var pops=root.querySelectorAll('.pop');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    pops.forEach(function(el,i){ el.style.transitionDelay=(Math.min(i,8)*45)+'ms'; el.setAttribute('data-in',''); });
   });});
 }
 </script>
