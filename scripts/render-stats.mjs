@@ -1,0 +1,121 @@
+// Pure renderer for the CFY no-login stats page. No side effects.
+// Imported by scripts/gen-stats.mjs (live data) and used to build the initial placeholder.
+
+export function flag(code) {
+  if (!code || String(code).length !== 2) return "🌍";
+  return String.fromCodePoint(...[...String(code).toUpperCase()].map((c) => 0x1f1a5 + c.charCodeAt(0)));
+}
+
+const PAGE_LABELS = {
+  "/": "Home",
+  "/index.html": "Home",
+  "/shop.html": "Shop",
+  "/terms.html": "Terms",
+};
+export function pageLabel(path) {
+  if (!path) return "(other)";
+  return PAGE_LABELS[path] || path;
+}
+
+export function renderHTML({ views = 0, visitors = 0, shopViews = 0, countries = [], pages = [], stamp = "" } = {}) {
+  const maxC = Math.max(1, ...countries.map((c) => Number(c[2])));
+  const countryRows = countries.length
+    ? countries
+        .map(
+          ([name, code, v]) =>
+            `<div class="row"><span class="flag">${flag(code)}</span><span class="name">${name}</span><span class="bar"><i style="width:${Math.round((Number(v) / maxC) * 100)}%"></i></span><span class="v">${v}</span></div>`,
+        )
+        .join("\n    ")
+    : `<div class="empty">No visitors yet. Share the site and countries will appear here.</div>`;
+
+  const maxP = Math.max(1, ...pages.map((p) => Number(p[1])));
+  const pageRows = pages.length
+    ? pages
+        .map(
+          ([path, v]) =>
+            `<div class="row"><span class="pg">${pageLabel(path)}</span><span class="bar"><i style="width:${Math.round((Number(v) / maxP) * 100)}%"></i></span><span class="v">${v}</span></div>`,
+        )
+        .join("\n    ")
+    : `<div class="empty">No page views yet.</div>`;
+
+  const stampLine = stamp
+    ? `Live · auto-updates hourly · last refreshed ${stamp}`
+    : `Set up · waiting for the first hourly refresh`;
+
+  return `<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="refresh" content="900" />
+<meta name="robots" content="noindex" />
+<title>Consoles For You · Website Analytics</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0a0b09;--surface:#14160f;--surface2:#1a1c13;--line:#282b1d;--ink:#f4f6ee;--muted:#9aa08a;--green:#c5f82a;--green-deep:#8fb814}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);padding:34px 20px 64px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto}
+  .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .mark{font-family:"Anton",sans-serif;font-size:1.7rem;letter-spacing:.02em}
+  .mark b{color:#fff;font-weight:400}.mark span{color:var(--green);font-weight:400}
+  h1{font-family:"Anton",sans-serif;font-weight:400;font-size:1.5rem;letter-spacing:.01em;color:var(--ink)}
+  .sub{color:var(--muted);font-size:.94rem;margin:6px 0 22px}
+  .sub strong{color:var(--ink)}
+  .snap{display:inline-flex;align-items:center;gap:8px;background:rgba(197,248,42,.09);border:1px solid rgba(197,248,42,.3);border-radius:999px;padding:6px 14px;font-family:"Space Mono",monospace;font-size:.74rem;font-weight:700;color:var(--green);margin-bottom:26px;text-transform:uppercase;letter-spacing:.04em}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(197,248,42,.6);animation:p 1.8s ease-out infinite}
+  @keyframes p{0%{box-shadow:0 0 0 0 rgba(197,248,42,.5)}100%{box-shadow:0 0 0 9px rgba(197,248,42,0)}}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+  @media(max-width:620px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .card .n{font-family:"Space Mono",monospace;font-size:2.7rem;font-weight:700;line-height:1;color:var(--green)}
+  .card .l{margin-top:10px;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:14px}
+  .panel h2{font-size:1.05rem;font-weight:800;margin-bottom:3px}
+  .panel .ph{color:var(--muted);font-size:.82rem;margin-bottom:18px;font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.04em}
+  .row{display:flex;align-items:center;gap:13px;margin:11px 0}
+  .row .flag{font-size:1.4rem;width:28px;text-align:center}
+  .row .name{width:150px;font-weight:600;font-size:.94rem}
+  .row .pg{width:150px;font-weight:600;font-size:.94rem}
+  @media(max-width:620px){.row .name,.row .pg{width:96px;font-size:.86rem}}
+  .bar{flex:1;height:13px;background:var(--surface2);border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green-deep),var(--green));border-radius:999px}
+  .row .v{width:56px;text-align:right;font-family:"Space Mono",monospace;font-weight:700;color:var(--green)}
+  .empty{color:var(--muted);font-size:.92rem;padding:6px 0}
+  .actions{margin-top:26px}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:.92rem;padding:12px 20px;border-radius:12px;background:transparent;color:var(--green);border:1.5px solid var(--line)}
+  .btn:hover{border-color:var(--green)}
+  .foot{color:var(--muted);font-size:.79rem;margin-top:30px;line-height:1.65}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="mark"><b>CF</b><span>Y</span></div><h1>Website Analytics</h1></div>
+  <p class="sub">Who's visiting <strong>consolesforyou.com</strong>, and from where.</p>
+  <span class="snap"><span class="dot"></span> ${stampLine}</span>
+  <div class="cards">
+    <div class="card"><div class="n">${views}</div><div class="l">Page views</div></div>
+    <div class="card"><div class="n">${visitors}</div><div class="l">Unique visitors</div></div>
+    <div class="card"><div class="n">${shopViews}</div><div class="l">Shop views</div></div>
+  </div>
+  <div class="panel">
+    <h2>Visitors by country</h2>
+    <p class="ph">Last 30 days</p>
+    ${countryRows}
+  </div>
+  <div class="panel">
+    <h2>Top pages</h2>
+    <p class="ph">Last 30 days</p>
+    ${pageRows}
+  </div>
+  <div class="actions">
+    <a class="btn" href="https://consolesforyou.com" target="_blank" rel="noopener">Visit consolesforyou.com</a>
+  </div>
+  <p class="foot">This page updates itself automatically. Refresh or reopen it anytime to see the latest, no login needed. Numbers cover the last 30 days. Shop views count anyone who opened the shop page.</p>
+</div>
+</body>
+</html>`;
+}

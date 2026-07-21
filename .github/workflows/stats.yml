@@ -1,0 +1,35 @@
+name: Refresh analytics page
+
+on:
+  schedule:
+    - cron: "23 * * * *" # hourly
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate stats.html
+        env:
+          POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+          POSTHOG_PROJECT_ID: "208594"
+          POSTHOG_HOST: "https://eu.posthog.com"
+        run: node scripts/gen-stats.mjs
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain stats.html)" ]; then
+            git config user.name "cfy-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add stats.html
+            git commit -m "chore: refresh analytics page [skip ci]"
+            git push
+          else
+            echo "stats.html unchanged (or no API key yet) — nothing to commit."
+          fi
