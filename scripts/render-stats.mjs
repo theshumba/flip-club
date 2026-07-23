@@ -28,12 +28,22 @@ export function renderHTML({ views = 0, visitors = 0, shopViews = 0, countries =
         .join("\n    ")
     : `<div class="empty">No visitors yet. Share the site and countries will appear here.</div>`;
 
-  const maxP = Math.max(1, ...pages.map((p) => Number(p[1])));
-  const pageRows = pages.length
-    ? pages
+  // Merge paths that share a label (/ and /index.html are both "Home") so a page is one row, not two.
+  const merged = [];
+  for (const [path, v] of pages) {
+    const label = pageLabel(path);
+    const hit = merged.find((m) => m[0] === label);
+    if (hit) hit[1] += Number(v);
+    else merged.push([label, Number(v)]);
+  }
+  merged.sort((a, b) => b[1] - a[1]);
+
+  const maxP = Math.max(1, ...merged.map((p) => Number(p[1])));
+  const pageRows = merged.length
+    ? merged
         .map(
-          ([path, v]) =>
-            `<div class="row"><span class="pg">${pageLabel(path)}</span><span class="bar"><i style="width:${Math.round((Number(v) / maxP) * 100)}%"></i></span><span class="v">${v}</span></div>`,
+          ([label, v]) =>
+            `<div class="row"><span class="pg">${label}</span><span class="bar"><i style="width:${Math.round((Number(v) / maxP) * 100)}%"></i></span><span class="v">${v}</span></div>`,
         )
         .join("\n    ")
     : `<div class="empty">No page views yet.</div>`;
