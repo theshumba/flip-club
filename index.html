@@ -30,7 +30,7 @@
 <!-- ============================================================
      SWAP-ME CHECKLIST (search "SWAP-ME"):
        • WhatsApp number → set the WHATSAPP const in the script block (used by quote + shop)
-       • Quote prices → priceTable in the script block - PS5 models ONLY show on-screen prices (= CeX voucher −15-25%, floored to beat CeX cash; last synced 2026-07-08; review weekly). Every other console = WhatsApp photo valuation (inquiryModels list - no price shown on site)
+       • Quote prices → NO console shows an on-screen price any more. Every model sits in inquiryModels and the widget says "Enquire now", which opens WhatsApp for a photo valuation. priceTable is deliberately empty: to put an instant price back on one model, add it there as 'Model': [boxed, good, faulty] and remove it from inquiryModels.
        • Shop prices → stock[] price = CeX We-Sell −15-25%
        • Shop stock + real photos → stock[] in the script block (add Stripe Payment Link as s.buy to take card)
        • PO Box / drop-off address → give to sellers in WhatsApp after they accept
@@ -418,7 +418,7 @@ posthog.init('phc_xpgg4xbpp4mCYL2nVT7QUjYBCR34sckhqjiSYbpiDYy5',{api_host:'https
     <div>
       <span class="eyebrow reveal in">Sell · Shop · Repair · UK console community</span>
       <h1 class="h-xl reveal in d1">Sell your <span class="stroke">console</span><br>for a <em>fair<br>cash price.</em></h1>
-      <p class="lead reveal in d2">Selling a PS5? Get an instant price in seconds. Any other console? Send us a few photos on WhatsApp and we'll reply with a fair cash valuation. Free postage, tested the day it lands, paid by bank transfer. Plus a shop of tested consoles, in-house repairs, and Flip Club, our UK community learning how console reselling works.</p>
+      <p class="lead reveal in d2">Selling a console? Pick your model, send us a few photos on WhatsApp, and we'll reply with a fair cash valuation. Free postage, tested the day it lands, paid by bank transfer. Plus a shop of tested consoles, in-house repairs, and Flip Club, our UK community learning how console reselling works.</p>
       <div class="hero-cta reveal in d3">
         <a href="#quote" class="btn btn-primary">Get your quote</a>
         <a href="#shop" class="btn btn-ghost">Shop consoles</a>
@@ -446,14 +446,14 @@ posthog.init('phc_xpgg4xbpp4mCYL2nVT7QUjYBCR34sckhqjiSYbpiDYy5',{api_host:'https
         <select class="q-select" id="q-cond" aria-label="Condition"></select>
       </div>
       <div class="q-result">
-        <div class="qlabel">Our cash offer</div>
-        <div class="q-price" id="q-price">£226</div>
-        <div class="q-guar">Found a higher CeX cash quote? Show us and we'll beat it.</div>
+        <div class="qlabel">Your valuation</div>
+        <div class="q-price txt" id="q-price">Enquire now</div>
+        <div class="q-guar">Message us a few photos of your console and we'll reply with a fair cash offer.</div>
       </div>
       <!-- SWAP-ME: WhatsApp number is the WHATSAPP const in the script block -->
       <a class="btn btn-primary" id="q-claim" href="#" target="_blank" rel="noopener">
         <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
-        <span id="q-btn-label">Lock this price</span>
+        <span id="q-btn-label">Enquire on WhatsApp</span>
       </a>
       <p class="q-note">Free postage · tested same day · same-day bank transfer</p>
     </div>
@@ -466,10 +466,10 @@ posthog.init('phc_xpgg4xbpp4mCYL2nVT7QUjYBCR34sckhqjiSYbpiDYy5',{api_host:'https
     <div class="sec-head reveal">
       <span class="eyebrow">Sell to us</span>
       <h2 class="h-lg">Fair cash price.<br>Paid the same day.</h2>
-      <p class="lead">Sell your PS5 with an instant on-screen price, or send a few photos of any other console on WhatsApp for a fast, fair valuation. Show us a higher genuine CeX <em>cash</em> quote for the same console and condition, and we'll beat it. Post it to us free, we test it the day it lands, and you're paid by same-day bank transfer. No haggling, no queue, no lowballing.</p>
+      <p class="lead">Send us a few photos of any console on WhatsApp and we'll come back with a fast, fair valuation. Show us a higher genuine CeX <em>cash</em> quote for the same console and condition, and we'll beat it. Post it to us free, we test it the day it lands, and you're paid by same-day bank transfer. No haggling, no queue, no lowballing.</p>
     </div>
     <div class="steps four">
-      <div class="step reveal"><span class="num">01 / QUOTE</span><h3>Get your quote</h3><p>PS5s get an instant on-screen price. Any other console? Message us a few photos on WhatsApp and we'll reply with a fair cash valuation.</p></div>
+      <div class="step reveal"><span class="num">01 / QUOTE</span><h3>Get your quote</h3><p>Pick your console and condition, tap through to WhatsApp, and message us a few photos. We'll reply with a fair cash valuation.</p></div>
       <div class="step reveal d1"><span class="num">02 / POST</span><h3>Free label</h3><p>Happy with it? We email a free prepaid label. Box it up and drop it at any post office. Postage is on us.</p></div>
       <div class="step reveal d2"><span class="num">03 / TEST</span><h3>We test it</h3><p>Real people test and grade your console the day it lands. Honest grade, every time. No surprise deductions.</p></div>
       <div class="step reveal d3"><span class="num">04 / PAID</span><h3>Same-day cash</h3><p>All good? Money hits your bank the same day. Not quite right? We tell you straight, and post it back free if you say no.</p></div>
@@ -521,9 +521,9 @@ posthog.init('phc_xpgg4xbpp4mCYL2nVT7QUjYBCR34sckhqjiSYbpiDYy5',{api_host:'https
         </div>
         <div class="px-summary">
           <div class="px-row"><span>Item price</span><span class="val" id="px-price">£349</span></div>
-          <div class="px-row"><span>Trade-in credit</span><span class="val credit" id="px-credit">−£77</span></div>
-          <div class="px-boost" id="px-boost">£10 more than our cash offer</div>
-          <div class="px-row px-total"><span>You pay</span><span id="px-pay">£272</span></div>
+          <div class="px-row"><span>Trade-in credit</span><span class="val credit" id="px-credit">Enquire now</span></div>
+          <div class="px-boost" id="px-boost">Send us photos on WhatsApp. Part-ex credit is 15% above our cash offer</div>
+          <div class="px-row px-total"><span>You pay</span><span id="px-pay">TBC</span></div>
           <a class="btn btn-primary" id="px-claim" href="#" target="_blank" rel="noopener">
             <svg class="wa-ic" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.4 1.2 1.2-4.3-.2-.4c-1-1.6-1.6-3.5-1.6-5.5C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.7 16 25.7zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
             Start part-exchange
@@ -740,7 +740,7 @@ posthog.init('phc_xpgg4xbpp4mCYL2nVT7QUjYBCR34sckhqjiSYbpiDYy5',{api_host:'https
     <div class="reveal">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How does selling my console to you work? <span class="pm">+</span></button>
-        <div class="faq-a"><p>Selling a PS5? You get an instant price on screen. Any other console? Tap through to WhatsApp, send us a few photos, and we'll reply with a fair cash valuation. Happy with the number either way? We email you a free prepaid postage label, you drop it at the post office, we test it the day it lands, and once it passes you're paid by same-day bank transfer. No queue, no haggling.</p></div>
+        <div class="faq-a"><p>Pick your console and condition, tap through to WhatsApp, and send us a few photos. We'll reply with a fair cash valuation. Happy with the number? We email you a free prepaid postage label, you drop it at the post office, we test it the day it lands, and once it passes you're paid by same-day bank transfer. No queue, no haggling.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How can you pay more than CeX? <span class="pm">+</span></button>
@@ -840,17 +840,14 @@ const WHATSAPP = '447786607434'; // Consoles For You WhatsApp (07786 607434) - i
 const waLink = (msg) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 /* ===== valuation widget ===== */
-// EDIT THESE - on-screen prices are PS5-ONLY: CeX VOUCHER minus 15-25%, floored so it always still beats CeX cash. Faulty ~= 40% of Good. Last synced 2026-07-08. Review weekly.
-// model : [ boxed/like-new , good/working , faulty/for-repair ]
-const priceTable = {
-  'PlayStation 5 (Disc)':         [226, 205, 80],
-  'PlayStation 5 (Digital)':      [207, 197, 80],
-  'PlayStation 5 Slim (Disc)':    [247, 237, 95],
-  'PlayStation 5 Slim (Digital)': [213, 207, 85],
-  'PlayStation 5 Pro':            [422, 405, 160],
-};
-// Every other console we buy - no price on site; the customer sends photos on WhatsApp and we reply with a valuation.
+// No console shows an on-screen price. Every model is an "Enquire now" -> WhatsApp photo valuation.
+// To put an instant price back on a model, add it here as  'Model': [ boxed/like-new , good/working , faulty/for-repair ]
+// and delete that model from inquiryModels below. Last live PS5 numbers (2026-07-08, CeX voucher -15-25%) if you
+// ever want them back: Disc [226,205,80] · Digital [207,197,80] · Slim Disc [247,237,95] · Slim Digital [213,207,85] · Pro [422,405,160].
+const priceTable = {};
+// Every console we buy - no price on site; the customer sends photos on WhatsApp and we reply with a valuation.
 const inquiryModels = [
+  'PlayStation 5 (Disc)','PlayStation 5 (Digital)','PlayStation 5 Slim (Disc)','PlayStation 5 Slim (Digital)','PlayStation 5 Pro',
   'PlayStation 4 Slim','PlayStation 4 Pro','PlayStation 3',
   'Xbox Series X (Disc)','Xbox Series X (Digital)','Xbox Series X 2TB Galaxy',
   'Xbox Series S 512GB','Xbox Series S 1TB','Xbox One X',
@@ -879,11 +876,11 @@ function updateQuote(){
     qBtnEl.textContent = 'Lock this price';
     claimEl.href = waLink(`Hi Consoles For You, I'd like to sell my ${m} (${cond}). Your quote was £${price}. Please send me a free postage label.`);
   } else {
-    qLabelEl.textContent = 'Valuation over WhatsApp';
-    priceEl.textContent = 'Send us photos';
+    qLabelEl.textContent = 'Your valuation';
+    priceEl.textContent = 'Enquire now';
     priceEl.classList.add('txt');
-    qGuarEl.textContent = "Message us a few photos of your console and we'll reply with a fair cash valuation.";
-    qBtnEl.textContent = 'Get my valuation';
+    qGuarEl.textContent = "Message us a few photos of your console and we'll reply with a fair cash offer.";
+    qBtnEl.textContent = 'Enquire on WhatsApp';
     claimEl.href = waLink(`Hi Consoles For You, I'd like a cash valuation for my ${m} (${cond}). I'll send a few photos of the console now.`);
   }
 }
@@ -924,7 +921,7 @@ function updatePartex(){
       : `£${credit - cash} more than our cash offer`;
     document.getElementById('px-claim').href = waLink(`Hi Consoles For You, I'd like to part-exchange my ${pxModel.value} (${conditions[+pxCond.value]}) toward the ${item.name} (model ${item.model}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
   } else {
-    document.getElementById('px-credit').textContent = 'Photo valuation';
+    document.getElementById('px-credit').textContent = 'Enquire now';
     document.getElementById('px-pay').textContent    = 'TBC';
     document.getElementById('px-boost').textContent  = 'Send us photos on WhatsApp. Part-ex credit is 15% above our cash offer';
     document.getElementById('px-claim').href = waLink(`Hi Consoles For You, I'd like to part-exchange my ${pxModel.value} (${conditions[+pxCond.value]}) toward the ${item.name} (model ${item.model}, £${item.price}). I'll send a few photos of my console for a trade-in valuation.`);

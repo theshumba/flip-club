@@ -573,15 +573,11 @@ const firebaseConfig = {
 };
 
 /* ===== part-exchange data (copied from index.html - keep in sync) ===== */
-// model : [ boxed/like-new , good/working , faulty/for-repair ]
-const priceTable = {
-  'PlayStation 5 (Disc)':         [226, 205, 80],
-  'PlayStation 5 (Digital)':      [207, 197, 80],
-  'PlayStation 5 Slim (Disc)':    [247, 237, 95],
-  'PlayStation 5 Slim (Digital)': [213, 207, 85],
-  'PlayStation 5 Pro':            [422, 405, 160],
-};
+// No console has an on-screen trade-in price: every model is an "Enquire now" -> WhatsApp photo valuation.
+// To restore an instant price, add it here as 'Model': [ boxed, good, faulty ] and remove it from inquiryModels.
+const priceTable = {};
 const inquiryModels = [
+  'PlayStation 5 (Disc)','PlayStation 5 (Digital)','PlayStation 5 Slim (Disc)','PlayStation 5 Slim (Digital)','PlayStation 5 Pro',
   'PlayStation 4 Slim','PlayStation 4 Pro','PlayStation 3',
   'Xbox Series X (Disc)','Xbox Series X (Digital)','Xbox Series X 2TB Galaxy',
   'Xbox Series S 512GB','Xbox Series S 1TB','Xbox One X',
@@ -939,7 +935,7 @@ function wirePartex(u){
         <div class="px-note">${excess > 0 ? `+ £${excess} cash back to you · ` : ''}Trade-in credit £${credit}, £${credit - cash} more than our cash offer</div>`;
       cta.href = waLink(`Hi CFY, I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). Trade-in credit £${credit}, so I'd pay £${pay}.`);
     } else {
-      out.innerHTML = `<div class="px-line">Trade in your <b>${esc(model)}</b> → <b>photo valuation over WhatsApp</b></div>
+      out.innerHTML = `<div class="px-line">Trade in your <b>${esc(model)}</b> → <b>enquire on WhatsApp</b></div>
         <div class="px-note">Send us a few photos. Part-ex credit is 15% above our cash offer</div>`;
       cta.href = waLink(`Hi CFY, I'd like to part-exchange my ${model} (${cond}) toward the ${u.name} (${gbp(u.price)}). I'll send a few photos of my console for a trade-in valuation.`);
     }
